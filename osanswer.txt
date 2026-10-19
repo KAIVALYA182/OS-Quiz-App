@@ -1,0 +1,17 @@
+QUIZ_ID=39d9c9cf-9cdd-4e9e-9be6-1cf0cdf8e0b2
+USER_ID=34ef1ea7-8922-4138-a756-50bca62ef69d
+
+curl -X POST http://localhost:5000/api/quiz/$QUIZ_ID/submit \
+  -H "Content-Type: application/json" \
+  -d @- <<EOF
+{
+  "userId": "$USER_ID",
+  "timeTakenSeconds": 90,
+  "answers": [
+    { "questionId": "67f18c2d-9f64-4a11-94a9-93d3b9e4db4c", "selectedOptionIndex": 2 },
+    { "questionId": "750ba54e-ca70-488f-9846-252c3c510877", "selectedOptionIndex": 1 },
+    { "questionId": "265ca262-c9c0-4423-b19e-297cdd6b8030", "selectedOptionIndex": 1 },
+    { "questionId": "36fdcbc4-935a-406f-a224-47d435f18851", "selectedOptionIndex": 0 }
+  ]
+}
+EOF

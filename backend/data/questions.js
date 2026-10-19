@@ -1,0 +1,667 @@
+// backend/data/questions.js
+// The question bank: 10 topics x 5 questions. This is the file to edit when
+// you want to add or change questions; `npm run seed` loads it into Supabase.
+//
+// Each question:
+//   questionText         the question
+//   options              array of 2-6 strings (these have 4)
+//   correctOptionIndex   0-based index into `options`
+//   difficulty           "easy" | "medium" | "hard"
+//   explanation          shown to the student after answering
+//
+// Topic names must match the CHECK constraint on questions.topic in
+// db/schema.sql (and db/migrations/001_add_topics.sql for existing databases).
+
+module.exports = [
+  // ------------------------------------------------------------------ 1
+  {
+    topic: "Operating System Basics",
+    questions: [
+      {
+        seedKey: "os-question-001",
+        difficulty: "easy",
+        questionText: "What is the primary role of the operating system kernel?",
+        options: [
+          "Provide a graphical desktop for the user",
+          "Compile and link user programs",
+          "Manage hardware resources and provide core services to programs",
+          "Store all of the user's files on disk",
+        ],
+        correctOptionIndex: 2,
+        explanation:
+          "The kernel is the core of the OS: it manages the CPU, memory and devices, and provides the services that programs rely on.",
+      },
+      {
+        seedKey: "os-question-002",
+        difficulty: "easy",
+        questionText:
+          "A user program asks the kernel to perform a privileged operation, such as reading from a file, by making a:",
+        options: ["Macro expansion", "System call", "Compiler directive", "Linker command"],
+        correctOptionIndex: 1,
+        explanation:
+          "System calls are the controlled entry points through which user programs request kernel services.",
+      },
+      {
+        seedKey: "os-question-003",
+        difficulty: "medium",
+        questionText:
+          "In dual-mode operation, privileged instructions such as halting the CPU or performing direct I/O can be executed only in:",
+        options: [
+          "User mode",
+          "Either mode, provided the program is trusted",
+          "Neither mode; only hardware can run them",
+          "Kernel (supervisor) mode",
+        ],
+        correctOptionIndex: 3,
+        explanation:
+          "The mode bit separates user mode from kernel mode. Privileged instructions trap if attempted in user mode, which protects the OS and other programs.",
+      },
+      {
+        seedKey: "os-question-004",
+        difficulty: "medium",
+        questionText:
+          "Which OS structure runs nearly all services (file system, device drivers, memory management) together in a single kernel address space?",
+        options: ["Monolithic kernel", "Microkernel", "Layered approach", "Virtual machine monitor"],
+        correctOptionIndex: 0,
+        explanation:
+          "A monolithic kernel keeps all major services in kernel space for speed, at the cost of less isolation. A microkernel moves most services out into user space.",
+      },
+      {
+        seedKey: "os-question-005",
+        difficulty: "easy",
+        questionText: "Which type of operating system is designed to guarantee that tasks finish within strict time limits?",
+        options: [
+          "Batch operating system",
+          "Time-sharing operating system",
+          "Real-time operating system",
+          "Distributed operating system",
+        ],
+        correctOptionIndex: 2,
+        explanation:
+          "Real-time operating systems provide predictable, bounded response times, which is essential for things like industrial control and avionics.",
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------------ 2
+  {
+    topic: "Process Management",
+    questions: [
+      {
+        seedKey: "os-question-006",
+        difficulty: "easy",
+        questionText: "Which of the following is NOT a state in the basic five-state process model?",
+        options: ["Ready", "Running", "Waiting (blocked)", "Compiling"],
+        correctOptionIndex: 3,
+        explanation:
+          "The five states are New, Ready, Running, Waiting and Terminated. Compiling is not a process state.",
+      },
+      {
+        seedKey: "os-question-007",
+        difficulty: "easy",
+        questionText:
+          "Which data structure does the OS use to store a process's state, such as its program counter, registers and scheduling information?",
+        options: [
+          "Page table",
+          "Process Control Block (PCB)",
+          "Interrupt vector table",
+          "File descriptor table",
+        ],
+        correctOptionIndex: 1,
+        explanation: "Each process has a PCB. It is saved and restored during a context switch.",
+      },
+      {
+        seedKey: "os-question-008",
+        difficulty: "medium",
+        questionText: "In UNIX/Linux, what value does fork() return in the newly created child process?",
+        options: ["0", "The child's process ID", "-1", "The parent's process ID"],
+        correctOptionIndex: 0,
+        explanation:
+          "fork() returns 0 to the child, the child's PID to the parent, and -1 if the call fails. Programs use this to tell the two processes apart.",
+      },
+      {
+        seedKey: "os-question-009",
+        difficulty: "medium",
+        questionText: "What happens during a context switch?",
+        options: [
+          "The CPU is shut down and restarted",
+          "A process is permanently removed from memory",
+          "The state of the running process is saved and the state of another process is loaded",
+          "All processes in the ready queue are terminated",
+        ],
+        correctOptionIndex: 2,
+        explanation:
+          "The OS saves the current process's state into its PCB and restores the state of the next process to run. This is pure overhead, since no useful work is done meanwhile.",
+      },
+      {
+        seedKey: "os-question-010",
+        difficulty: "medium",
+        questionText:
+          "A process that has finished executing but still has an entry in the process table, because its parent has not yet read its exit status, is called a:",
+        options: ["Orphan process", "Zombie process", "Daemon process", "Idle process"],
+        correctOptionIndex: 1,
+        explanation:
+          "A zombie remains in the process table until the parent calls wait(). An orphan is a running process whose parent has terminated.",
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------------ 3
+  {
+    topic: "CPU Scheduling",
+    questions: [
+      {
+        seedKey: "os-question-011",
+        difficulty: "medium",
+        questionText:
+          "Which scheduling algorithm gives the minimum average waiting time for a given set of processes that all arrive at the same time?",
+        options: [
+          "First-Come, First-Served (FCFS)",
+          "Shortest Job First (SJF)",
+          "Round Robin",
+          "Priority scheduling",
+        ],
+        correctOptionIndex: 1,
+        explanation:
+          "SJF is provably optimal for average waiting time. Its practical difficulty is that the next CPU burst length must be predicted.",
+      },
+      {
+        seedKey: "os-question-012",
+        difficulty: "easy",
+        questionText:
+          "The convoy effect, where short processes wait behind one long process, is most associated with which algorithm?",
+        options: [
+          "Round Robin",
+          "Shortest Remaining Time First",
+          "Multilevel feedback queue",
+          "First-Come, First-Served (FCFS)",
+        ],
+        correctOptionIndex: 3,
+        explanation:
+          "In FCFS a long CPU-bound process can hold the CPU while many short or I/O-bound processes queue up behind it.",
+      },
+      {
+        seedKey: "os-question-013",
+        difficulty: "medium",
+        questionText: "In Round Robin scheduling, if the time quantum is made extremely large, the algorithm behaves like:",
+        options: [
+          "Shortest Job First",
+          "Priority scheduling",
+          "First-Come, First-Served (FCFS)",
+          "Multilevel queue scheduling",
+        ],
+        correctOptionIndex: 2,
+        explanation:
+          "With a huge quantum every process finishes its burst before being preempted, so processes simply run in arrival order, which is FCFS.",
+      },
+      {
+        seedKey: "os-question-014",
+        difficulty: "medium",
+        questionText: "Starvation of low-priority processes in priority scheduling is commonly solved by:",
+        options: ["Aging", "Increasing the time quantum", "Disabling preemption", "Adding more RAM"],
+        correctOptionIndex: 0,
+        explanation:
+          "Aging gradually raises the priority of a process the longer it waits, so it eventually gets the CPU.",
+      },
+      {
+        seedKey: "os-question-015",
+        difficulty: "hard",
+        questionText:
+          "Processes P1, P2 and P3 arrive at time 0 with CPU bursts of 6 ms, 8 ms and 4 ms. Under FCFS in the order P1, P2, P3, what is the average waiting time?",
+        options: ["4.67 ms", "6 ms", "6.67 ms", "12.67 ms"],
+        correctOptionIndex: 2,
+        explanation:
+          "Waiting times are 0, 6 and 14 ms, so the average is 20/3 ≈ 6.67 ms. The 12.67 ms option is the average turnaround time ((6 + 14 + 18) / 3).",
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------------ 4
+  {
+    topic: "Concurrency & Synchronization",
+    questions: [
+      {
+        seedKey: "os-question-016",
+        difficulty: "easy",
+        questionText: "A race condition occurs when:",
+        options: [
+          "A process runs faster than the CPU clock",
+          "Two processes have the same priority",
+          "The result depends on the order in which concurrent processes access shared data",
+          "A process waits forever for a resource",
+        ],
+        correctOptionIndex: 2,
+        explanation:
+          "When concurrent accesses to shared data are not synchronised, the outcome depends on the exact interleaving, which makes the program unpredictable.",
+      },
+      {
+        seedKey: "os-question-017",
+        difficulty: "medium",
+        questionText:
+          "Which of the following is NOT one of the three requirements of a correct solution to the critical-section problem?",
+        options: ["Busy waiting", "Mutual exclusion", "Progress", "Bounded waiting"],
+        correctOptionIndex: 0,
+        explanation:
+          "A solution must provide mutual exclusion, progress and bounded waiting. Busy waiting is an implementation technique some solutions use, not a requirement.",
+      },
+      {
+        seedKey: "os-question-018",
+        difficulty: "medium",
+        questionText: "What does the wait() (P) operation on a counting semaphore do?",
+        options: [
+          "Increments the semaphore and wakes a waiting process",
+          "Resets the semaphore to zero",
+          "Destroys the semaphore",
+          "Decrements the semaphore and blocks the caller if no resource is available",
+        ],
+        correctOptionIndex: 3,
+        explanation:
+          "wait() decrements the semaphore value. If the value would go below zero, the calling process blocks until another process calls signal().",
+      },
+      {
+        seedKey: "os-question-019",
+        difficulty: "medium",
+        questionText: "Which set of semaphores is typically used to solve the bounded-buffer Producer–Consumer problem?",
+        options: ["Only a single mutex", "mutex, empty and full", "read and write", "One semaphore per philosopher"],
+        correctOptionIndex: 1,
+        explanation: "mutex protects the buffer, empty counts free slots and full counts filled slots.",
+      },
+      {
+        seedKey: "os-question-020",
+        difficulty: "medium",
+        questionText: "Which hardware instruction is commonly used to implement locks atomically?",
+        options: ["Load", "Jump", "Push", "Test-and-Set"],
+        correctOptionIndex: 3,
+        explanation:
+          "Test-and-Set reads and writes a memory location as one indivisible step, which makes it a building block for spinlocks and mutexes. Compare-and-Swap works similarly.",
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------------ 5
+  {
+    topic: "Deadlocks",
+    questions: [
+      {
+        seedKey: "os-question-021",
+        difficulty: "medium",
+        questionText: "Which of the following is NOT a necessary condition for deadlock?",
+        options: ["Mutual exclusion", "Hold and wait", "Resource preemption", "Circular wait"],
+        correctOptionIndex: 2,
+        explanation:
+          "The four necessary conditions are mutual exclusion, hold and wait, no preemption and circular wait. Allowing resource preemption removes one of them.",
+      },
+      {
+        seedKey: "os-question-022",
+        difficulty: "easy",
+        questionText: "The Banker's Algorithm is used for:",
+        options: ["Deadlock detection", "Deadlock avoidance", "CPU scheduling", "Page replacement"],
+        correctOptionIndex: 1,
+        explanation:
+          "It grants a request only if the system stays in a safe state afterwards, which avoids deadlock.",
+      },
+      {
+        seedKey: "os-question-023",
+        difficulty: "hard",
+        questionText: "In a resource-allocation graph, a cycle means a deadlock exists for certain only when:",
+        options: [
+          "Every resource type has exactly one instance",
+          "There are more than two processes in the cycle",
+          "At least one resource has multiple instances",
+          "All the processes in the cycle are preemptible",
+        ],
+        correctOptionIndex: 0,
+        explanation:
+          "With single-instance resources a cycle is both necessary and sufficient for deadlock. With multiple instances a cycle is necessary but not sufficient.",
+      },
+      {
+        seedKey: "os-question-024",
+        difficulty: "medium",
+        questionText: "Which approach prevents deadlock by breaking the circular-wait condition?",
+        options: [
+          "Allowing processes to hold resources indefinitely",
+          "Making every resource sharable",
+          "Killing a random process every minute",
+          "Numbering resource types and requiring requests in increasing order",
+        ],
+        correctOptionIndex: 3,
+        explanation:
+          "If every process must request resources in a fixed global order, a cycle of waiting processes cannot form.",
+      },
+      {
+        seedKey: "os-question-025",
+        difficulty: "medium",
+        questionText: "A system is in a safe state if:",
+        options: [
+          "There is an order in which all processes can run to completion, even if each requests its maximum need",
+          "No process is currently waiting for a resource",
+          "All resources are currently free",
+          "Every process holds at least one resource",
+        ],
+        correctOptionIndex: 0,
+        explanation:
+          "A safe state has a safe sequence: each process in turn can obtain its remaining needs from the available resources plus those released by earlier processes.",
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------------ 6
+  {
+    topic: "Memory Management",
+    questions: [
+      {
+        seedKey: "os-question-026",
+        difficulty: "easy",
+        questionText:
+          "Which technique lets a process occupy non-contiguous areas of physical memory and eliminates external fragmentation?",
+        options: [
+          "Paging",
+          "Contiguous allocation with variable partitions",
+          "Swapping the entire process",
+          "Dynamic linking",
+        ],
+        correctOptionIndex: 0,
+        explanation:
+          "Paging splits memory into fixed-size frames and a process into same-size pages, so any free frame can be used.",
+      },
+      {
+        seedKey: "os-question-027",
+        difficulty: "medium",
+        questionText: "External fragmentation is a problem in:",
+        options: [
+          "Paging",
+          "Fixed-size frame allocation",
+          "Cache memory",
+          "Variable-size contiguous allocation (including pure segmentation)",
+        ],
+        correctOptionIndex: 3,
+        explanation:
+          "When variable-size blocks are allocated and freed, free memory breaks into small holes that are individually too small to use. Paging avoids this but can cause internal fragmentation.",
+      },
+      {
+        seedKey: "os-question-028",
+        difficulty: "medium",
+        questionText: "A system uses 32-bit logical addresses and a page size of 4 KB. How many bits form the page offset?",
+        options: ["10", "12", "16", "20"],
+        correctOptionIndex: 1,
+        explanation: "4 KB = 2^12 bytes, so 12 bits address a byte within a page. The remaining 20 bits identify the page number.",
+      },
+      {
+        seedKey: "os-question-029",
+        difficulty: "medium",
+        questionText: "Which allocation strategy places a process in the smallest free block that is large enough for it?",
+        options: ["First fit", "Worst fit", "Best fit", "Next fit"],
+        correctOptionIndex: 2,
+        explanation: "Best fit searches all holes and picks the smallest adequate one. It tends to leave tiny leftover fragments.",
+      },
+      {
+        seedKey: "os-question-030",
+        difficulty: "medium",
+        questionText: "Which hardware unit translates logical addresses to physical addresses at run time?",
+        options: [
+          "Arithmetic Logic Unit (ALU)",
+          "DMA controller",
+          "Cache controller",
+          "Memory Management Unit (MMU)",
+        ],
+        correctOptionIndex: 3,
+        explanation:
+          "The MMU uses page tables (or base and limit registers) to map the addresses a program generates to real memory addresses.",
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------------ 7
+  {
+    topic: "Virtual Memory",
+    questions: [
+      {
+        seedKey: "os-question-031",
+        difficulty: "easy",
+        questionText: "A page fault occurs when:",
+        options: [
+          "A page contains a software bug",
+          "A process accesses a page that is not currently in main memory",
+          "The disk runs out of free space",
+          "Two processes access the same page",
+        ],
+        correctOptionIndex: 1,
+        explanation:
+          "The page-table entry is marked invalid, the hardware traps to the OS, and the OS loads the page from disk.",
+      },
+      {
+        seedKey: "os-question-032",
+        difficulty: "medium",
+        questionText:
+          "Belady's anomaly, where giving a process more frames can lead to more page faults, can occur with which page replacement algorithm?",
+        options: ["FIFO", "LRU", "Optimal (OPT)", "None; the anomaly applies to every algorithm"],
+        correctOptionIndex: 0,
+        explanation:
+          "FIFO is not a stack algorithm, so it can suffer from the anomaly. LRU and Optimal are stack algorithms, so more frames never hurt them.",
+      },
+      {
+        seedKey: "os-question-033",
+        difficulty: "medium",
+        questionText: "Thrashing is a condition in which:",
+        options: [
+          "The CPU overheats from continuous use",
+          "The disk is completely full",
+          "A process runs without any page faults",
+          "The system spends more time swapping pages than executing processes",
+        ],
+        correctOptionIndex: 3,
+        explanation:
+          "When too many processes compete for too few frames, page faults dominate and CPU utilisation collapses. Reducing the degree of multiprogramming or using a working-set model helps.",
+      },
+      {
+        seedKey: "os-question-034",
+        difficulty: "medium",
+        questionText:
+          "Which page replacement algorithm gives the lowest possible page-fault rate but cannot be implemented in practice?",
+        options: ["LRU", "FIFO", "Optimal (OPT)", "Clock"],
+        correctOptionIndex: 2,
+        explanation:
+          "OPT replaces the page that will not be used for the longest time, which requires knowing future references. It is used as a benchmark for other algorithms.",
+      },
+      {
+        seedKey: "os-question-035",
+        difficulty: "hard",
+        questionText:
+          "Using FIFO replacement with 3 frames, how many page faults occur for the reference string 1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5?",
+        options: ["7", "8", "9", "10"],
+        correctOptionIndex: 2,
+        explanation:
+          "Hits occur only on the second 1, the second 2 and the final 5, so there are 12 - 3 = 9 faults. With 4 frames the same string gives 10 faults (Belady's anomaly).",
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------------ 8
+  {
+    topic: "File Systems",
+    questions: [
+      {
+        seedKey: "os-question-036",
+        difficulty: "medium",
+        questionText:
+          "In UNIX-style file systems, which structure stores a file's metadata (owner, permissions, size, block pointers) but not its name?",
+        options: ["Superblock", "Directory entry", "Boot block", "inode"],
+        correctOptionIndex: 3,
+        explanation: "Directories map names to inode numbers; the inode holds everything else about the file.",
+      },
+      {
+        seedKey: "os-question-037",
+        difficulty: "medium",
+        questionText: "Which file allocation method gives fast direct access but suffers from external fragmentation?",
+        options: ["Contiguous allocation", "Linked allocation", "Indexed allocation", "FAT-based allocation"],
+        correctOptionIndex: 0,
+        explanation:
+          "In a contiguous file the address of any block can be computed directly, but finding contiguous free space for growing files leads to external fragmentation.",
+      },
+      {
+        seedKey: "os-question-038",
+        difficulty: "hard",
+        questionText: "A file has two hard links. What happens to its data when one of the links is deleted?",
+        options: [
+          "The data is erased immediately",
+          "The data remains, because the inode's link count drops to 1",
+          "The remaining link becomes a symbolic link",
+          "The file is moved to a recycle area",
+        ],
+        correctOptionIndex: 1,
+        explanation: "The data is freed only when the link count reaches zero and no process still has the file open.",
+      },
+      {
+        seedKey: "os-question-039",
+        difficulty: "medium",
+        questionText: "In the FAT file system, how are the blocks of a file chained together?",
+        options: [
+          "By pointers stored at the start of each data block",
+          "By a B-tree keyed on file names",
+          "By table entries that each hold the number of the next block",
+          "By storing all blocks contiguously",
+        ],
+        correctOptionIndex: 2,
+        explanation:
+          "The File Allocation Table has one entry per block, and each entry holds the next block of the file, or an end-of-file marker.",
+      },
+      {
+        seedKey: "os-question-040",
+        difficulty: "medium",
+        questionText:
+          "What permissions does the command chmod 754 file assign to the owner, group and others respectively?",
+        options: ["rwx, r-x, r--", "rwx, rwx, r--", "rw-, r-x, r--", "r-x, rwx, r--"],
+        correctOptionIndex: 0,
+        explanation: "Each digit adds read (4), write (2) and execute (1). So 7 = rwx, 5 = r-x and 4 = r--.",
+      },
+    ],
+  },
+
+  // ------------------------------------------------------------------ 9
+  {
+    topic: "I/O Management",
+    questions: [
+      {
+        seedKey: "os-question-041",
+        difficulty: "easy",
+        questionText: "What is the main purpose of Direct Memory Access (DMA)?",
+        options: [
+          "To speed up the CPU clock",
+          "To transfer blocks of data between a device and memory without the CPU handling every byte",
+          "To encrypt data on its way to the disk",
+          "To schedule processes on multiple CPUs",
+        ],
+        correctOptionIndex: 1,
+        explanation:
+          "The CPU sets up the transfer and the DMA controller moves the data, interrupting the CPU only when it is finished. This frees the CPU for other work.",
+      },
+      {
+        seedKey: "os-question-042",
+        difficulty: "easy",
+        questionText: "In which I/O technique does the CPU repeatedly check a device's status register until the device is ready?",
+        options: ["Interrupt-driven I/O", "DMA", "Spooling", "Polling (programmed I/O)"],
+        correctOptionIndex: 3,
+        explanation: "Polling busy-waits on the device, which wastes CPU cycles when the device is slow.",
+      },
+      {
+        seedKey: "os-question-043",
+        difficulty: "medium",
+        questionText: "Which disk scheduling algorithm always serves the pending request closest to the current head position?",
+        options: ["SSTF (Shortest Seek Time First)", "FCFS", "SCAN", "C-SCAN"],
+        correctOptionIndex: 0,
+        explanation: "SSTF minimises each individual seek, but it can starve requests that are far from the head.",
+      },
+      {
+        seedKey: "os-question-044",
+        difficulty: "hard",
+        questionText:
+          "The disk head is at cylinder 53 and the request queue is 98, 183, 37, 122, 14, 124, 65, 67. Using FCFS, what is the total head movement?",
+        options: ["183 cylinders", "236 cylinders", "299 cylinders", "640 cylinders"],
+        correctOptionIndex: 3,
+        explanation:
+          "FCFS follows the queue order: 45 + 85 + 146 + 85 + 108 + 110 + 59 + 2 = 640 cylinders. SSTF would need only 236.",
+      },
+      {
+        seedKey: "os-question-045",
+        difficulty: "easy",
+        questionText:
+          "Which technique holds output for a slow device, such as a printer, in a queue on disk so that processes do not have to wait for the device?",
+        options: ["Caching", "Polling", "Spooling", "Paging"],
+        correctOptionIndex: 2,
+        explanation:
+          "Spooling (Simultaneous Peripheral Operations On-Line) queues jobs for devices that cannot interleave data from several programs at once.",
+      },
+    ],
+  },
+
+  // ----------------------------------------------------------------- 10
+  {
+    topic: "Protection & Security",
+    questions: [
+      {
+        seedKey: "os-question-046",
+        difficulty: "easy",
+        questionText: "Which principle says a process should be given only the privileges it needs to do its job?",
+        options: [
+          "Principle of least privilege",
+          "Principle of open design",
+          "Principle of data redundancy",
+          "Principle of maximum sharing",
+        ],
+        correctOptionIndex: 0,
+        explanation: "Least privilege limits the damage a bug or a compromised process can cause.",
+      },
+      {
+        seedKey: "os-question-047",
+        difficulty: "medium",
+        questionText: "An access control list (ACL) is stored with each:",
+        options: [
+          "User account",
+          "Running process",
+          "Object (such as a file), listing who may access it and how",
+          "CPU register",
+        ],
+        correctOptionIndex: 2,
+        explanation:
+          "An ACL is attached to the object and names the subjects allowed to use it. A capability list is the reverse: it is attached to the subject.",
+      },
+      {
+        seedKey: "os-question-048",
+        difficulty: "medium",
+        questionText: "A buffer overflow attack works by:",
+        options: [
+          "Sending so much network traffic that a server crashes",
+          "Writing past the end of a buffer to overwrite adjacent memory, such as a return address",
+          "Guessing a user's password repeatedly",
+          "Intercepting data in transit between two machines",
+        ],
+        correctOptionIndex: 1,
+        explanation:
+          "When input is not bounds-checked, an attacker can overwrite control data on the stack and redirect execution to malicious code.",
+      },
+      {
+        seedKey: "os-question-049",
+        difficulty: "medium",
+        questionText: "Which approach is the safest way for an OS to store user passwords?",
+        options: [
+          "Plain text in a protected file",
+          "Base64 encoding",
+          "A salted cryptographic hash",
+          "Encryption with a key stored beside the file",
+        ],
+        correctOptionIndex: 2,
+        explanation:
+          "A salted hash cannot be reversed, and the salt defeats precomputed rainbow tables. Base64 is an encoding, not protection.",
+      },
+      {
+        seedKey: "os-question-050",
+        difficulty: "easy",
+        questionText: "A program that appears useful or legitimate but secretly performs harmful actions is called a:",
+        options: ["Worm", "Logic bomb", "Trap door", "Trojan horse"],
+        correctOptionIndex: 3,
+        explanation:
+          "A Trojan horse disguises itself as benign software. A worm spreads by itself, and a logic bomb triggers on a specific condition.",
+      },
+    ],
+  },
+];
