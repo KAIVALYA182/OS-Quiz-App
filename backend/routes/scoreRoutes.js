@@ -4,7 +4,7 @@ const router = express.Router();
 const { submitQuiz } = require("../controllers/scoreController");
 
 // POST /api/quiz/:quizId/submit
-// body: { userId, answers: [{ questionId, selectedOptionIndex }], timeTakenSeconds? }
+// body: { attemptId, answers: [{ questionId, selectedOptionIndex }] }
 router.post("/:quizId/submit", submitQuiz);
 
 module.exports = router;

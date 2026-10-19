@@ -152,9 +152,16 @@ test("isolated PostgreSQL integration", { timeout: 180000 }, async (t) => {
           ).rows[0].id,
           id,
         );
-        assert.equal((await pool.query('select topic from questions where id=$1',[id])).rows[0].topic,'Memory Management');
+        assert.equal(
+          (await pool.query("select topic from questions where id=$1", [id]))
+            .rows[0].topic,
+          "Memory Management",
+        );
         // Restore this fixture topic for the subsequent fixed-evidence assertions.
-        await pool.query("update questions set topic='Operating System Basics' where id=$1",[id]);
+        await pool.query(
+          "update questions set topic='Operating System Basics' where id=$1",
+          [id],
+        );
         await pool.query(
           "update quizzes set seed_key=null,title='Teacher edited quiz',is_timed=true,time_limit_minutes=15 where seed_key='topic:Operating System Basics'",
         );

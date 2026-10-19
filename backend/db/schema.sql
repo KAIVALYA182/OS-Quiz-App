@@ -1,6 +1,6 @@
 -- backend/db/schema.sql
--- Paste this whole file into the Supabase SQL Editor and click Run.
--- Safe to re-run: every statement uses "if not exists".
+-- Fresh-install baseline; use npm run db:init for an empty database.
+-- For existing databases use npm run migrate. Extensions are repeatable.
 --
 -- Mongo -> Postgres mapping:
 --   User model      -> users

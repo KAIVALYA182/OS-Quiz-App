@@ -24,37 +24,8 @@ function createApp() {
   configureAuth(app);
   app.get("/api/health", (req, res) => res.json({ status: "ok" }));
   app.use("/api", requireAuth);
-  app.get(
-    "/api/quiz",
-    wrap(async (req, res) => res.json(await listQuizzes())),
-  );
-  app.post(
-    "/api/quiz/:quizId/start",
-    wrap(async (req, res) =>
-      res
-        .status(201)
-        .json(await attempts.start(req.user.id, req.params.quizId)),
-    ),
-  );
-  app.get(
-    "/api/quiz/:quizId",
-    wrap(async (req, res) => {
-      const z = await attempts.loadQuiz(
-        require("./config/db").pool,
-        req.params.quizId,
-      );
-      res.json({
-        ...z,
-        questions: z.questions.map(
-          ({ correctOptionIndex, explanation, ...q }) => q,
-        ),
-      });
-    }),
-  );
-  app.post(
-    "/api/quiz/:quizId/submit",
-    require("./controllers/scoreController").submitQuiz,
-  );
+  app.use("/api/quiz", require("./routes/quizRoutes"));
+  app.use("/api/quiz", require("./routes/scoreRoutes"));
   app.get(
     "/api/progress",
     wrap(async (req, res) => res.json(await attempts.progress(req.user.id))),

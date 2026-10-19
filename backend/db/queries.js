@@ -1,6 +1,5 @@
 // backend/db/queries.js
-// All SQL lives here, so controllers never build queries themselves. Rows are
-// mapped to camelCase shapes that the scoring engine and the API return.
+// Quiz catalog queries. Assigned-attempt transactions live in ../attempts.js.
 
 const { pool } = require("../config/db");
 

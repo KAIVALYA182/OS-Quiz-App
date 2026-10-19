@@ -1,6 +1,6 @@
 # OS Quiz App
 
-React/Vite and Express/PostgreSQL. Vite is updated to the compatible 6.4 maintenance line for security fixes and the test runner; React and the existing Tailwind 3 styling are retained. Requires Node 22+ and PostgreSQL 14+ (Supabase Session pooler supported). Existing question content, scoring, feedback, timer and answer-review components are retained.
+React/Vite and Express/PostgreSQL. Vite is updated to the compatible 6.4 maintenance line for security fixes and the test runner; React and the existing Tailwind 3 styling are retained. For installation and tests use Node 22.22.2+, 24.15+, or 26+ (matching the package engine ranges), and PostgreSQL 14+ (Supabase Session pooler supported). Existing question content, scoring, feedback, timer and answer-review components are retained.
 
 ## Install and configure
 
@@ -170,5 +170,5 @@ There was no pre-existing lint script in either package. Syntax checks, componen
 
 - Safe seed/schema: `backend/scripts/seed.js`, `backend/scripts/migrate.js`, `backend/scripts/initSchema.js`, `backend/scripts/validateQuestions.js`, `backend/data/questions.js`, `backend/db/schema.sql`, `backend/db/migrations/002_accounts_attempts.sql`, `backend/db/migrations/003_integrity.sql`.
 - Authentication/API protection: `backend/auth.js`, `backend/server.js`, `backend/config/db.js`, `backend/routes/devRoutes.js`, `backend/.env.example`, `frontend/src/components/Auth.jsx`, `frontend/src/api/client.js`.
-- Progress, personalised learning, rankings and scoring integration: `backend/attempts.js`, `backend/controllers/scoreController.js`, `backend/controllers/quizController.js`, `backend/db/queries.js`, `frontend/src/App.jsx`, `frontend/src/components/PersonalPages.jsx`, `frontend/src/components/QuizAttempt.jsx`, `frontend/src/components/QuizList.jsx`, `frontend/src/api/quizApi.js`, `frontend/src/api/scoreApi.js`.
+- Progress, personalised learning, rankings and scoring integration: `backend/attempts.js`, `backend/controllers/scoreController.js`, `backend/controllers/quizController.js`, `backend/routes/quizRoutes.js`, `backend/routes/scoreRoutes.js`, `backend/db/queries.js`, `frontend/src/App.jsx`, `frontend/src/components/PersonalPages.jsx`, `frontend/src/components/QuizAttempt.jsx`, `frontend/src/components/QuizList.jsx`, `frontend/src/api/quizApi.js`, `frontend/src/api/scoreApi.js`.
 - Tests/setup: `backend/tests/integration.test.js`, `backend/tests/fixtures/session-server.js`, `backend/tests/fixtures/browser-preview.js`, `frontend/src/tests/*`, `frontend/vitest.config.js`, both package manifests/lockfiles, `frontend/vite.config.js`, `frontend/.env.example`, `.gitignore`, this README.
