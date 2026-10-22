@@ -1,0 +1,677 @@
+[
+  {
+    "seedKey": "os-vm-006",
+    "topic": "Virtual Memory",
+    "subtopic": "Demand paging",
+    "difficulty": "easy",
+    "questionText": "What does demand paging do?",
+    "options": [
+      "Eliminate the need for physical RAM",
+      "Load every process's complete address space at boot",
+      "Guarantee no page faults after launch",
+      "Load a page when it is actually referenced rather than loading every page in advance"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Demand paging delays bringing pages into memory until needed, reducing unnecessary initial loading."
+  },
+  {
+    "seedKey": "os-vm-007",
+    "topic": "Virtual Memory",
+    "subtopic": "Backing storage",
+    "difficulty": "easy",
+    "questionText": "What can hold a process page while it is not resident in RAM?",
+    "options": [
+      "Appropriate backing storage such as swap or its mapped file",
+      "Only a keyboard buffer",
+      "Only the CPU's program counter",
+      "A process identifier"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Nonresident pages can be reconstructed or read from backing storage according to their mapping type."
+  },
+  {
+    "seedKey": "os-vm-008",
+    "topic": "Virtual Memory",
+    "subtopic": "Locality",
+    "difficulty": "easy",
+    "questionText": "What does temporal locality mean?",
+    "options": [
+      "All page references occur at the same instant",
+      "Recently accessed data is likely to be accessed again soon",
+      "Nearby addresses are always physically adjacent on disk",
+      "Every process accesses every page equally"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Temporal locality concerns reuse over time, helping explain why recently used pages may be valuable."
+  },
+  {
+    "seedKey": "os-vm-009",
+    "topic": "Virtual Memory",
+    "subtopic": "Spatial locality",
+    "difficulty": "easy",
+    "questionText": "What does spatial locality describe?",
+    "options": [
+      "A process always running on the same CPU",
+      "All users sharing one page table",
+      "A disk always moving in one direction",
+      "Accesses tending to nearby addresses"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Sequential or nearby memory accesses give spatial locality, which caches and page-based transfers can exploit."
+  },
+  {
+    "seedKey": "os-vm-010",
+    "topic": "Virtual Memory",
+    "subtopic": "Dirty pages",
+    "difficulty": "easy",
+    "questionText": "What does a dirty bit indicate for a resident page?",
+    "options": [
+      "The page belongs to the idle task",
+      "The page has never been read",
+      "The page has been modified since the relevant clean state",
+      "The page contains a virus by definition"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "A dirty page may need writing to backing storage before its frame can be reused safely."
+  },
+  {
+    "seedKey": "os-vm-011",
+    "topic": "Virtual Memory",
+    "subtopic": "Reference bits",
+    "difficulty": "easy",
+    "questionText": "What does a page's referenced/accessed bit help record?",
+    "options": [
+      "Whether the page has been accessed since the bit was cleared",
+      "The complete sequence of all past CPU instructions",
+      "The number of files the owner has opened",
+      "A cryptographic proof of ownership"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Replacement algorithms can use approximate access information to distinguish recently touched pages."
+  },
+  {
+    "seedKey": "os-vm-012",
+    "topic": "Virtual Memory",
+    "subtopic": "Replacement",
+    "difficulty": "easy",
+    "questionText": "When a needed page must enter memory and no usable free frame exists, what may the OS need to do?",
+    "options": [
+      "Delete the process's source code",
+      "Turn every virtual address into a disk name",
+      "Increase the address width instantly",
+      "Choose a resident victim page for eviction"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Page replacement frees a frame, possibly after preserving dirty contents."
+  },
+  {
+    "seedKey": "os-vm-013",
+    "topic": "Virtual Memory",
+    "subtopic": "Anonymous memory",
+    "difficulty": "easy",
+    "questionText": "A new anonymous page is promised as zero-initialized. What value should an application observe before writing it?",
+    "options": [
+      "The page's disk cylinder number",
+      "Data from the previous frame owner",
+      "Unspecified passwords from kernel memory",
+      "Zeros"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Zero-fill semantics avoid exposing previous contents and provide the specified initialization."
+  },
+  {
+    "seedKey": "os-vm-014",
+    "topic": "Virtual Memory",
+    "subtopic": "Mappings",
+    "difficulty": "easy",
+    "questionText": "What does mapping a file into virtual memory allow?",
+    "options": [
+      "Guarantee all writes are durable immediately",
+      "Access file contents through memory addresses under the mapping's rules",
+      "Change every file name by arithmetic on a pointer",
+      "Avoid all possible page faults"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "File mappings connect virtual pages to file-backed data; residency and writeback remain managed separately."
+  },
+  {
+    "seedKey": "os-vm-015",
+    "topic": "Virtual Memory",
+    "subtopic": "Working set",
+    "difficulty": "easy",
+    "questionText": "What is a process working set over a recent reference window?",
+    "options": [
+      "Every file ever created by the user",
+      "Only the executable's first instruction",
+      "The distinct pages used during that window",
+      "The total number of installed memory modules"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "A working set approximates the currently active memory demand of a process."
+  },
+  {
+    "seedKey": "os-vm-016",
+    "topic": "Virtual Memory",
+    "subtopic": "Minor faults",
+    "difficulty": "easy",
+    "questionText": "Can a page fault be handled without reading a page from disk?",
+    "options": [
+      "Yes; zero-fill and copy-on-write faults are examples",
+      "No; every fault requires a disk transfer",
+      "Only if the process has no virtual memory",
+      "No; every fault destroys a page table"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Some faults establish or copy mappings using resident memory, while major faults require storage access."
+  },
+  {
+    "seedKey": "os-vm-017",
+    "topic": "Virtual Memory",
+    "subtopic": "Prefetching",
+    "difficulty": "easy",
+    "questionText": "What is the aim of page prefetching?",
+    "options": [
+      "Evict every page as soon as it is read",
+      "Make physical memory unlimited",
+      "Remove every page permission check",
+      "Bring likely-needed pages into memory before their first demand access"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Successful prediction can hide latency; inaccurate prefetching can waste memory and I/O."
+  },
+  {
+    "seedKey": "os-vm-018",
+    "topic": "Virtual Memory",
+    "subtopic": "Resident set",
+    "difficulty": "easy",
+    "questionText": "What is a process's resident set?",
+    "options": [
+      "Its pages currently held in physical memory",
+      "Its complete list of past PIDs",
+      "All source files on its development machine",
+      "Only its pages currently stored in swap"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "The resident set concerns current physical residency, which may be smaller than the mapped virtual address space."
+  },
+  {
+    "seedKey": "os-vm-019",
+    "topic": "Virtual Memory",
+    "subtopic": "Invalid access",
+    "difficulty": "easy",
+    "questionText": "How does a legitimate nonresident-page fault differ from accessing an unmapped invalid address?",
+    "options": [
+      "The invalid access grants permanent kernel access",
+      "The legitimate fault can load or establish an allowed mapping",
+      "Every invalid address must be allocated automatically",
+      "Both always mean disk failure"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "The kernel first determines whether the address and access are valid; not every fault is demand paging."
+  },
+  {
+    "seedKey": "os-vm-020",
+    "topic": "Virtual Memory",
+    "subtopic": "LRU trace",
+    "difficulty": "medium",
+    "questionText": "With two empty frames, LRU processes references 1,2,1,3. Which page is evicted when 3 arrives?",
+    "options": [
+      "Page 1",
+      "Page 3",
+      "No page can be evicted",
+      "Page 2"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Page 1 was refreshed by the third reference, so page 2 is least recently used at the final miss."
+  },
+  {
+    "seedKey": "os-vm-021",
+    "topic": "Virtual Memory",
+    "subtopic": "FIFO trace",
+    "difficulty": "medium",
+    "questionText": "With two empty frames, FIFO processes 1,2,1,3. Which page is evicted for 3?",
+    "options": [
+      "Page 1",
+      "Neither; three pages fit in two frames",
+      "Page 3",
+      "Page 2"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "A hit on 1 does not change FIFO arrival order; page 1 is still oldest."
+  },
+  {
+    "seedKey": "os-vm-022",
+    "topic": "Virtual Memory",
+    "subtopic": "Optimal victim",
+    "difficulty": "medium",
+    "questionText": "Resident pages are A,B,C. Future uses are B,C,A,B,C; which page would optimal replacement evict now to admit D?",
+    "options": [
+      "A",
+      "D, which is not yet resident",
+      "C",
+      "B"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "A's next use is farthest away among resident pages, after B and C, so optimal replacement selects A."
+  },
+  {
+    "seedKey": "os-vm-023",
+    "topic": "Virtual Memory",
+    "subtopic": "Clock policy",
+    "difficulty": "medium",
+    "questionText": "In a basic clock scan, what usually happens when the hand sees a page with reference bit 1?",
+    "options": [
+      "Mark every other page dirty",
+      "Always evict it immediately without clearing",
+      "Terminate its owning process",
+      "Clear the bit and give the page a second chance"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Clock approximates recency by clearing accessed bits and skipping pages that were recently referenced."
+  },
+  {
+    "seedKey": "os-vm-024",
+    "topic": "Virtual Memory",
+    "subtopic": "Dirty eviction cost",
+    "difficulty": "medium",
+    "questionText": "Why can evicting a clean file-backed page be cheaper than evicting a dirty one?",
+    "options": [
+      "Clean pages need no translation entries",
+      "Dirty pages cannot be written to storage",
+      "Clean pages never occupy RAM",
+      "The clean page can be discarded and reread from its unchanged backing file"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Dirty modifications may require writeback; a clean copy already exists in the backing file."
+  },
+  {
+    "seedKey": "os-vm-025",
+    "topic": "Virtual Memory",
+    "subtopic": "Local replacement",
+    "difficulty": "medium",
+    "questionText": "What does local page replacement restrict?",
+    "options": [
+      "Every process shares a single fixed virtual address",
+      "A process generally selects victims from its own allocated frames",
+      "All pages must be pinned",
+      "Only pages on a physically local disk may be used"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Local policies limit how one process's faults directly displace another process's resident pages."
+  },
+  {
+    "seedKey": "os-vm-026",
+    "topic": "Virtual Memory",
+    "subtopic": "Global replacement",
+    "difficulty": "medium",
+    "questionText": "What is a possible consequence of global replacement?",
+    "options": [
+      "One process's memory demand can evict another process's pages",
+      "Processes cannot share memory",
+      "Dirty bits become unnecessary",
+      "Each process is guaranteed an unchanging fault rate"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Shared victim selection couples resident sets across processes and can affect isolation of performance."
+  },
+  {
+    "seedKey": "os-vm-027",
+    "topic": "Virtual Memory",
+    "subtopic": "Page-fault frequency",
+    "difficulty": "medium",
+    "questionText": "A controller sees a sustained high page-fault frequency for a process. What response may reduce that process's faults if memory is available?",
+    "options": [
+      "Disable all permission checks",
+      "Always reduce its resident set",
+      "Allocate it more frames",
+      "Discard its newest executable"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "More frames may accommodate a larger active working set, though causes and system pressure still matter."
+  },
+  {
+    "seedKey": "os-vm-028",
+    "topic": "Virtual Memory",
+    "subtopic": "Working-set size",
+    "difficulty": "medium",
+    "questionText": "For the last six references 2,3,2,4,3,5, how many distinct pages are in the working set?",
+    "options": [
+      "6",
+      "5",
+      "3",
+      "4"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "The distinct pages are {2,3,4,5}, so the working-set size is four."
+  },
+  {
+    "seedKey": "os-vm-029",
+    "topic": "Virtual Memory",
+    "subtopic": "Fault rate",
+    "difficulty": "medium",
+    "questionText": "A process makes 10000 page references and incurs 25 page faults. What is its fault rate?",
+    "options": [
+      "25%",
+      "0.25%",
+      "2.5%",
+      "0.025%"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "The fraction is 25/10000=0.0025; multiplying by 100 gives 0.25%."
+  },
+  {
+    "seedKey": "os-vm-030",
+    "topic": "Virtual Memory",
+    "subtopic": "Copy-on-write fault",
+    "difficulty": "medium",
+    "questionText": "A process writes a private copy-on-write page shared with another process. What should happen under normal COW semantics?",
+    "options": [
+      "Both processes' private values must change together",
+      "The write is silently discarded",
+      "The writer receives a private writable copy",
+      "The shared physical page is always deleted first"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "A write fault separates the writer's mapping so private modifications do not affect the other process."
+  },
+  {
+    "seedKey": "os-vm-031",
+    "topic": "Virtual Memory",
+    "subtopic": "Shared file mapping",
+    "difficulty": "medium",
+    "questionText": "Two processes use a shared writable mapping of the same file region. What is the intended communication property?",
+    "options": [
+      "Neither process can read until both exit",
+      "Every write immediately survives power failure",
+      "Writes can be visible through the shared mapping, subject to synchronization rules",
+      "Each must always receive independent private copies"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Shared mappings expose common underlying data, but application synchronization and persistence are separate concerns."
+  },
+  {
+    "seedKey": "os-vm-032",
+    "topic": "Virtual Memory",
+    "subtopic": "Overcommit",
+    "difficulty": "medium",
+    "questionText": "Why can an address-space reservation succeed even when an equal amount of RAM is not immediately free?",
+    "options": [
+      "Virtual reservation need not commit all physical pages at once",
+      "Virtual addresses are stored only on keyboard devices",
+      "The OS has created physical memory from nothing",
+      "All reserved bytes are guaranteed resident forever"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Lazy allocation and overcommit policies separate virtual reservations from immediate physical backing."
+  },
+  {
+    "seedKey": "os-vm-033",
+    "topic": "Virtual Memory",
+    "subtopic": "Pinned pages",
+    "difficulty": "medium",
+    "questionText": "Why can excessive memory pinning worsen paging flexibility?",
+    "options": [
+      "Pinning makes every frame simultaneously free",
+      "Pinned pages cannot be freely evicted while pinned",
+      "Pinned pages no longer require physical storage",
+      "Pinning compresses all pages to zero bytes"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Restricting eviction reduces the set of frames available for other allocations and replacement decisions."
+  },
+  {
+    "seedKey": "os-vm-034",
+    "topic": "Virtual Memory",
+    "subtopic": "Sequential scans",
+    "difficulty": "medium",
+    "questionText": "Why can a long one-time scan pollute a naive recency-based cache?",
+    "options": [
+      "All scans automatically bypass every cache",
+      "Sequential data cannot be paged",
+      "It may displace frequently reused pages with pages unlikely to be reused",
+      "The scan eliminates all future memory references"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Recency alone may not distinguish a streaming workload from a reusable working set."
+  },
+  {
+    "seedKey": "os-vm-035",
+    "topic": "Virtual Memory",
+    "subtopic": "Stack property",
+    "difficulty": "medium",
+    "questionText": "Why do stack replacement algorithms such as true LRU avoid Belady's anomaly?",
+    "options": [
+      "They require no information about references",
+      "The pages held with fewer frames are a subset of those held with more frames",
+      "They never evict any page",
+      "Their faults are unrelated to frame count"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Inclusion across capacities prevents an added frame from increasing misses for the same reference sequence."
+  },
+  {
+    "seedKey": "os-vm-036",
+    "topic": "Virtual Memory",
+    "subtopic": "Precleaning",
+    "difficulty": "medium",
+    "questionText": "What is the benefit of writing dirty pages back before an urgent eviction is needed?",
+    "options": [
+      "It eliminates the need to track dirty state",
+      "It makes every virtual address valid",
+      "It guarantees no page is ever modified again",
+      "Future frame reclamation may avoid synchronous writeback delay"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Background cleaning can create clean reclaimable pages, smoothing later memory-pressure handling."
+  },
+  {
+    "seedKey": "os-vm-037",
+    "topic": "Virtual Memory",
+    "subtopic": "Mapped file truncation",
+    "difficulty": "medium",
+    "questionText": "Why must applications handle invalidation when a mapped file is truncated below an accessed region?",
+    "options": [
+      "The missing region must automatically become a separate disk",
+      "The accessed mapping may no longer have valid backing storage",
+      "Mappings always prevent every possible file-size change",
+      "Truncation expands every mapping"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Access beyond the surviving mapped backing can fault; file and mapping lifetimes require coordinated use."
+  },
+  {
+    "seedKey": "os-vm-038",
+    "topic": "Virtual Memory",
+    "subtopic": "Shared zero page",
+    "difficulty": "medium",
+    "questionText": "How can many untouched anonymous pages initially share one physical zero page safely?",
+    "options": [
+      "Disable write faults globally",
+      "Map it read-only and create private backing on writes",
+      "Let every process freely modify it for all users",
+      "Store every process's secret in its first bytes"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Read-only zero sharing saves memory until a write requires a private page."
+  },
+  {
+    "seedKey": "os-vm-039",
+    "topic": "Virtual Memory",
+    "subtopic": "Reclaim order",
+    "difficulty": "medium",
+    "questionText": "Why is an unreferenced clean cache page often a good reclaim candidate?",
+    "options": [
+      "It has no page-table metadata",
+      "It has low estimated reuse and cheap reconstruction from backing storage",
+      "It can never be accessed again by any process",
+      "It necessarily contains only invalid data"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Replacement balances expected reuse with eviction cost; a clean inactive page is often inexpensive to reclaim."
+  },
+  {
+    "seedKey": "os-vm-040",
+    "topic": "Virtual Memory",
+    "subtopic": "Resident bytes",
+    "difficulty": "medium",
+    "questionText": "A process has 120 resident pages of 4 KiB each. What resident data size does that represent?",
+    "options": [
+      "120 KiB",
+      "30 KiB",
+      "480 KiB",
+      "480 MiB"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Resident bytes equal 120×4 KiB=480 KiB, excluding other accounting categories."
+  },
+  {
+    "seedKey": "os-vm-041",
+    "topic": "Virtual Memory",
+    "subtopic": "Demand-zero accounting",
+    "difficulty": "medium",
+    "questionText": "An untouched 64-page anonymous reservation uses a shared zero-page scheme. Does reservation alone require 64 distinct data frames?",
+    "options": [
+      "Yes; each virtual byte requires its own frame",
+      "No; private frames can be allocated only as pages are written",
+      "No; writes never need physical storage",
+      "Yes; virtual reservation always forces all frames resident"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Reservation and physical commitment are distinct; page-table and other metadata can still consume memory."
+  },
+  {
+    "seedKey": "os-vm-042",
+    "topic": "Virtual Memory",
+    "subtopic": "LRU faults",
+    "difficulty": "hard",
+    "questionText": "With three initially empty frames, how many LRU faults occur for 1,2,3,1,4,2,1,5?",
+    "options": [
+      "6",
+      "8",
+      "5",
+      "7"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Faults occur on 1,2,3,4,2,5. The hit on 1 updates recency; the stated sequence totals six faults."
+  },
+  {
+    "seedKey": "os-vm-043",
+    "topic": "Virtual Memory",
+    "subtopic": "Fault latency",
+    "difficulty": "hard",
+    "questionText": "A normal access costs 100 ns. A fault adds 8 ms, with probability 0.0001 per access. Ignoring other overhead, what is expected time per access?",
+    "options": [
+      "8100 ns",
+      "800 ns",
+      "100.8 ns",
+      "900 ns"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "The extra expected cost is 0.0001×8000000 ns=800 ns; add the normal 100 ns to get 900 ns."
+  },
+  {
+    "seedKey": "os-vm-044",
+    "topic": "Virtual Memory",
+    "subtopic": "Fault-rate budget",
+    "difficulty": "hard",
+    "questionText": "Normal access is 100 ns and each fault adds 10 ms. What maximum fault probability keeps expected access time at most 200 ns?",
+    "options": [
+      "0.00001",
+      "0.1",
+      "0.001",
+      "0.01"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "The extra budget is 100 ns. With 10 ms=10000000 ns, p≤100/10000000=0.00001."
+  },
+  {
+    "seedKey": "os-vm-045",
+    "topic": "Virtual Memory",
+    "subtopic": "Dirty fault mixture",
+    "difficulty": "hard",
+    "questionText": "A fault requires a 4 ms read; half its victims additionally need a 6 ms write. With no overlap, what is mean fault I/O time?",
+    "options": [
+      "10 ms",
+      "5 ms",
+      "7 ms",
+      "3 ms"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Every fault pays 4 ms; the expected extra write cost is 0.5×6=3 ms, totaling 7 ms."
+  },
+  {
+    "seedKey": "os-vm-046",
+    "topic": "Virtual Memory",
+    "subtopic": "Working-set pressure",
+    "difficulty": "hard",
+    "questionText": "Three processes need working sets of 12, 15 and 18 frames. Only 40 frames are usable. What does the working-set total suggest?",
+    "options": [
+      "The total demand is 30 frames",
+      "All three working sets fit exactly",
+      "Demand exceeds capacity by 5 frames, risking thrashing",
+      "There are 5 spare frames"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Total demand is 12+15+18=45, exceeding 40 by 5; reducing concurrency or increasing memory may help."
+  },
+  {
+    "seedKey": "os-vm-047",
+    "topic": "Virtual Memory",
+    "subtopic": "Clock trace",
+    "difficulty": "hard",
+    "questionText": "Frames A,B,C have bits 1,0,1 and the clock hand starts at A. Under basic second chance, which page is the first victim?",
+    "options": [
+      "A",
+      "C",
+      "None because one bit is 1",
+      "B"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "A's bit is cleared and skipped; the next frame B has bit 0, so it is selected."
+  },
+  {
+    "seedKey": "os-vm-048",
+    "topic": "Virtual Memory",
+    "subtopic": "Scan order",
+    "difficulty": "hard",
+    "questionText": "A row-major matrix spans many pages. Why can column-wise traversal produce more page faults than row-wise traversal with a small resident set?",
+    "options": [
+      "Column traversal changes each element's numerical value",
+      "Row-major storage makes all columns physically contiguous",
+      "Successive accesses can jump among pages whose reuse distances exceed available frames",
+      "Paging ignores access order entirely"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Row-wise access exploits spatial locality, whereas column strides can repeatedly revisit pages after eviction."
+  },
+  {
+    "seedKey": "os-vm-049",
+    "topic": "Virtual Memory",
+    "subtopic": "COW and file durability",
+    "difficulty": "hard",
+    "questionText": "Why does modifying a private file mapping not normally update the underlying file through that mapping?",
+    "options": [
+      "Every file mapping is inherently durable",
+      "Private modifications are separated from the shared file-backed contents",
+      "The file is necessarily opened without read permission",
+      "All writes to any mapping are discarded immediately"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Private mapping semantics preserve a private modified view, unlike shared mappings intended to update common backing data."
+  },
+  {
+    "seedKey": "os-vm-050",
+    "topic": "Virtual Memory",
+    "subtopic": "Reclaim race",
+    "difficulty": "hard",
+    "questionText": "Why must the OS coordinate page-table invalidation with eviction of a page still mapped by running processes?",
+    "options": [
+      "A CPU could otherwise access a reclaimed frame after it has been reused",
+      "Physical page reuse never happens",
+      "Running processes never cache translations",
+      "Dirty tracking automatically prevents every stale translation"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Reclaim must remove accessible mappings and stale translation paths before a frame is repurposed."
+  }
+]

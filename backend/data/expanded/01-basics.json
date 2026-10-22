@@ -1,0 +1,677 @@
+[
+  {
+    "seedKey": "os-basics-006",
+    "topic": "Operating System Basics",
+    "subtopic": "Boot",
+    "difficulty": "easy",
+    "questionText": "What is the bootloader's main job after firmware selects a boot device?",
+    "options": [
+      "Compile every application",
+      "Defragment all disks",
+      "Schedule user threads",
+      "Load the operating system kernel"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "The bootloader places the kernel and required boot data in memory, then transfers control to it."
+  },
+  {
+    "seedKey": "os-basics-007",
+    "topic": "Operating System Basics",
+    "subtopic": "Interfaces",
+    "difficulty": "easy",
+    "questionText": "Which component interprets a user's command-line instructions?",
+    "options": [
+      "Memory controller",
+      "Disk platter",
+      "CPU cache",
+      "Shell"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "A shell parses commands and launches programs or implements built-in commands."
+  },
+  {
+    "seedKey": "os-basics-008",
+    "topic": "Operating System Basics",
+    "subtopic": "Interrupts",
+    "difficulty": "easy",
+    "questionText": "A keyboard signals that a key was pressed. Which mechanism normally informs the CPU?",
+    "options": [
+      "Hardware interrupt",
+      "File compression",
+      "Static linking",
+      "Source-code compilation"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Device controllers raise interrupts so the OS can handle events without continuously polling every device."
+  },
+  {
+    "seedKey": "os-basics-009",
+    "topic": "Operating System Basics",
+    "subtopic": "Resources",
+    "difficulty": "easy",
+    "questionText": "Which is an example of an OS allocating a resource?",
+    "options": [
+      "Assigning physical memory frames to a process",
+      "Choosing a document's font",
+      "Formatting a spreadsheet cell",
+      "Correcting a spelling error"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Memory is a shared hardware resource whose allocation and isolation are OS responsibilities."
+  },
+  {
+    "seedKey": "os-basics-010",
+    "topic": "Operating System Basics",
+    "subtopic": "Batch systems",
+    "difficulty": "easy",
+    "questionText": "A batch system is especially suited to which workload?",
+    "options": [
+      "Immediate keyboard-driven editing",
+      "Strict microsecond control deadlines",
+      "Continuous mouse feedback",
+      "Queued jobs requiring little interactive input"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Batch systems process submitted jobs with minimal interactive intervention."
+  },
+  {
+    "seedKey": "os-basics-011",
+    "topic": "Operating System Basics",
+    "subtopic": "Abstraction",
+    "difficulty": "easy",
+    "questionText": "Which OS abstraction gives a running program the appearance of its own CPU execution context?",
+    "options": [
+      "Network cable",
+      "Process",
+      "Disk sector",
+      "Source file"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "A process packages an executing program's state and resources; scheduling multiplexes the CPU among processes."
+  },
+  {
+    "seedKey": "os-basics-012",
+    "topic": "Operating System Basics",
+    "subtopic": "Libraries",
+    "difficulty": "easy",
+    "questionText": "Why might a program call a library wrapper instead of issuing a raw system call itself?",
+    "options": [
+      "The wrapper replaces the CPU",
+      "The wrapper provides a convenient programming interface",
+      "The wrapper disables memory protection",
+      "The wrapper guarantees no kernel entry"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Library functions often prepare arguments and invoke the platform's system-call interface on the program's behalf."
+  },
+  {
+    "seedKey": "os-basics-013",
+    "topic": "Operating System Basics",
+    "subtopic": "Modes",
+    "difficulty": "easy",
+    "questionText": "A program calculates a sum without needing OS services. Where can these ordinary instructions execute?",
+    "options": [
+      "Disk-controller mode only",
+      "Bootloader mode only",
+      "User mode",
+      "Firmware setup only"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Ordinary arithmetic does not require privilege and normally runs in user mode."
+  },
+  {
+    "seedKey": "os-basics-014",
+    "topic": "Operating System Basics",
+    "subtopic": "Multiprogramming",
+    "difficulty": "easy",
+    "questionText": "What is the main purpose of keeping several programs ready in memory?",
+    "options": [
+      "Make all programs execute the same instruction",
+      "Give every program unlimited RAM",
+      "Eliminate every context switch",
+      "Keep the CPU busy when one program waits for I/O"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Multiprogramming overlaps one program's waiting time with another program's CPU work."
+  },
+  {
+    "seedKey": "os-basics-015",
+    "topic": "Operating System Basics",
+    "subtopic": "APIs",
+    "difficulty": "easy",
+    "questionText": "What does an application binary interface primarily specify?",
+    "options": [
+      "A user's password policy",
+      "The order of disk requests",
+      "The appearance of application menus",
+      "Binary calling conventions and executable interfaces"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "An ABI defines low-level conventions such as register use, stack layout and binary interfaces."
+  },
+  {
+    "seedKey": "os-basics-016",
+    "topic": "Operating System Basics",
+    "subtopic": "Services",
+    "difficulty": "easy",
+    "questionText": "Which task is normally handled by an OS service rather than the application alone?",
+    "options": [
+      "Deciding a slide's layout",
+      "Choosing an essay title",
+      "Enforcing access permissions when opening a file",
+      "Selecting a game's storyline"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Access control must be enforced by the trusted system rather than solely by an untrusted application."
+  },
+  {
+    "seedKey": "os-basics-017",
+    "topic": "Operating System Basics",
+    "subtopic": "Errors",
+    "difficulty": "easy",
+    "questionText": "What should a protected OS normally do when a user process makes an invalid memory access?",
+    "options": [
+      "Allow arbitrary kernel memory writes",
+      "Report or signal the fault to the process",
+      "Erase all files immediately",
+      "Disable protection for every process"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Hardware detects invalid access and enters the kernel, which can terminate or signal the offending process."
+  },
+  {
+    "seedKey": "os-basics-018",
+    "topic": "Operating System Basics",
+    "subtopic": "Kernel design",
+    "difficulty": "medium",
+    "questionText": "Why can moving a device driver to user space improve fault containment?",
+    "options": [
+      "A driver crash need not corrupt the kernel address space",
+      "It removes the need for device permissions",
+      "User-space drivers cannot have bugs",
+      "It guarantees faster device transfers"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Separate protection domains contain many memory faults, although communication overhead and privileged I/O mediation remain."
+  },
+  {
+    "seedKey": "os-basics-019",
+    "topic": "Operating System Basics",
+    "subtopic": "Preemption",
+    "difficulty": "medium",
+    "questionText": "Why does a time-sharing OS use a programmable timer interrupt?",
+    "options": [
+      "To regain control even if a user process does not yield",
+      "To make every instruction privileged",
+      "To store the process's executable on disk",
+      "To eliminate interrupt handlers"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Timer interrupts let the kernel preempt an uncooperative process and schedule another runnable process."
+  },
+  {
+    "seedKey": "os-basics-020",
+    "topic": "Operating System Basics",
+    "subtopic": "Trap handling",
+    "difficulty": "medium",
+    "questionText": "A system call changes the CPU privilege level. Does this necessarily switch to a different process?",
+    "options": [
+      "Yes; every system call creates a child process",
+      "No; the same process can execute kernel code on its own behalf",
+      "No; privilege never actually changes",
+      "Yes; the kernel always schedules another user"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "A mode switch enters kernel execution, whereas a process context switch changes the scheduled process."
+  },
+  {
+    "seedKey": "os-basics-021",
+    "topic": "Operating System Basics",
+    "subtopic": "Virtual machines",
+    "difficulty": "medium",
+    "questionText": "What does a hypervisor primarily virtualize for guest operating systems?",
+    "options": [
+      "Only shell command history",
+      "A machine-like collection of hardware resources",
+      "Only user passwords",
+      "Only application source code"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "A hypervisor presents virtual CPUs, memory and devices so guest OS instances can run with isolation."
+  },
+  {
+    "seedKey": "os-basics-022",
+    "topic": "Operating System Basics",
+    "subtopic": "Containers",
+    "difficulty": "medium",
+    "questionText": "Why are ordinary OS containers generally not separate virtual machines?",
+    "options": [
+      "They share the host kernel while isolating selected resources",
+      "They contain no processes",
+      "They bypass all host access checks",
+      "They must each boot a different kernel"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Namespace and resource-control mechanisms isolate containers, but system calls still use the host kernel."
+  },
+  {
+    "seedKey": "os-basics-023",
+    "topic": "Operating System Basics",
+    "subtopic": "Mechanism and policy",
+    "difficulty": "medium",
+    "questionText": "Which pairing correctly distinguishes a mechanism from a policy?",
+    "options": [
+      "Choosing a victim versus detecting a page fault",
+      "Choosing a quota versus copying memory",
+      "Context-switch machinery versus deciding which process runs next",
+      "Choosing a priority versus saving CPU registers"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "A mechanism provides the means to act; policy decides how or when to use it."
+  },
+  {
+    "seedKey": "os-basics-024",
+    "topic": "Operating System Basics",
+    "subtopic": "Interrupt masking",
+    "difficulty": "medium",
+    "questionText": "Why should kernel code keep interrupt-disabled regions short?",
+    "options": [
+      "User programs cannot calculate while any interrupt exists",
+      "Long regions delay interrupt handling and hurt responsiveness",
+      "Interrupt masking permanently deletes timer events",
+      "Interrupt masking makes disk capacity shrink"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Masking interrupts delays service on the affected CPU; short critical regions limit latency."
+  },
+  {
+    "seedKey": "os-basics-025",
+    "topic": "Operating System Basics",
+    "subtopic": "Reentrancy",
+    "difficulty": "medium",
+    "questionText": "What property is required of a function safely entered concurrently using independent caller state?",
+    "options": [
+      "Static address binding",
+      "Reentrancy",
+      "External fragmentation",
+      "Exclusive disk ownership"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Reentrant code avoids unsafe shared mutable state or protects it appropriately, allowing overlapping executions."
+  },
+  {
+    "seedKey": "os-basics-026",
+    "topic": "Operating System Basics",
+    "subtopic": "Boot trust",
+    "difficulty": "medium",
+    "questionText": "Why can loading a kernel from an unverified boot image undermine later access controls?",
+    "options": [
+      "Malicious privileged code can subvert those controls",
+      "File permissions apply before firmware exists",
+      "Boot images cannot contain executable code",
+      "An unverified image always reduces CPU frequency"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Controls rely on a trustworthy privileged computing base; a compromised kernel can bypass them."
+  },
+  {
+    "seedKey": "os-basics-027",
+    "topic": "Operating System Basics",
+    "subtopic": "Time accounting",
+    "difficulty": "medium",
+    "questionText": "A service receives 200 requests per second and completes all of them. What quantity is 200 requests/s?",
+    "options": [
+      "Memory latency",
+      "Response time",
+      "Turnaround time",
+      "Throughput"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Throughput counts completed work per unit time; latency measures elapsed time for one operation."
+  },
+  {
+    "seedKey": "os-basics-028",
+    "topic": "Operating System Basics",
+    "subtopic": "Latency",
+    "difficulty": "medium",
+    "questionText": "A request is sent at 12 ms and its response arrives at 47 ms. What is its response latency?",
+    "options": [
+      "59 ms",
+      "35 ms",
+      "47 ms",
+      "12 ms"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Latency is the difference between arrival and response times: 47 minus 12 equals 35 ms."
+  },
+  {
+    "seedKey": "os-basics-029",
+    "topic": "Operating System Basics",
+    "subtopic": "Overhead",
+    "difficulty": "medium",
+    "questionText": "A CPU spends 8 ms on useful work and 2 ms on OS overhead each cycle. What fraction is useful work?",
+    "options": [
+      "20%",
+      "25%",
+      "80%",
+      "90%"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Each cycle lasts 10 ms; useful utilization is 8 divided by 10, or 80%."
+  },
+  {
+    "seedKey": "os-basics-030",
+    "topic": "Operating System Basics",
+    "subtopic": "System-call cost",
+    "difficulty": "medium",
+    "questionText": "A workload makes 400 system calls costing 3 microseconds each. Ignoring overlap, what is the total call overhead?",
+    "options": [
+      "12 ms",
+      "1.2 ms",
+      "120 ms",
+      "0.12 ms"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "400 times 3 is 1200 microseconds; dividing by 1000 gives 1.2 ms."
+  },
+  {
+    "seedKey": "os-basics-031",
+    "topic": "Operating System Basics",
+    "subtopic": "Layering",
+    "difficulty": "medium",
+    "questionText": "What is a common restriction in a strictly layered OS design?",
+    "options": [
+      "Only the highest layer can use the CPU",
+      "A layer uses only interfaces of lower layers",
+      "Layers must be stored on different disks",
+      "Every layer can directly modify any higher layer"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Restricting dependencies helps modular reasoning, though real systems may relax strict layering for efficiency."
+  },
+  {
+    "seedKey": "os-basics-032",
+    "topic": "Operating System Basics",
+    "subtopic": "Portability",
+    "difficulty": "medium",
+    "questionText": "Which approach generally makes an OS easier to port to a new processor architecture?",
+    "options": [
+      "Require applications to program page tables directly",
+      "Remove all hardware abstractions",
+      "Embed instruction encodings throughout all services",
+      "Separate architecture-specific code from common services"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Isolating machine-dependent operations reduces the amount of code that must change for a new architecture."
+  },
+  {
+    "seedKey": "os-basics-033",
+    "topic": "Operating System Basics",
+    "subtopic": "Interrupt dispatch",
+    "difficulty": "medium",
+    "questionText": "Why does an interrupt vector or interrupt table contain handler entry information?",
+    "options": [
+      "To dispatch each event to the appropriate service routine",
+      "To list all available file names",
+      "To assign permanent CPU time to each disk block",
+      "To store every user's document"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "The processor and kernel use the vector to find code for a particular interrupt or exception."
+  },
+  {
+    "seedKey": "os-basics-034",
+    "topic": "Operating System Basics",
+    "subtopic": "Exceptions",
+    "difficulty": "medium",
+    "questionText": "An integer divide instruction faults on a zero divisor. How does this differ from a typical device interrupt?",
+    "options": [
+      "It can only occur while the CPU is idle",
+      "It always means the disk is full",
+      "It must originate on a network card",
+      "The exception is synchronous with the executing instruction"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Exceptions arise from instruction execution; external device interrupts are generally asynchronous to that instruction stream."
+  },
+  {
+    "seedKey": "os-basics-035",
+    "topic": "Operating System Basics",
+    "subtopic": "Blocking",
+    "difficulty": "medium",
+    "questionText": "A process requests a blocking disk read whose data is not cached. What can the OS do while the device works?",
+    "options": [
+      "Require the caller to spin in user space",
+      "Treat the read as already completed",
+      "Stop every CPU until completion",
+      "Run another ready process"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Blocking suspends the caller, letting the scheduler use the CPU for other work."
+  },
+  {
+    "seedKey": "os-basics-036",
+    "topic": "Operating System Basics",
+    "subtopic": "Instrumentation",
+    "difficulty": "medium",
+    "questionText": "Why might a benchmark that includes verbose kernel tracing overestimate normal execution time?",
+    "options": [
+      "Instrumentation itself consumes time and can change scheduling",
+      "Tracing removes all system-call overhead",
+      "Tracing guarantees identical cache behavior",
+      "Trace files cannot be written while measuring time"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Measurement can perturb the workload; compare under controlled and representative instrumentation settings."
+  },
+  {
+    "seedKey": "os-basics-037",
+    "topic": "Operating System Basics",
+    "subtopic": "SMP",
+    "difficulty": "medium",
+    "questionText": "What distinguishes symmetric multiprocessing from a single-core system?",
+    "options": [
+      "All processors must execute the same process",
+      "Each user must own a separate disk",
+      "Multiple processors can run OS-managed work concurrently",
+      "Only one process may exist in memory"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "SMP permits concurrent execution on multiple CPUs, requiring coordination of shared kernel state."
+  },
+  {
+    "seedKey": "os-basics-038",
+    "topic": "Operating System Basics",
+    "subtopic": "Real-time behavior",
+    "difficulty": "medium",
+    "questionText": "A controller requires completion before a deadline. Which measurement matters more than average throughput alone?",
+    "options": [
+      "Average screen brightness",
+      "The longest file name",
+      "Worst-case response time relative to the deadline",
+      "The number of installed applications"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Deadline guarantees require bounded delays; excellent average throughput does not rule out occasional deadline misses."
+  },
+  {
+    "seedKey": "os-basics-039",
+    "topic": "Operating System Basics",
+    "subtopic": "Accounting",
+    "difficulty": "medium",
+    "questionText": "Why does the kernel distinguish CPU time from elapsed wall-clock time?",
+    "options": [
+      "CPU time is measured only in bytes",
+      "CPU time always includes another process's execution",
+      "A process may spend elapsed time waiting or not scheduled",
+      "Wall-clock time can never advance during I/O"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "CPU time counts execution attributed to the process, while wall time includes waiting and scheduling delays."
+  },
+  {
+    "seedKey": "os-basics-040",
+    "topic": "Operating System Basics",
+    "subtopic": "System service boundary",
+    "difficulty": "medium",
+    "questionText": "A cached library operation completes entirely in user space. Must it incur a system call?",
+    "options": [
+      "No; a library interface does not imply a kernel transition",
+      "Yes; all cache reads are privileged",
+      "No; user space can directly change privileged registers",
+      "Yes; every function call is a system call"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Library APIs can implement work locally; only operations needing kernel services must cross the protection boundary."
+  },
+  {
+    "seedKey": "os-basics-041",
+    "topic": "Operating System Basics",
+    "subtopic": "Amdahl's law",
+    "difficulty": "hard",
+    "questionText": "An OS optimization doubles a component taking 40% of execution time; the other 60% is unchanged. What is overall speedup?",
+    "options": [
+      "2 times",
+      "0.8 times",
+      "1.25 times",
+      "1.6 times"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "New normalized time is 0.6 plus 0.4/2 = 0.8; speedup is 1/0.8 = 1.25."
+  },
+  {
+    "seedKey": "os-basics-042",
+    "topic": "Operating System Basics",
+    "subtopic": "Reliability",
+    "difficulty": "hard",
+    "questionText": "Two independent required services each have availability 0.99. Ignoring recovery interactions, what is joint availability?",
+    "options": [
+      "0.9999",
+      "0.99",
+      "1.98",
+      "0.9801"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Both services must be available, so independent probabilities multiply: 0.99 times 0.99 = 0.9801."
+  },
+  {
+    "seedKey": "os-basics-043",
+    "topic": "Operating System Basics",
+    "subtopic": "End-to-end design",
+    "difficulty": "hard",
+    "questionText": "Why does successful disk write submission alone not prove an application transaction is durable?",
+    "options": [
+      "Data and metadata may still reside in volatile caches",
+      "The CPU never buffers writes",
+      "Submitting a write always forces all caches to stable media",
+      "A file descriptor stores a second permanent copy"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Durability requires the appropriate persistence operations and ordering guarantees across the storage stack."
+  },
+  {
+    "seedKey": "os-basics-044",
+    "topic": "Operating System Basics",
+    "subtopic": "Nested entry",
+    "difficulty": "hard",
+    "questionText": "A kernel handles a system call when a higher-priority interrupt arrives. Which design concern is essential?",
+    "options": [
+      "Allow the handler to overwrite the caller's saved registers",
+      "Protect shared state across nested execution paths",
+      "Disable virtual memory permanently",
+      "Assume all kernel execution is automatically atomic"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Nested kernel activity can access shared state concurrently or reentrantly; locking and interrupt discipline must account for this."
+  },
+  {
+    "seedKey": "os-basics-045",
+    "topic": "Operating System Basics",
+    "subtopic": "Virtualization cost",
+    "difficulty": "hard",
+    "questionText": "A workload has 900 ms native work plus 100 ms emulation overhead. Hardware support removes 75% of the overhead. What is its new time?",
+    "options": [
+      "225 ms",
+      "975 ms",
+      "925 ms",
+      "750 ms"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Native work stays 900 ms; remaining overhead is 100 times 0.25 = 25 ms, totaling 925 ms."
+  },
+  {
+    "seedKey": "os-basics-046",
+    "topic": "Operating System Basics",
+    "subtopic": "Interrupt budget",
+    "difficulty": "hard",
+    "questionText": "A CPU handles 5000 interrupts/s, each consuming 12 microseconds with no overlap. What CPU percentage do handlers consume?",
+    "options": [
+      "12%",
+      "0.6%",
+      "60%",
+      "6%"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Handler time is 5000 times 12 = 60000 microseconds per second, or 0.06 seconds: 6%."
+  },
+  {
+    "seedKey": "os-basics-047",
+    "topic": "Operating System Basics",
+    "subtopic": "Isolation boundary",
+    "difficulty": "hard",
+    "questionText": "Why does executing a kernel service in the caller's process not eliminate its security boundary?",
+    "options": [
+      "The caller becomes permanently privileged after any system call",
+      "Privilege and address-access checks still distinguish trusted kernel execution",
+      "All callers share writable kernel data by default",
+      "The boundary exists only between different physical CPUs"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "A protection-domain transition can occur within one process; the kernel validates arguments and restricts privileged access."
+  },
+  {
+    "seedKey": "os-basics-048",
+    "topic": "Operating System Basics",
+    "subtopic": "Multi-core interrupts",
+    "difficulty": "hard",
+    "questionText": "Why is disabling local interrupts insufficient to protect shared kernel data on an SMP machine?",
+    "options": [
+      "Another CPU can still access the shared data",
+      "It invalidates every remote process",
+      "It makes memory operations indivisible on every CPU",
+      "It instantly stops all CPUs"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Interrupt masking affects the local CPU; inter-CPU synchronization is still required for shared state."
+  },
+  {
+    "seedKey": "os-basics-049",
+    "topic": "Operating System Basics",
+    "subtopic": "Response-time budget",
+    "difficulty": "hard",
+    "questionText": "A hard-deadline path has 2 ms input latency, 5 ms computation and 1 ms output latency. With a 10 ms deadline, what maximum extra delay fits?",
+    "options": [
+      "8 ms",
+      "10 ms",
+      "2 ms",
+      "3 ms"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Existing worst-case time is 2+5+1=8 ms. The remaining budget is 10-8=2 ms."
+  },
+  {
+    "seedKey": "os-basics-050",
+    "topic": "Operating System Basics",
+    "subtopic": "System boundary reasoning",
+    "difficulty": "hard",
+    "questionText": "A user buffer is validated, then another thread changes its mapping before the kernel uses it. What does this illustrate?",
+    "options": [
+      "Validation makes every future mapping immutable",
+      "User pointers are always safe in kernel mode",
+      "Context switches cannot affect pointer validity",
+      "Validation alone may not stabilize memory across later use"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Memory mappings and contents may change between checks and use; kernels need safe copy/access mechanisms and appropriate stabilization."
+  }
+]

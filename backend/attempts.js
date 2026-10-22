@@ -30,6 +30,25 @@ async function loadQuiz(db, id) {
 }
 const versionOf = (z) =>
   crypto.createHash("sha256").update(JSON.stringify(z)).digest("hex");
+const TOPIC_LIMIT = 20;
+const TOPIC_MODE = "topic-random-20-v1";
+const isTopicQuiz = (z) => z.topic !== "Mixed";
+const topicSelection = (z) => ({
+  mode: TOPIC_MODE,
+  poolVersion: versionOf(z),
+  poolSize: z.questions.length,
+});
+function assignTopic(z) {
+  const questions = [...z.questions];
+  // Partial Fisher–Yates: unbiased sampling without replacement. Small pools use all.
+  if (questions.length > TOPIC_LIMIT) {
+    for (let i = 0; i < TOPIC_LIMIT; i++) {
+      const j = crypto.randomInt(i, questions.length);
+      [questions[i], questions[j]] = [questions[j], questions[i]];
+    }
+  }
+  return { ...z, selection: topicSelection(z), questions: questions.slice(0, TOPIC_LIMIT) };
+}
 const hide = (z) => ({
   ...z,
   questions: z.questions.map(({ correctOptionIndex, explanation, ...q }) => q),
@@ -82,7 +101,10 @@ async function start(userId, quizId, practice = false) {
   try {
     await c.query("begin isolation level repeatable read");
     let z;
-    if (!practice) z = await loadQuiz(c, quizId);
+    if (!practice) {
+      z = await loadQuiz(c, quizId);
+      if (isTopicQuiz(z)) z = assignTopic(z);
+    }
     else {
       // Use an existing quiz as the parent; practice has a separate immutable type.
       const first = (
@@ -161,6 +183,15 @@ async function start(userId, quizId, practice = false) {
   } finally {
     c.release();
   }
+}
+async function getAttempt(userId, attemptId) {
+  if (!uuid(attemptId)) fail(404, "Attempt not found.");
+  const a = (await pool.query(
+    "select id,snapshot,attempt_type from attempts where id=$1 and user_id=$2",
+    [attemptId, userId],
+  )).rows[0];
+  if (!a) fail(404, "Attempt not found.");
+  return { ...hide(a.snapshot), attemptId: a.id, attemptType: a.attempt_type };
 }
 async function submit(userId, attemptId, answers, quizId) {
   if (!uuid(attemptId)) fail(400, "A valid assigned attemptId is required.");
@@ -326,11 +357,58 @@ async function result(userId, id) {
     review,
   };
 }
-async function leaderboard(userId, quizId, page) {
+async function leaderboard(userId, quizId, page, requestedVersion) {
   if (!Number.isInteger(page) || page < 1 || page > 100000)
     fail(400, "Invalid page.");
-  const z = await loadQuiz(pool, quizId),
-    version = versionOf(z);
+  const z = await loadQuiz(pool, quizId);
+  const poolVersion = versionOf(z);
+  const historical = (
+    await pool.query(
+      `select r.version, max(jsonb_array_length(a.snapshot->'questions'))::int as "questionCount",
+      max(a.snapshot->>'title') as title,
+      max(a.snapshot->'selection'->>'poolVersion') as "poolVersion",
+      max(a.snapshot->'selection'->>'mode') as mode,
+      bool_or(r.user_id=$2) as "isOwn",
+      max(r.created_at) filter (where r.user_id=$2) as "ownCompletedAt"
+    from results r join attempts a on a.id=r.attempt_id and a.user_id=r.user_id and a.quiz_id=r.quiz_id and a.version=r.version
+    join users u on u.id=r.user_id
+    where r.quiz_id=$1 and r.attempt_type='standard' and a.attempt_type='standard' and a.completed_at is not null
+    and u.role='student' and u.auth_enabled and u.leaderboard_enabled and normalize_identity(u.email)<>'test.student@example.com'
+    group by r.version order by max(r.created_at) desc,r.version`,
+      [quizId, userId],
+    )
+  ).rows;
+  const currentSets = historical.filter((v) =>
+    v.poolVersion === poolVersion && v.mode === TOPIC_MODE);
+  // Prefer this student's latest completed selection. Never pool scores from
+  // different random assignments, or from the previous full-pool format.
+  const ownLatest = currentSets.filter((v) => v.isOwn).sort((a, b) =>
+    new Date(b.ownCompletedAt) - new Date(a.ownCompletedAt) || a.version.localeCompare(b.version))[0];
+  const currentVersion = isTopicQuiz(z)
+    ? (ownLatest || currentSets[0])?.version ||
+      versionOf({ ...z, selection: topicSelection(z), questions: [] })
+    : poolVersion;
+  const publicVersion = ({ poolVersion, mode, isOwn, ownCompletedAt, ...v }) => v;
+  const versions = [
+    {
+      version: currentVersion,
+      questionCount: isTopicQuiz(z) ? Math.min(TOPIC_LIMIT, z.questions.length) : z.questions.length,
+      title: z.title,
+      current: true,
+      sampled: isTopicQuiz(z),
+    },
+    ...historical
+      .filter((v) => v.version !== currentVersion)
+      .map((v) => ({ ...publicVersion(v), current: false, sampled: v.mode === TOPIC_MODE })),
+  ];
+  if (
+    requestedVersion !== undefined &&
+    (typeof requestedVersion !== "string" ||
+      !/^[a-f0-9]{64}$/.test(requestedVersion) ||
+      !versions.some((v) => v.version === requestedVersion))
+  )
+    fail(400, "Unknown quiz version.");
+  const version = requestedVersion || currentVersion;
   // Integer percentages match the scoring engine and define ties consistently.
   const ranked = `with best as (
  select u.id,u.username,max(r.score_percentage) as score from results r join users u on u.id=r.user_id
@@ -359,11 +437,20 @@ async function leaderboard(userId, quizId, page) {
       version,
     ])
   ).rows[0].count;
-  return { rows, currentUser: mine, total, page, pageSize: 20, version };
+  return {
+    rows,
+    currentUser: mine,
+    total,
+    page,
+    pageSize: 20,
+    version,
+    versions,
+  };
 }
 module.exports = {
   start,
   submit,
+  getAttempt,
   learning,
   progress,
   result,

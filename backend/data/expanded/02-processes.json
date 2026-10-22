@@ -1,0 +1,677 @@
+[
+  {
+    "seedKey": "os-process-006",
+    "topic": "Process Management",
+    "subtopic": "Program versus process",
+    "difficulty": "easy",
+    "questionText": "How does a program file differ from a process?",
+    "options": [
+      "A process contains no execution state",
+      "A program is passive code; a process is an executing instance",
+      "A program must be running; a process is always a disk file",
+      "They are identical in every context"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "The executable is stored instructions; a process adds live execution state and resources."
+  },
+  {
+    "seedKey": "os-process-007",
+    "topic": "Process Management",
+    "subtopic": "Threads",
+    "difficulty": "easy",
+    "questionText": "Threads in the same process normally share which resource?",
+    "options": [
+      "A single set of CPU registers for all threads",
+      "One mandatory shared program counter",
+      "One mandatory shared stack pointer",
+      "The process's address space"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Threads share process memory but maintain separate execution registers and stacks."
+  },
+  {
+    "seedKey": "os-process-008",
+    "topic": "Process Management",
+    "subtopic": "Ready queue",
+    "difficulty": "easy",
+    "questionText": "A process can run but is waiting for a CPU. Which queue typically contains it?",
+    "options": [
+      "Firmware boot queue",
+      "Disk's completed-request list",
+      "Ready queue",
+      "Terminated-process queue only"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Ready processes have the resources needed to execute except for a scheduled CPU."
+  },
+  {
+    "seedKey": "os-process-009",
+    "topic": "Process Management",
+    "subtopic": "Blocking",
+    "difficulty": "easy",
+    "questionText": "A process waiting for input from a blocking read is normally in which state?",
+    "options": [
+      "Running continuously",
+      "Terminated",
+      "Ready solely because it has a PID",
+      "Blocked or waiting"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "The process cannot proceed until the requested event completes, so it is blocked rather than ready."
+  },
+  {
+    "seedKey": "os-process-010",
+    "topic": "Process Management",
+    "subtopic": "Identifiers",
+    "difficulty": "easy",
+    "questionText": "What is the purpose of a process identifier (PID)?",
+    "options": [
+      "Encode the process's complete machine code",
+      "Guarantee a permanent identity across all reboots",
+      "Store every open file's contents",
+      "Identify a process within the OS's PID namespace"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "A PID is an identifier, not an executable or globally permanent identity."
+  },
+  {
+    "seedKey": "os-process-011",
+    "topic": "Process Management",
+    "subtopic": "exec",
+    "difficulty": "easy",
+    "questionText": "What does a successful UNIX exec-family call normally replace?",
+    "options": [
+      "Every process's PID",
+      "The entire filesystem",
+      "The machine's physical processor",
+      "The calling process's program image"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Successful exec loads a new program into the existing process; its PID remains the same."
+  },
+  {
+    "seedKey": "os-process-012",
+    "topic": "Process Management",
+    "subtopic": "Waiting for children",
+    "difficulty": "easy",
+    "questionText": "What is the main purpose of wait() or waitpid() in a parent process?",
+    "options": [
+      "Collect a child's termination status",
+      "Allocate every child's stack manually",
+      "Start a second kernel",
+      "Change all other processes' priorities"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Waiting allows the parent to observe child completion and reap its retained exit information."
+  },
+  {
+    "seedKey": "os-process-013",
+    "topic": "Process Management",
+    "subtopic": "IPC",
+    "difficulty": "easy",
+    "questionText": "What does IPC stand for?",
+    "options": [
+      "Internal printer cartridge",
+      "Independent program compilation",
+      "Interprocess communication",
+      "Instruction priority counter"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "IPC mechanisms allow processes to exchange data or coordinate their activities."
+  },
+  {
+    "seedKey": "os-process-014",
+    "topic": "Process Management",
+    "subtopic": "Pipes",
+    "difficulty": "easy",
+    "questionText": "What is a traditional anonymous pipe primarily used for?",
+    "options": [
+      "Allocating a new CPU core",
+      "A byte stream between related processes",
+      "Random access to a disk partition",
+      "Replacing every process's heap"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "A pipe provides a stream interface, commonly used between a parent and child or shell pipeline stages."
+  },
+  {
+    "seedKey": "os-process-015",
+    "topic": "Process Management",
+    "subtopic": "Signals",
+    "difficulty": "easy",
+    "questionText": "What is a UNIX signal primarily used to deliver?",
+    "options": [
+      "An asynchronous notification to a process",
+      "A mandatory new process image",
+      "A permanent file allocation table",
+      "A complete replacement for physical memory"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Signals notify processes of events such as termination requests or timer expiration."
+  },
+  {
+    "seedKey": "os-process-016",
+    "topic": "Process Management",
+    "subtopic": "Lifecycle",
+    "difficulty": "easy",
+    "questionText": "When an I/O event completes for a blocked process, what transition normally becomes possible?",
+    "options": [
+      "Terminated to running",
+      "Ready to newborn",
+      "Blocked directly to terminated",
+      "Blocked to ready"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Completion removes the waiting condition; the process still needs CPU scheduling before it executes."
+  },
+  {
+    "seedKey": "os-process-017",
+    "topic": "Process Management",
+    "subtopic": "Thread stacks",
+    "difficulty": "easy",
+    "questionText": "Why does each thread normally need its own stack?",
+    "options": [
+      "Only one thread can call functions in a process",
+      "Stacks store only shared executable code",
+      "Each thread has its own active calls and local execution context",
+      "A stack is the same as a process ID"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Separate stacks preserve each thread's call frames, return addresses and stack-local variables."
+  },
+  {
+    "seedKey": "os-process-018",
+    "topic": "Process Management",
+    "subtopic": "Exit status",
+    "difficulty": "easy",
+    "questionText": "A child exits with a nonzero status. What should its parent generally infer?",
+    "options": [
+      "The status contains the child's full memory image",
+      "The child reports an application-defined unsuccessful outcome",
+      "The child's PID must be zero",
+      "The operating system has necessarily crashed"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Exit status conveys a limited result code whose meaning is defined by the program and conventions."
+  },
+  {
+    "seedKey": "os-process-019",
+    "topic": "Process Management",
+    "subtopic": "fork inheritance",
+    "difficulty": "medium",
+    "questionText": "After fork(), parent and child both have a descriptor for the same open file description. What may they share?",
+    "options": [
+      "The current file offset",
+      "The same private stack after all writes",
+      "A single mutable process ID",
+      "An inseparable thread identity"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Inherited descriptors reference the same open file description, which includes shared offset and status information."
+  },
+  {
+    "seedKey": "os-process-020",
+    "topic": "Process Management",
+    "subtopic": "Copy-on-write",
+    "difficulty": "medium",
+    "questionText": "Why can copy-on-write make fork() cheaper initially?",
+    "options": [
+      "All child writes are discarded",
+      "The child has no address space",
+      "Physical pages are shared until a process writes to them",
+      "Every page is copied twice immediately"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Shared read-only mappings postpone copying; a write fault creates a private copy when necessary."
+  },
+  {
+    "seedKey": "os-process-021",
+    "topic": "Process Management",
+    "subtopic": "Isolation",
+    "difficulty": "medium",
+    "questionText": "Two processes map the same virtual address but see different values. What makes this possible?",
+    "options": [
+      "All processes must share identical heaps",
+      "Virtual addresses are necessarily physical addresses",
+      "Different page-table mappings",
+      "The CPU ignores process identity during translation"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Per-process address translation can map equal virtual addresses to different physical frames."
+  },
+  {
+    "seedKey": "os-process-022",
+    "topic": "Process Management",
+    "subtopic": "Shared memory",
+    "difficulty": "medium",
+    "questionText": "Why does shared-memory IPC still need synchronization for a shared counter?",
+    "options": [
+      "Processes cannot access the same physical page",
+      "Concurrent read-modify-write operations can interfere",
+      "The counter has no physical storage",
+      "Shared memory automatically serializes every instruction"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Sharing bytes provides communication but does not make compound updates atomic."
+  },
+  {
+    "seedKey": "os-process-023",
+    "topic": "Process Management",
+    "subtopic": "Message passing",
+    "difficulty": "medium",
+    "questionText": "What benefit can message passing offer over unrestricted shared memory?",
+    "options": [
+      "Explicit communication boundaries reduce direct shared-state exposure",
+      "It prevents all deadlocks automatically",
+      "It makes message ordering irrelevant",
+      "It guarantees zero copying on every OS"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Messages give explicit send/receive interfaces, although implementation cost and ordering rules vary."
+  },
+  {
+    "seedKey": "os-process-024",
+    "topic": "Process Management",
+    "subtopic": "Pipe lifetime",
+    "difficulty": "medium",
+    "questionText": "A reader reaches end-of-file on a pipe only after which condition?",
+    "options": [
+      "The first byte written is zero",
+      "The reader performs exactly one read",
+      "All write-end references are closed and buffered bytes are drained",
+      "One of several writers closes its descriptor"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Any remaining writer can still produce data; after all writers close, buffered data is read before EOF."
+  },
+  {
+    "seedKey": "os-process-025",
+    "topic": "Process Management",
+    "subtopic": "Descriptor hygiene",
+    "difficulty": "medium",
+    "questionText": "Why should a shell child close unused pipe ends before executing a pipeline command?",
+    "options": [
+      "Every pipe requires three readers",
+      "It makes the child's PID equal to the parent's",
+      "Unused references can prevent EOF and waste descriptors",
+      "Closing unused ends deletes the executable"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Extra writer references may keep readers waiting indefinitely for EOF."
+  },
+  {
+    "seedKey": "os-process-026",
+    "topic": "Process Management",
+    "subtopic": "Thread models",
+    "difficulty": "medium",
+    "questionText": "In a many-to-one user-thread implementation, what can a blocking system call do?",
+    "options": [
+      "Block the single underlying kernel thread and thus all user threads",
+      "Automatically terminate only the calling function",
+      "Create a kernel thread for every instruction",
+      "Guarantee simultaneous execution on many CPUs"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "With one kernel scheduling entity, a blocking operation can stall all user threads managed above it."
+  },
+  {
+    "seedKey": "os-process-027",
+    "topic": "Process Management",
+    "subtopic": "Orphans",
+    "difficulty": "medium",
+    "questionText": "What is an orphan process in the usual UNIX sense?",
+    "options": [
+      "A terminated child whose status is uncollected",
+      "A process without any instructions",
+      "A thread with two independent PIDs in one namespace",
+      "A still-running process whose parent has exited"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Orphans are reparented to an appropriate reaper; they differ from terminated zombies."
+  },
+  {
+    "seedKey": "os-process-028",
+    "topic": "Process Management",
+    "subtopic": "Signal safety",
+    "difficulty": "medium",
+    "questionText": "Why is arbitrary library work unsafe inside an asynchronous signal handler?",
+    "options": [
+      "Signals always run before the process starts",
+      "Every library function is atomic",
+      "The handler has unlimited dedicated memory",
+      "It may reenter non-async-signal-safe code in an inconsistent state"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "A signal can interrupt library internals; only suitable operations are safe from such handlers."
+  },
+  {
+    "seedKey": "os-process-029",
+    "topic": "Process Management",
+    "subtopic": "Cancellation",
+    "difficulty": "medium",
+    "questionText": "Why is cooperative thread cancellation often easier to reason about than abrupt cancellation?",
+    "options": [
+      "It permanently disables interrupts",
+      "Cleanup occurs at defined points where invariants can be restored",
+      "It guarantees the thread never uses locks",
+      "It removes the need to release resources"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Defined cancellation points help release locks and resources without interrupting arbitrary partially completed updates."
+  },
+  {
+    "seedKey": "os-process-030",
+    "topic": "Process Management",
+    "subtopic": "Process trees",
+    "difficulty": "medium",
+    "questionText": "A parent creates 3 direct children, and each child creates 2 children. Including the original parent, how many processes exist if none exit?",
+    "options": [
+      "10",
+      "12",
+      "9",
+      "6"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "There is 1 original process, 3 children and 3 times 2 grandchildren: 1+3+6=10."
+  },
+  {
+    "seedKey": "os-process-031",
+    "topic": "Process Management",
+    "subtopic": "Thread resources",
+    "difficulty": "medium",
+    "questionText": "A process creates 4 threads, each with a 2 MiB stack reservation. What is the total stack reservation, excluding other memory?",
+    "options": [
+      "2 MiB",
+      "4 MiB",
+      "16 MiB",
+      "8 MiB"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Four independent stack reservations of 2 MiB total 4 times 2 = 8 MiB; reservation need not equal resident memory."
+  },
+  {
+    "seedKey": "os-process-032",
+    "topic": "Process Management",
+    "subtopic": "fork failure",
+    "difficulty": "medium",
+    "questionText": "How should a parent distinguish fork() failure from successful creation?",
+    "options": [
+      "Assume every positive value is a memory address",
+      "Check whether the child's eventual exit code is positive",
+      "Check for a negative return value",
+      "Assume return zero always means failure"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "fork returns a negative value on failure, zero in the child and the child's PID in the parent."
+  },
+  {
+    "seedKey": "os-process-033",
+    "topic": "Process Management",
+    "subtopic": "exec failure",
+    "difficulty": "medium",
+    "questionText": "A program calls exec(), then executes its next statement. What is the usual explanation?",
+    "options": [
+      "Every system call must change the PID",
+      "The kernel cloned the next statement",
+      "exec failed and returned an error",
+      "Successful exec always returns to the old image"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "A successful exec does not return to the old program image; a return indicates failure."
+  },
+  {
+    "seedKey": "os-process-034",
+    "topic": "Process Management",
+    "subtopic": "Resource limits",
+    "difficulty": "medium",
+    "questionText": "Why limit how many processes one untrusted user may create?",
+    "options": [
+      "Prevent one user from exhausting shared process-related resources",
+      "Remove the need for authentication",
+      "Ensure every process has identical code",
+      "Make all users share a single PID"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Per-user or group limits help contain process-table, memory and CPU exhaustion."
+  },
+  {
+    "seedKey": "os-process-035",
+    "topic": "Process Management",
+    "subtopic": "Blocked versus suspended",
+    "difficulty": "medium",
+    "questionText": "How does a suspended blocked process differ from a resident blocked process?",
+    "options": [
+      "It no longer has any saved state",
+      "It is also withheld from normal resident execution, often with memory swapped out",
+      "It is guaranteed to be using a CPU",
+      "It has already completed all I/O"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Suspension adds an administrative or residency constraint beyond the event the process is waiting for."
+  },
+  {
+    "seedKey": "os-process-036",
+    "topic": "Process Management",
+    "subtopic": "Thread joining",
+    "difficulty": "medium",
+    "questionText": "Why join a joinable thread after it finishes?",
+    "options": [
+      "Synchronize with completion and reclaim retained thread resources",
+      "Start the same finished thread from its first instruction",
+      "Turn all its local variables into global variables",
+      "Copy the entire filesystem into its stack"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "A join observes termination and permits cleanup of resources retained for the joiner."
+  },
+  {
+    "seedKey": "os-process-037",
+    "topic": "Process Management",
+    "subtopic": "Process launch",
+    "difficulty": "medium",
+    "questionText": "Why can a shell use fork followed by exec when launching a command?",
+    "options": [
+      "fork writes a new kernel to disk",
+      "The child can configure descriptors before replacing its program image",
+      "The combination guarantees no system calls",
+      "exec requires changing the parent's source code"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "The child can set up pipes and redirection while the parent shell retains its own execution context."
+  },
+  {
+    "seedKey": "os-process-038",
+    "topic": "Process Management",
+    "subtopic": "CPU parallelism",
+    "difficulty": "medium",
+    "questionText": "A process has 8 runnable threads on 2 CPU cores. Ignoring SMT, what is the maximum number executing simultaneously?",
+    "options": [
+      "16",
+      "1",
+      "2",
+      "8"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "At most one thread executes per core in this model; other runnable threads wait for scheduling."
+  },
+  {
+    "seedKey": "os-process-039",
+    "topic": "Process Management",
+    "subtopic": "Process accounting",
+    "difficulty": "medium",
+    "questionText": "A process uses 3 s of CPU during 12 s of elapsed time. What is its average utilization of one CPU?",
+    "options": [
+      "400%",
+      "25%",
+      "9%",
+      "75%"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Utilization is 3/12 = 0.25, or 25%; the rest of elapsed time can include waiting or preemption."
+  },
+  {
+    "seedKey": "os-process-040",
+    "topic": "Process Management",
+    "subtopic": "IPC ownership",
+    "difficulty": "medium",
+    "questionText": "A server receives a PID in an untrusted IPC message. Why should it not use that PID alone to authorize an operation?",
+    "options": [
+      "The sender can claim another process's identifier",
+      "A numeric PID proves file ownership",
+      "Every IPC channel guarantees the payload is truthful",
+      "PIDs are secret cryptographic keys"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Authorization should use authenticated peer credentials or capabilities, not a claimed identifier in message data."
+  },
+  {
+    "seedKey": "os-process-041",
+    "topic": "Process Management",
+    "subtopic": "fork tracing",
+    "difficulty": "hard",
+    "questionText": "All fork calls succeed. Starting with one process, what total exists after fork(); fork(); fork(); if none exit early?",
+    "options": [
+      "8",
+      "4",
+      "6",
+      "3"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Each unconditional fork doubles the existing processes: 1 to 2 to 4 to 8."
+  },
+  {
+    "seedKey": "os-process-042",
+    "topic": "Process Management",
+    "subtopic": "Conditional fork",
+    "difficulty": "hard",
+    "questionText": "All fork calls succeed. Starting with one process, how many processes remain after if (fork() == 0) fork(); with no exits?",
+    "options": [
+      "2",
+      "5",
+      "3",
+      "4"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "The first fork creates one child; only that child enters the branch and creates one more process, totaling three."
+  },
+  {
+    "seedKey": "os-process-043",
+    "topic": "Process Management",
+    "subtopic": "Buffered output",
+    "difficulty": "hard",
+    "questionText": "A program buffers text to a regular file using stdio, forks before flushing, and both processes call exit(). What can happen?",
+    "options": [
+      "The file must become empty",
+      "The child cannot inherit user-space buffer contents",
+      "fork guarantees the user-space buffer is flushed once",
+      "The pre-fork buffered text is written twice"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "fork duplicates the user-space buffer; normal exit in both processes can flush two copies to the inherited file description."
+  },
+  {
+    "seedKey": "os-process-044",
+    "topic": "Process Management",
+    "subtopic": "Multithreaded fork",
+    "difficulty": "hard",
+    "questionText": "A multithreaded process forks while another thread holds a user-space mutex. What risk faces the child before exec?",
+    "options": [
+      "The child automatically unlocks every application mutex",
+      "The child may inherit a locked mutex without the owning thread",
+      "The kernel converts the mutex to a pipe",
+      "All parent threads are guaranteed to exist in the child"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Only the calling thread survives in the child, so copied library or application lock state can be unusable."
+  },
+  {
+    "seedKey": "os-process-045",
+    "topic": "Process Management",
+    "subtopic": "Descriptor offsets",
+    "difficulty": "hard",
+    "questionText": "A file offset starts at 0. Parent and child share its open file description after fork. Parent completes a 4-byte read, then child completes a 3-byte read. What is the final offset?",
+    "options": [
+      "4",
+      "3",
+      "0",
+      "7"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Both reads advance the shared open-file offset in the stated order: 0+4+3=7."
+  },
+  {
+    "seedKey": "os-process-046",
+    "topic": "Process Management",
+    "subtopic": "Memory sharing trace",
+    "difficulty": "hard",
+    "questionText": "After fork with private copy-on-write memory, parent changes x from 5 to 9. Child has made no write. What does child read for x?",
+    "options": [
+      "14",
+      "5",
+      "9",
+      "An automatically shared sum"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "A parent write to a private mapping triggers separation; the child's original value remains 5."
+  },
+  {
+    "seedKey": "os-process-047",
+    "topic": "Process Management",
+    "subtopic": "Pipe deadlock",
+    "difficulty": "hard",
+    "questionText": "A parent waits for its child before reading a pipe, while the child writes more than pipe capacity before exiting. What can occur?",
+    "options": [
+      "Child blocks on the full pipe while parent waits for child completion",
+      "wait automatically drains the pipe",
+      "The pipe expands without limit by definition",
+      "The kernel discards excess bytes silently"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Neither side can progress: the reader waits for exit, and the writer needs the reader to consume buffered data."
+  },
+  {
+    "seedKey": "os-process-048",
+    "topic": "Process Management",
+    "subtopic": "PID reuse",
+    "difficulty": "hard",
+    "questionText": "A supervisor stores a PID, its process exits, and a new process receives that PID. Why can a later signal be unsafe?",
+    "options": [
+      "Signals contain the original executable image",
+      "PIDs can never be reused",
+      "The old PID always points to a zombie forever",
+      "It may target a different process due to PID reuse"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "A stale numeric identifier does not establish a continuing process identity; stronger lifecycle handles avoid this race."
+  },
+  {
+    "seedKey": "os-process-049",
+    "topic": "Process Management",
+    "subtopic": "Publication and termination",
+    "difficulty": "hard",
+    "questionText": "A worker stores a result then finishes. Why does a properly defined thread join matter before the parent reads that result?",
+    "options": [
+      "It can establish the synchronization needed to observe completed writes",
+      "It guarantees all reads are atomic regardless of type",
+      "It replaces every lock in the program",
+      "It makes data races legal before the join"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "The thread API's completion/join synchronization publishes prior worker writes; concurrent access before synchronization can still be unsafe."
+  },
+  {
+    "seedKey": "os-process-050",
+    "topic": "Process Management",
+    "subtopic": "Bounded IPC analysis",
+    "difficulty": "hard",
+    "questionText": "A byte-stream pipe holds 4096 bytes and initially contains 1024. With no reads, how many additional bytes fit before it is full?",
+    "options": [
+      "5120 bytes",
+      "4096 bytes",
+      "3072 bytes",
+      "1024 bytes"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Free capacity is 4096-1024=3072 bytes; this capacity calculation does not imply any particular write atomicity guarantee."
+  }
+]

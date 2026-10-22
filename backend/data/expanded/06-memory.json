@@ -1,0 +1,677 @@
+[
+  {
+    "seedKey": "os-memory-006",
+    "topic": "Memory Management",
+    "subtopic": "Address spaces",
+    "difficulty": "easy",
+    "questionText": "What is a virtual address?",
+    "options": [
+      "Always the physical location of a disk sector",
+      "A password for a memory module",
+      "The total number of installed CPU cores",
+      "An address used by a process before hardware translation"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Virtual addresses identify locations in a process's logical address space and may map to different physical locations."
+  },
+  {
+    "seedKey": "os-memory-007",
+    "topic": "Memory Management",
+    "subtopic": "Physical memory",
+    "difficulty": "easy",
+    "questionText": "What is a physical frame in a paged memory system?",
+    "options": [
+      "A user account's permission group",
+      "A variable-length directory entry",
+      "An executable's source-code function",
+      "A fixed-size unit of physical memory"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Frames hold pages, and their size matches the system's page size for the relevant mapping."
+  },
+  {
+    "seedKey": "os-memory-008",
+    "topic": "Memory Management",
+    "subtopic": "Page tables",
+    "difficulty": "easy",
+    "questionText": "What information does a page-table entry commonly contain?",
+    "options": [
+      "A physical-frame reference and access/status bits",
+      "The processor's full instruction set",
+      "A complete list of all user passwords",
+      "Only the executable's file name"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "A page-table entry describes translation and attributes such as validity, permissions and access status."
+  },
+  {
+    "seedKey": "os-memory-009",
+    "topic": "Memory Management",
+    "subtopic": "Internal fragmentation",
+    "difficulty": "easy",
+    "questionText": "What is internal fragmentation?",
+    "options": [
+      "Unused space inside an allocated region",
+      "Free gaps between allocated variable-sized regions",
+      "A destroyed disk directory",
+      "An invalid CPU opcode"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Allocation units may be larger than the requested data, leaving unused bytes within the assigned units."
+  },
+  {
+    "seedKey": "os-memory-010",
+    "topic": "Memory Management",
+    "subtopic": "Heap",
+    "difficulty": "easy",
+    "questionText": "Which area commonly supports dynamically allocated objects whose lifetimes need not match function calls?",
+    "options": [
+      "Instruction register",
+      "Interrupt vector only",
+      "Heap",
+      "Firmware ROM only"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Heap allocation supports runtime sizes and lifetimes that differ from stack call-frame lifetimes."
+  },
+  {
+    "seedKey": "os-memory-011",
+    "topic": "Memory Management",
+    "subtopic": "Stack",
+    "difficulty": "easy",
+    "questionText": "Which memory area normally holds active call frames and return information for a thread?",
+    "options": [
+      "Disk free-space bitmap",
+      "Executable symbol table only",
+      "Printer buffer only",
+      "Stack"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "A thread's stack tracks nested function invocations and their local execution state."
+  },
+  {
+    "seedKey": "os-memory-012",
+    "topic": "Memory Management",
+    "subtopic": "Relocation",
+    "difficulty": "easy",
+    "questionText": "What is run-time relocation intended to allow?",
+    "options": [
+      "Executable files to replace CPU registers",
+      "Only one program to exist at a time",
+      "A program's addresses to be mapped to its actual placement in memory",
+      "Every program to directly write any physical byte"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Translation or relocation mechanisms let logical program addresses work independently of a fixed physical placement."
+  },
+  {
+    "seedKey": "os-memory-013",
+    "topic": "Memory Management",
+    "subtopic": "Protection",
+    "difficulty": "easy",
+    "questionText": "Why mark a memory page read-only?",
+    "options": [
+      "Guarantee its data is encrypted",
+      "Force it to contain only zeros",
+      "Prevent writes through mappings lacking write permission",
+      "Prevent the CPU from reading it"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Page permissions are enforced on access; read-only does not by itself mean encrypted or unreadable."
+  },
+  {
+    "seedKey": "os-memory-014",
+    "topic": "Memory Management",
+    "subtopic": "Shared code",
+    "difficulty": "easy",
+    "questionText": "Why can immutable executable code pages be shared between processes?",
+    "options": [
+      "Sharing always disables isolation for all data",
+      "They need no conflicting per-process modifications",
+      "Each process must store a different instruction in every byte",
+      "Shared code cannot be executed"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Read-only code can map the same physical pages into multiple protected address spaces."
+  },
+  {
+    "seedKey": "os-memory-015",
+    "topic": "Memory Management",
+    "subtopic": "Memory leaks",
+    "difficulty": "easy",
+    "questionText": "What is a memory leak?",
+    "options": [
+      "Every stack automatically shrinks to zero",
+      "A cache line is temporarily invalid",
+      "Allocated memory becomes unreachable without being released",
+      "A physical frame is always accessed by two processes"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Lost allocations can accumulate and exhaust resources even though the bytes are no longer useful."
+  },
+  {
+    "seedKey": "os-memory-016",
+    "topic": "Memory Management",
+    "subtopic": "Dangling pointers",
+    "difficulty": "easy",
+    "questionText": "What is a use-after-free?",
+    "options": [
+      "Accessing an object after its storage has been released",
+      "Comparing two integers",
+      "Reading a currently owned stack-local variable",
+      "Allocating a new object before use"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "A freed region may be reused, so later access through a stale reference can corrupt or expose other data."
+  },
+  {
+    "seedKey": "os-memory-017",
+    "topic": "Memory Management",
+    "subtopic": "TLB purpose",
+    "difficulty": "easy",
+    "questionText": "What is cached by a translation lookaside buffer (TLB)?",
+    "options": [
+      "Recent virtual-to-physical address translations",
+      "CPU scheduling priorities exclusively",
+      "Only application passwords",
+      "Only complete disk files"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "TLB entries reduce the need for repeated page-table walks during memory access."
+  },
+  {
+    "seedKey": "os-memory-018",
+    "topic": "Memory Management",
+    "subtopic": "Zero filling",
+    "difficulty": "easy",
+    "questionText": "Why should the OS clear a frame before giving it to an unrelated process?",
+    "options": [
+      "Convert every pointer to a file name",
+      "Give the new process kernel privileges",
+      "Avoid exposing another process's residual data",
+      "Make the frame physically larger"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Reused memory can contain private information from a prior owner; initialization prevents this disclosure."
+  },
+  {
+    "seedKey": "os-memory-019",
+    "topic": "Memory Management",
+    "subtopic": "Allocation failure",
+    "difficulty": "easy",
+    "questionText": "What should robust application code do if a memory allocation fails?",
+    "options": [
+      "Disable OS memory protection",
+      "Overwrite an unrelated object to make space",
+      "Assume every request must eventually succeed immediately",
+      "Handle the failure instead of dereferencing an invalid result"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Memory is finite; checking allocation outcomes avoids follow-on invalid accesses or corruption."
+  },
+  {
+    "seedKey": "os-memory-020",
+    "topic": "Memory Management",
+    "subtopic": "Address splitting",
+    "difficulty": "medium",
+    "questionText": "With 1 KiB pages, what is the page number of virtual byte address 2500?",
+    "options": [
+      "1024",
+      "2",
+      "3",
+      "452"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Divide by 1024 and take the integer quotient: 2500=2×1024+452, so the page number is 2."
+  },
+  {
+    "seedKey": "os-memory-021",
+    "topic": "Memory Management",
+    "subtopic": "Address offset",
+    "difficulty": "medium",
+    "questionText": "With 2 KiB pages, what is the offset of virtual byte address 5000?",
+    "options": [
+      "2952 bytes",
+      "2 bytes",
+      "904 bytes",
+      "2048 bytes"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "5000=2×2048+904; the remainder is the offset within the page."
+  },
+  {
+    "seedKey": "os-memory-022",
+    "topic": "Memory Management",
+    "subtopic": "Physical translation",
+    "difficulty": "medium",
+    "questionText": "Page size is 1024 bytes. Virtual page 3 maps to frame 9. What physical address corresponds to virtual address 3200?",
+    "options": [
+      "9216",
+      "9344",
+      "3200",
+      "10240"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Virtual address 3200 has page 3 and offset 128. Frame base is 9×1024=9216; add 128 to get 9344."
+  },
+  {
+    "seedKey": "os-memory-023",
+    "topic": "Memory Management",
+    "subtopic": "Base-limit check",
+    "difficulty": "medium",
+    "questionText": "A byte-addressed process has base 12000 and exclusive logical limit 600. Is logical address 600 valid?",
+    "options": [
+      "No; all addresses below 12000 are invalid logical addresses",
+      "Yes; it maps to 12000",
+      "No; valid logical addresses are 0 through 599",
+      "Yes; it maps to 12600"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "A limit specifying length 600 permits offsets strictly below 600, so offset 600 is out of bounds."
+  },
+  {
+    "seedKey": "os-memory-024",
+    "topic": "Memory Management",
+    "subtopic": "Base-limit translation",
+    "difficulty": "medium",
+    "questionText": "A process has base 4000 and exclusive logical limit 1000. What physical address does valid logical address 125 map to?",
+    "options": [
+      "3875",
+      "125000",
+      "1000",
+      "4125"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "The limit check passes because 125<1000; relocation adds the base: 4000+125=4125."
+  },
+  {
+    "seedKey": "os-memory-025",
+    "topic": "Memory Management",
+    "subtopic": "Pages needed",
+    "difficulty": "medium",
+    "questionText": "How many 4 KiB pages are needed to hold 10 KiB of data?",
+    "options": [
+      "4",
+      "2",
+      "3",
+      "10"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Round 10/4 upward: two pages hold only 8 KiB, so a third page is required."
+  },
+  {
+    "seedKey": "os-memory-026",
+    "topic": "Memory Management",
+    "subtopic": "Internal waste",
+    "difficulty": "medium",
+    "questionText": "A 10 KiB object occupies three 4 KiB pages. How much allocated space is unused?",
+    "options": [
+      "2 KiB",
+      "6 KiB",
+      "4 KiB",
+      "1 KiB"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Allocation is 3×4=12 KiB; the unused portion is 12-10=2 KiB."
+  },
+  {
+    "seedKey": "os-memory-027",
+    "topic": "Memory Management",
+    "subtopic": "Page-table size",
+    "difficulty": "medium",
+    "questionText": "A 16-bit virtual address space uses 256-byte pages and 4-byte page-table entries. What is the size of a full single-level table?",
+    "options": [
+      "256 bytes",
+      "65536 bytes",
+      "4096 bytes",
+      "1024 bytes"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "There are 2^16/2^8=256 virtual pages; 256×4=1024 bytes of entries."
+  },
+  {
+    "seedKey": "os-memory-028",
+    "topic": "Memory Management",
+    "subtopic": "First fit",
+    "difficulty": "medium",
+    "questionText": "Free blocks in address order are 100, 500, 200 and 300 KiB. Where does first-fit place a 180 KiB request?",
+    "options": [
+      "The 200 KiB block",
+      "The 300 KiB block",
+      "The 100 KiB block",
+      "The 500 KiB block"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "First-fit stops at the first sufficiently large block in the given traversal order; 100 is too small, then 500 fits."
+  },
+  {
+    "seedKey": "os-memory-029",
+    "topic": "Memory Management",
+    "subtopic": "Worst fit",
+    "difficulty": "medium",
+    "questionText": "Free blocks are 100, 500, 200 and 300 KiB. Which does worst-fit choose for a 180 KiB request?",
+    "options": [
+      "The 500 KiB block",
+      "The 300 KiB block",
+      "The 200 KiB block",
+      "The 100 KiB block"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Worst-fit chooses the largest available fitting block, here 500 KiB."
+  },
+  {
+    "seedKey": "os-memory-030",
+    "topic": "Memory Management",
+    "subtopic": "Compaction",
+    "difficulty": "medium",
+    "questionText": "What is required to compact movable memory allocations safely?",
+    "options": [
+      "Assume physical addresses never change",
+      "Discard every process's saved state",
+      "Update affected address references or use suitable relocation support",
+      "Turn all holes into executable files"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Moving allocations changes their physical placement; references or translation mappings must remain valid."
+  },
+  {
+    "seedKey": "os-memory-031",
+    "topic": "Memory Management",
+    "subtopic": "Segmentation",
+    "difficulty": "medium",
+    "questionText": "How is an address commonly interpreted in a segmented address space?",
+    "options": [
+      "A disk cylinder plus printer number",
+      "Only a physical-frame number with no offset",
+      "A segment identifier plus an offset within that segment",
+      "Only the CPU's current frequency"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Segments represent logical regions, each with a base and bounds used to interpret offsets."
+  },
+  {
+    "seedKey": "os-memory-032",
+    "topic": "Memory Management",
+    "subtopic": "TLB misses",
+    "difficulty": "medium",
+    "questionText": "Does a TLB miss necessarily mean the referenced page is absent from RAM?",
+    "options": [
+      "No; the mapping may be found by a page-table walk",
+      "Yes; every TLB miss requires disk I/O",
+      "Yes; every miss terminates the process",
+      "No; TLB misses can never delay an access"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "The TLB caches translations; a missed cache entry can still refer to a present physical page."
+  },
+  {
+    "seedKey": "os-memory-033",
+    "topic": "Memory Management",
+    "subtopic": "Hierarchical tables",
+    "difficulty": "medium",
+    "questionText": "Why can multilevel page tables save memory for sparse address spaces?",
+    "options": [
+      "They remove the need for virtual page numbers",
+      "Unneeded lower-level tables need not be allocated",
+      "They force every application to use identical addresses",
+      "They store every page's full contents in the root table"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Sparse mappings can leave entire table subtrees absent, unlike a full dense linear table."
+  },
+  {
+    "seedKey": "os-memory-034",
+    "topic": "Memory Management",
+    "subtopic": "Huge pages",
+    "difficulty": "medium",
+    "questionText": "What is a typical tradeoff when using larger pages?",
+    "options": [
+      "Elimination of all page permissions",
+      "Greater TLB reach but potentially more internal waste",
+      "A compulsory increase in address width",
+      "Guaranteed smaller allocations for every object"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Each TLB entry covers more bytes, but coarse allocation can waste memory and complicate placement."
+  },
+  {
+    "seedKey": "os-memory-035",
+    "topic": "Memory Management",
+    "subtopic": "TLB reach",
+    "difficulty": "medium",
+    "questionText": "A TLB has 64 entries and each maps a 4 KiB page. What is its maximum reach with distinct entries?",
+    "options": [
+      "16 KiB",
+      "4 MiB",
+      "256 KiB",
+      "64 KiB"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Reach is entries times page size: 64×4 KiB=256 KiB."
+  },
+  {
+    "seedKey": "os-memory-036",
+    "topic": "Memory Management",
+    "subtopic": "Permission changes",
+    "difficulty": "medium",
+    "questionText": "Why may changing page permissions require invalidating cached translations?",
+    "options": [
+      "A CPU may retain old permission bits in its TLB",
+      "Permissions exist only in file names",
+      "Page tables never contain access flags",
+      "Invalidation automatically copies the page to disk"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "TLBs can cache attributes along with frame translations; stale entries must not keep granting old access rights."
+  },
+  {
+    "seedKey": "os-memory-037",
+    "topic": "Memory Management",
+    "subtopic": "Guard pages",
+    "difficulty": "medium",
+    "questionText": "How can an unmapped guard page near a stack help detect overflow?",
+    "options": [
+      "It provides unlimited automatic stack growth",
+      "It doubles the CPU's register count",
+      "It makes recursion use no space",
+      "Access into it faults instead of silently corrupting adjacent mapped memory"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "A deliberate inaccessible region catches accesses crossing the boundary, though it is not a universal memory-safety solution."
+  },
+  {
+    "seedKey": "os-memory-038",
+    "topic": "Memory Management",
+    "subtopic": "Buddy allocation",
+    "difficulty": "medium",
+    "questionText": "A buddy allocator rounds requests to power-of-two blocks. What block size is needed for a 70 KiB request?",
+    "options": [
+      "72 KiB",
+      "64 KiB",
+      "256 KiB",
+      "128 KiB"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "The smallest power of two not below 70 is 128; 64 KiB is insufficient."
+  },
+  {
+    "seedKey": "os-memory-039",
+    "topic": "Memory Management",
+    "subtopic": "NUMA",
+    "difficulty": "medium",
+    "questionText": "Why can placement of a process's pages affect NUMA performance?",
+    "options": [
+      "A remote page cannot hold user data",
+      "Access to memory attached to another node can have higher latency",
+      "All RAM has identical access latency by definition",
+      "NUMA eliminates cache coherence automatically"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Memory distance and interconnect traffic can make local placement advantageous for some workloads."
+  },
+  {
+    "seedKey": "os-memory-040",
+    "topic": "Memory Management",
+    "subtopic": "Allocator metadata",
+    "difficulty": "medium",
+    "questionText": "Why is free(ptr) generally valid only for an appropriate live allocation pointer under that allocator's API?",
+    "options": [
+      "The allocator relies on ownership and metadata associated with the allocation",
+      "Every integer is a valid heap pointer",
+      "The OS ignores invalid frees in every language",
+      "Freeing stack addresses converts them into heap allocations"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Invalid or duplicate frees can corrupt allocation state or cause undefined behavior; the API's allocation rules must be followed."
+  },
+  {
+    "seedKey": "os-memory-041",
+    "topic": "Memory Management",
+    "subtopic": "Effective access time",
+    "difficulty": "hard",
+    "questionText": "TLB lookup takes 10 ns, RAM access 100 ns. A hit costs lookup+one RAM access; a miss costs lookup+two RAM accesses. At 90% hits, what is average access time?",
+    "options": [
+      "110 ns",
+      "190 ns",
+      "210 ns",
+      "120 ns"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Hit cost is 110 ns and miss cost 210 ns; 0.9×110+0.1×210=120 ns. No faults or overlapping lookups are assumed."
+  },
+  {
+    "seedKey": "os-memory-042",
+    "topic": "Memory Management",
+    "subtopic": "Two-level indexing",
+    "difficulty": "hard",
+    "questionText": "A 32-bit byte address uses 4 KiB pages and two page-table levels with 10 bits each. How many entries are in a second-level table?",
+    "options": [
+      "1024",
+      "256",
+      "1048576",
+      "4096"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "The page offset uses 12 bits, leaving 20 index bits split 10+10. A 10-bit index selects 2^10=1024 entries."
+  },
+  {
+    "seedKey": "os-memory-043",
+    "topic": "Memory Management",
+    "subtopic": "Sparse tables",
+    "difficulty": "hard",
+    "questionText": "A two-level scheme uses 4 KiB tables. A process needs one root and exactly 3 second-level tables. What page-table memory is allocated?",
+    "options": [
+      "12 KiB",
+      "24 KiB",
+      "16 KiB",
+      "4 KiB"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Four allocated tables each occupy 4 KiB: (1+3)×4=16 KiB, excluding mapped data pages."
+  },
+  {
+    "seedKey": "os-memory-044",
+    "topic": "Memory Management",
+    "subtopic": "Segmentation bounds",
+    "difficulty": "hard",
+    "questionText": "A segment has base 5000 and length 300. What happens for offset 299 versus offset 300?",
+    "options": [
+      "299 maps to 5299; 300 is out of bounds",
+      "299 maps to 4999; 300 maps to 5000",
+      "Both map to 5300",
+      "Both are out of bounds"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Valid offsets satisfy 0≤offset<300. Thus 5000+299=5299 is valid and 300 is not."
+  },
+  {
+    "seedKey": "os-memory-045",
+    "topic": "Memory Management",
+    "subtopic": "Page-table coverage",
+    "difficulty": "hard",
+    "questionText": "A page-table page contains 512 entries, each mapping one 4 KiB page. How much virtual space does it cover?",
+    "options": [
+      "8 MiB",
+      "2 MiB",
+      "4 MiB",
+      "512 KiB"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Coverage is 512×4096=2097152 bytes, which is 2 MiB."
+  },
+  {
+    "seedKey": "os-memory-046",
+    "topic": "Memory Management",
+    "subtopic": "TLB shootdown",
+    "difficulty": "hard",
+    "questionText": "Why can replacing a page-table entry on one CPU require coordination with other CPUs?",
+    "options": [
+      "Page-table writes automatically stop all remote CPUs",
+      "Other CPUs may still cache the old translation for that address space",
+      "Remote TLBs store only arithmetic results",
+      "Each CPU owns an unrelated copy of the executable file"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "A shootdown invalidates stale remote translations before memory reuse or new permissions can safely take effect."
+  },
+  {
+    "seedKey": "os-memory-047",
+    "topic": "Memory Management",
+    "subtopic": "Copy-on-write accounting",
+    "difficulty": "hard",
+    "questionText": "Two processes share 20 private-copy-on-write pages. One writes to 3 distinct shared pages, with sufficient free memory. How many physical data pages now back those mappings?",
+    "options": [
+      "26",
+      "23",
+      "17",
+      "40"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Initially 20 pages are shared. Three writes require three additional private copies, for 20+3=23 physical pages, excluding page tables."
+  },
+  {
+    "seedKey": "os-memory-048",
+    "topic": "Memory Management",
+    "subtopic": "Page-size optimization",
+    "difficulty": "hard",
+    "questionText": "Why might a larger page improve TLB misses yet worsen memory pressure for sparse tiny allocations?",
+    "options": [
+      "Each mapping covers more space but can reserve many unused bytes",
+      "Sparse allocations cannot be paged",
+      "TLB misses and allocation granularity are the same metric",
+      "Larger pages necessarily reduce physical-memory use in every case"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Translation efficiency and allocation waste are separate tradeoffs; improving one need not improve the other."
+  },
+  {
+    "seedKey": "os-memory-049",
+    "topic": "Memory Management",
+    "subtopic": "Overflow-safe bounds",
+    "difficulty": "hard",
+    "questionText": "For an untrusted range (start,length), why can checking start+length≤limit be unsafe with wrapping unsigned arithmetic?",
+    "options": [
+      "The limit always becomes zero on overflow",
+      "The addition can wrap to a small value and pass incorrectly",
+      "Unsigned addition cannot overflow",
+      "Every compiler automatically turns it into a checked addition"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Validate start≤limit and length≤limit-start, or use checked arithmetic, before accepting the range."
+  },
+  {
+    "seedKey": "os-memory-050",
+    "topic": "Memory Management",
+    "subtopic": "Memory ordering",
+    "difficulty": "hard",
+    "questionText": "Why is updating a page-table entry not by itself enough to safely reuse its old physical frame immediately?",
+    "options": [
+      "Every store flushes all CPU translation caches automatically",
+      "In-flight or cached translations may still reference the old frame",
+      "Physical frames are never reused",
+      "The new entry changes every stale pointer's bits"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Safe reuse requires the architecture's invalidation, synchronization and lifetime rules to eliminate accesses through stale mappings."
+  }
+]

@@ -1,0 +1,677 @@
+[
+  {
+    "seedKey": "os-security-006",
+    "topic": "Protection & Security",
+    "subtopic": "Authentication",
+    "difficulty": "easy",
+    "questionText": "What question does authentication primarily answer?",
+    "options": [
+      "Which disk sector is closest?",
+      "Who is making the request?",
+      "How large is the page table?",
+      "How much CPU time remains?"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Authentication establishes an identity; authorization separately decides what that identity may do."
+  },
+  {
+    "seedKey": "os-security-007",
+    "topic": "Protection & Security",
+    "subtopic": "Authorization",
+    "difficulty": "easy",
+    "questionText": "What is authorization?",
+    "options": [
+      "Defragmenting a filesystem",
+      "Converting source code into instructions",
+      "Measuring a CPU burst",
+      "Deciding whether an authenticated principal may perform an action"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Authorization enforces access policy for a particular subject, action and object."
+  },
+  {
+    "seedKey": "os-security-008",
+    "topic": "Protection & Security",
+    "subtopic": "Isolation",
+    "difficulty": "easy",
+    "questionText": "Why separate user and kernel address-space access rights?",
+    "options": [
+      "Prevent untrusted code from modifying protected OS state",
+      "Guarantee applications have no bugs",
+      "Allow every application to rewrite the kernel",
+      "Make password hashing unnecessary"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Privilege separation limits the damage ordinary application code can cause to the trusted system."
+  },
+  {
+    "seedKey": "os-security-009",
+    "topic": "Protection & Security",
+    "subtopic": "Confidentiality",
+    "difficulty": "easy",
+    "questionText": "Which security goal is violated when an unauthorized party reads private files?",
+    "options": [
+      "Availability only",
+      "Scheduling fairness only",
+      "Disk rotational speed",
+      "Confidentiality"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Confidentiality protects information from unauthorized disclosure."
+  },
+  {
+    "seedKey": "os-security-010",
+    "topic": "Protection & Security",
+    "subtopic": "Integrity",
+    "difficulty": "easy",
+    "questionText": "Which security goal concerns preventing unauthorized modification of data?",
+    "options": [
+      "Rotational latency",
+      "External fragmentation",
+      "Integrity",
+      "CPU utilization"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Integrity concerns correctness and authorized changes, distinct from secrecy or service availability."
+  },
+  {
+    "seedKey": "os-security-011",
+    "topic": "Protection & Security",
+    "subtopic": "Availability",
+    "difficulty": "easy",
+    "questionText": "A malicious workload exhausts all service capacity so legitimate users cannot connect. Which goal is directly harmed?",
+    "options": [
+      "Only compilation speed",
+      "Only file-name uniqueness",
+      "Only source-code formatting",
+      "Availability"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Denial of service prevents legitimate access to a functioning service."
+  },
+  {
+    "seedKey": "os-security-012",
+    "topic": "Protection & Security",
+    "subtopic": "Privilege separation",
+    "difficulty": "easy",
+    "questionText": "Why run an internet-facing service as an unprivileged account when possible?",
+    "options": [
+      "Limit the consequences if the service is compromised",
+      "Guarantee the service contains no vulnerabilities",
+      "Make all private files public",
+      "Disable all network access automatically"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Reducing privileges shrinks the resources an attacker can access through a compromised service."
+  },
+  {
+    "seedKey": "os-security-013",
+    "topic": "Protection & Security",
+    "subtopic": "Updates",
+    "difficulty": "easy",
+    "questionText": "Why install trusted security updates for OS components?",
+    "options": [
+      "Remove all need for input validation",
+      "Make backups unnecessary forever",
+      "Repair known vulnerabilities in the trusted software stack",
+      "Give every user administrator rights"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Updates can close known flaws; they complement rather than replace other protections."
+  },
+  {
+    "seedKey": "os-security-014",
+    "topic": "Protection & Security",
+    "subtopic": "Salts",
+    "difficulty": "easy",
+    "questionText": "What is the main purpose of a unique password salt?",
+    "options": [
+      "Serve as a secret replacement for the password",
+      "Allow recovery of plaintext passwords from hashes",
+      "Prevent identical passwords from having identical stored hashes and hinder precomputed attacks",
+      "Make every weak password strong automatically"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Salts are stored with password hashes and force attackers to account for each distinct salt."
+  },
+  {
+    "seedKey": "os-security-015",
+    "topic": "Protection & Security",
+    "subtopic": "Audit logs",
+    "difficulty": "easy",
+    "questionText": "What is a principal use of security audit logs?",
+    "options": [
+      "Record relevant events for investigation and accountability",
+      "Store every user's plaintext password",
+      "Replace all access-control decisions",
+      "Guarantee no attack can occur"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Useful logs record what happened without exposing unnecessary sensitive data; they support detection and investigation."
+  },
+  {
+    "seedKey": "os-security-016",
+    "topic": "Protection & Security",
+    "subtopic": "Malware categories",
+    "difficulty": "easy",
+    "questionText": "What distinguishes a worm's common propagation behavior?",
+    "options": [
+      "It cannot execute code",
+      "It is simply an encrypted backup",
+      "It must always be manually attached to a document",
+      "It can spread automatically across systems or networks"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Worms typically replicate through automated propagation; malware categories can overlap in practice."
+  },
+  {
+    "seedKey": "os-security-017",
+    "topic": "Protection & Security",
+    "subtopic": "Default access",
+    "difficulty": "easy",
+    "questionText": "What is a secure default when no access rule authorizes a request?",
+    "options": [
+      "Grant administrator privileges",
+      "Return all data and log later",
+      "Deny access",
+      "Disable authentication permanently"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Default denial prevents missing policy from becoming unintended permission."
+  },
+  {
+    "seedKey": "os-security-018",
+    "topic": "Protection & Security",
+    "subtopic": "Secrets handling",
+    "difficulty": "easy",
+    "questionText": "Why should a system avoid logging passwords or session secrets?",
+    "options": [
+      "Passwords stop being sensitive once typed",
+      "Logs automatically encrypt every field safely",
+      "Logs may expose credentials to people or systems that can read them",
+      "Session secrets cannot be reused"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Diagnostic channels often have broad retention and access, so credential disclosure there creates unnecessary risk."
+  },
+  {
+    "seedKey": "os-security-019",
+    "topic": "Protection & Security",
+    "subtopic": "Capabilities",
+    "difficulty": "medium",
+    "questionText": "What does an unforgeable capability combine conceptually?",
+    "options": [
+      "Only the object's public display name",
+      "A reference to an object with authority to use it in specified ways",
+      "A guarantee that the holder owns all system resources",
+      "A plaintext password for every user"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "A capability conveys designated rights to an object; mere knowledge of an arbitrary identifier is different."
+  },
+  {
+    "seedKey": "os-security-020",
+    "topic": "Protection & Security",
+    "subtopic": "Access matrices",
+    "difficulty": "medium",
+    "questionText": "In an access-control matrix, what does an entry for subject S and object O normally describe?",
+    "options": [
+      "The number of disk cylinders",
+      "The operations S is allowed to perform on O",
+      "O's physical memory address only",
+      "S's current CPU registers"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Matrix entries express rights between subjects and objects; ACLs and capabilities organize this policy differently."
+  },
+  {
+    "seedKey": "os-security-021",
+    "topic": "Protection & Security",
+    "subtopic": "ACL versus capabilities",
+    "difficulty": "medium",
+    "questionText": "How do per-object ACLs and per-subject capability lists organize permissions differently?",
+    "options": [
+      "Capability lists grant universal access by definition",
+      "ACLs describe only CPU frequencies",
+      "Both necessarily store plaintext login passwords",
+      "ACLs list authorized subjects for an object; capability lists enumerate object authorities held by a subject"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "They are different organizational views of subject-object rights, with different delegation and revocation tradeoffs."
+  },
+  {
+    "seedKey": "os-security-022",
+    "topic": "Protection & Security",
+    "subtopic": "Complete mediation",
+    "difficulty": "medium",
+    "questionText": "What does complete mediation require?",
+    "options": [
+      "Check authority for each relevant access, including safe handling of cached decisions",
+      "Check only the first login and trust all later payloads",
+      "Allow writes whenever reads succeed",
+      "Ignore revocation once a file name is known"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Access paths and cached rights must not bypass policy; changes and revocation must be handled consistently."
+  },
+  {
+    "seedKey": "os-security-023",
+    "topic": "Protection & Security",
+    "subtopic": "TOCTOU",
+    "difficulty": "medium",
+    "questionText": "A privileged program checks a path then opens it after an attacker changes the directory entry. What is the core problem?",
+    "options": [
+      "A time-of-check-to-time-of-use race",
+      "A password salt collision",
+      "An intentionally atomic namespace operation",
+      "A guaranteed CPU scheduling optimization"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "The checked object may differ from the object later used; safe handle-based operations reduce this race."
+  },
+  {
+    "seedKey": "os-security-024",
+    "topic": "Protection & Security",
+    "subtopic": "Reference monitors",
+    "difficulty": "medium",
+    "questionText": "What qualities should a reference monitor have?",
+    "options": [
+      "A complete copy of all application files",
+      "Always invoked, resistant to tampering and small enough to analyze",
+      "Optional invocation and writable policy by any process",
+      "No interaction with authorization policy"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "A reference monitor mediates protected access and must be trustworthy and analyzable."
+  },
+  {
+    "seedKey": "os-security-025",
+    "topic": "Protection & Security",
+    "subtopic": "ASLR",
+    "difficulty": "medium",
+    "questionText": "What is the main purpose of address-space layout randomization?",
+    "options": [
+      "Make useful memory locations harder for attackers to predict",
+      "Prove that memory accesses are bounds-safe",
+      "Prevent every code-execution attack by itself",
+      "Encrypt all pages automatically"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "ASLR complicates exploitation based on known addresses, but does not repair the underlying memory bug."
+  },
+  {
+    "seedKey": "os-security-026",
+    "topic": "Protection & Security",
+    "subtopic": "Non-executable memory",
+    "difficulty": "medium",
+    "questionText": "What does marking writable data pages non-executable help prevent?",
+    "options": [
+      "Reading the process's own data",
+      "Directly executing injected code from those pages",
+      "Any possibility of data corruption",
+      "All return-oriented attacks automatically"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Execute permissions block instruction fetch from those mappings, while other exploitation techniques can require additional defenses."
+  },
+  {
+    "seedKey": "os-security-027",
+    "topic": "Protection & Security",
+    "subtopic": "Stack canaries",
+    "difficulty": "medium",
+    "questionText": "What can a stack canary help detect?",
+    "options": [
+      "All malicious network packets before receipt",
+      "Every possible heap use-after-free",
+      "Some overwrites of protected stack-frame control data",
+      "Any incorrect arithmetic result"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "A guard value checked before return can detect certain stack overwrites, but is not complete memory safety."
+  },
+  {
+    "seedKey": "os-security-028",
+    "topic": "Protection & Security",
+    "subtopic": "Password verification",
+    "difficulty": "medium",
+    "questionText": "Why use a deliberately expensive password hash instead of a fast general-purpose hash?",
+    "options": [
+      "Raise the cost of offline password guessing after hash theft",
+      "Allow the server to return plaintext passwords",
+      "Eliminate online rate limiting",
+      "Make unique salts unnecessary"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Slow, memory-hard password hashing raises attack cost; salts, strong passwords and online protections remain useful."
+  },
+  {
+    "seedKey": "os-security-029",
+    "topic": "Protection & Security",
+    "subtopic": "Session identifiers",
+    "difficulty": "medium",
+    "questionText": "Why should an authenticated web session identifier be unpredictable?",
+    "options": [
+      "An attacker should not be able to guess a valid user's bearer credential",
+      "A username alone is always a secure session secret",
+      "Sequential identifiers improve confidentiality",
+      "Public timestamps prove authentication"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Possession of a session cookie often conveys access, so guessing or leaking it must be difficult."
+  },
+  {
+    "seedKey": "os-security-030",
+    "topic": "Protection & Security",
+    "subtopic": "Session fixation",
+    "difficulty": "medium",
+    "questionText": "Why regenerate a session identifier after successful authentication?",
+    "options": [
+      "Give the client permission to choose its role",
+      "Disable all subsequent authorization checks",
+      "Make the password recoverable from the cookie",
+      "Prevent an attacker-chosen pre-login session from becoming the victim's authenticated session"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Authentication should create a fresh session identity rather than elevating an identifier potentially known to an attacker."
+  },
+  {
+    "seedKey": "os-security-031",
+    "topic": "Protection & Security",
+    "subtopic": "CSRF",
+    "difficulty": "medium",
+    "questionText": "Why can cookie-authenticated state-changing web requests need CSRF protection?",
+    "options": [
+      "Cookies are never sent by browsers",
+      "Any POST request is automatically safe",
+      "Browsers can attach cookies automatically to attacker-triggered requests",
+      "CSRF tokens replace all password hashing"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Server-validated anti-CSRF measures distinguish authorized application actions from cross-site request triggers."
+  },
+  {
+    "seedKey": "os-security-032",
+    "topic": "Protection & Security",
+    "subtopic": "Injection",
+    "difficulty": "medium",
+    "questionText": "Why do parameterized SQL queries help prevent SQL injection?",
+    "options": [
+      "They encrypt query results by default",
+      "They separate query structure from supplied values",
+      "They make input validation unnecessary",
+      "They prove every user owns every row"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Bound values are data rather than executable SQL syntax; authorization and other validation remain separate duties."
+  },
+  {
+    "seedKey": "os-security-033",
+    "topic": "Protection & Security",
+    "subtopic": "Sandboxing",
+    "difficulty": "medium",
+    "questionText": "What is a realistic goal of sandboxing untrusted code?",
+    "options": [
+      "Give the code unrestricted kernel write access",
+      "Eliminate every need to patch the host",
+      "Guarantee the sandbox implementation cannot have bugs",
+      "Restrict resources and operations available if the code misbehaves"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Sandboxes reduce attack surface and impact within an explicitly enforced boundary, not by assuming code is harmless."
+  },
+  {
+    "seedKey": "os-security-034",
+    "topic": "Protection & Security",
+    "subtopic": "MAC and DAC",
+    "difficulty": "medium",
+    "questionText": "How does mandatory access control differ from discretionary owner-controlled permissions?",
+    "options": [
+      "System policy can restrict access even when the owner would grant it",
+      "MAC stores only file size information",
+      "Every owner can override mandatory policy unconditionally",
+      "DAC always forbids all sharing"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Mandatory policy imposes restrictions not wholly delegated to an ordinary object owner."
+  },
+  {
+    "seedKey": "os-security-035",
+    "topic": "Protection & Security",
+    "subtopic": "RBAC",
+    "difficulty": "medium",
+    "questionText": "What is the organizing idea of role-based access control?",
+    "options": [
+      "Let request payloads choose unrestricted permissions",
+      "Assign permissions to roles and assign users to appropriate roles",
+      "Give every new user the administrator role",
+      "Use a file's size as its password"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Roles group intended authorities, reducing the need for individually repeated permission assignments."
+  },
+  {
+    "seedKey": "os-security-036",
+    "topic": "Protection & Security",
+    "subtopic": "Set-user-ID risk",
+    "difficulty": "medium",
+    "questionText": "Why does a set-user-ID executable require careful validation of untrusted inputs and environment?",
+    "options": [
+      "The kernel automatically verifies its application logic",
+      "Its file extension prevents exploitation",
+      "It always has less access than every caller",
+      "It may run with authority greater than the invoking user"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Privileged execution can turn input-handling bugs into privilege escalation; trusted code must constrain what it acts on."
+  },
+  {
+    "seedKey": "os-security-037",
+    "topic": "Protection & Security",
+    "subtopic": "Least authority IPC",
+    "difficulty": "medium",
+    "questionText": "A privileged service accepts a caller-supplied file path. What is safer than assuming any path from an authenticated user is authorized?",
+    "options": [
+      "Treat authentication as permission for all objects",
+      "Log the service's credentials with the path",
+      "Run the path as a shell command",
+      "Validate that the caller may act on the resolved target object"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Identity alone does not establish object-level authority; target resolution and authorization must both be correct."
+  },
+  {
+    "seedKey": "os-security-038",
+    "topic": "Protection & Security",
+    "subtopic": "Encryption limits",
+    "difficulty": "medium",
+    "questionText": "What does disk encryption principally protect when a powered-off device is stolen?",
+    "options": [
+      "Confidentiality of encrypted data without the key",
+      "All availability against device destruction",
+      "Every user's session from a compromised live kernel",
+      "All data from malware running after an authorized unlock"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "At-rest encryption protects offline access, but cannot by itself secure data already available to a running compromised system."
+  },
+  {
+    "seedKey": "os-security-039",
+    "topic": "Protection & Security",
+    "subtopic": "Separation of duties",
+    "difficulty": "medium",
+    "questionText": "Why require two independent approvals for a particularly sensitive administrative operation?",
+    "options": [
+      "Grant permanent administrator access to all users",
+      "Remove the need to authenticate approvers",
+      "Make every operation run twice as fast",
+      "Reduce reliance on a single person's authority or mistake"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Splitting authority can limit unilateral abuse, provided the approvals are genuinely independent and enforced."
+  },
+  {
+    "seedKey": "os-security-040",
+    "topic": "Protection & Security",
+    "subtopic": "Public error messages",
+    "difficulty": "medium",
+    "questionText": "Why should a login endpoint avoid revealing whether a particular username exists through distinct credential errors?",
+    "options": [
+      "Allow any password for unknown users",
+      "Ensure all malformed requests return database internals",
+      "Reduce account-enumeration information leakage",
+      "Replace the need for unique usernames"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "A generic credential error limits one source of identity probing, alongside rate limits and careful timing behavior."
+  },
+  {
+    "seedKey": "os-security-041",
+    "topic": "Protection & Security",
+    "subtopic": "Capability revocation",
+    "difficulty": "hard",
+    "questionText": "Why can revoking a widely delegated capability be difficult without indirection or revocation machinery?",
+    "options": [
+      "Object deletion is always safe and reversible",
+      "Copies may remain usable in multiple holders",
+      "Capabilities can never be delegated",
+      "Every copied capability automatically becomes invalid immediately"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Authority may have propagated; designs can use indirection, epochs, expiration or related explicit revocation mechanisms."
+  },
+  {
+    "seedKey": "os-security-042",
+    "topic": "Protection & Security",
+    "subtopic": "Confused deputy",
+    "difficulty": "hard",
+    "questionText": "A privileged compiler is tricked into writing an output file using its own authority rather than the caller's. What is this class of flaw?",
+    "options": [
+      "Confused deputy",
+      "A harmless cache hit",
+      "Only external fragmentation",
+      "A mandatory safe-state allocation"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "A deputy misuses its authority on a caller's behalf when the intended authority boundary is not preserved."
+  },
+  {
+    "seedKey": "os-security-043",
+    "topic": "Protection & Security",
+    "subtopic": "Information flow",
+    "difficulty": "hard",
+    "questionText": "Under the classic Bell–LaPadula confidentiality model, which rule prevents writing high-classification information into a lower-classification object?",
+    "options": [
+      "No read down",
+      "Always write to public files",
+      "No write down",
+      "Grant every reader full write access"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "The star property restricts downward writes to prevent leakage of higher-classified information; this is a confidentiality model, not a full integrity policy."
+  },
+  {
+    "seedKey": "os-security-044",
+    "topic": "Protection & Security",
+    "subtopic": "Integrity models",
+    "difficulty": "hard",
+    "questionText": "In the strict Biba integrity model, why prohibit reading lower-integrity data into a higher-integrity subject?",
+    "options": [
+      "Prevent disclosure of high-secret information specifically",
+      "Avoid contaminating trusted computation with less-trusted inputs",
+      "Guarantee all low-integrity data is encrypted",
+      "Make every input automatically correct"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Biba's integrity rules protect trustworthiness, using information-flow constraints different from confidentiality models."
+  },
+  {
+    "seedKey": "os-security-045",
+    "topic": "Protection & Security",
+    "subtopic": "Guessing probability",
+    "difficulty": "hard",
+    "questionText": "A uniformly random session identifier has 128 bits. With one independent blind guess, what is success probability for one target identifier?",
+    "options": [
+      "1/128",
+      "1/2^64",
+      "1/2^128",
+      "128/2"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "There are 2^128 equally likely identifiers; exactly one matches the target, so probability is 2^-128."
+  },
+  {
+    "seedKey": "os-security-046",
+    "topic": "Protection & Security",
+    "subtopic": "Brute-force time",
+    "difficulty": "hard",
+    "questionText": "A toy 20-bit key space is searched at 1024 keys/s. In an exhaustive search with uniformly placed target, about how long is the average search ignoring overhead?",
+    "options": [
+      "2048 seconds",
+      "1024 seconds",
+      "20 seconds",
+      "512 seconds"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "There are 2^20 candidates; roughly half are tested on average. 2^19/2^10=2^9=512 seconds. This toy key size is not secure."
+  },
+  {
+    "seedKey": "os-security-047",
+    "topic": "Protection & Security",
+    "subtopic": "Defense boundaries",
+    "difficulty": "hard",
+    "questionText": "Why does successful authentication not prevent an insecure direct-object-reference vulnerability?",
+    "options": [
+      "Every authenticated user owns every object",
+      "The service may still fail to authorize access to the requested object's owner",
+      "Passwords determine all possible row permissions automatically",
+      "Object identifiers are always cryptographic proof of access"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "The backend must check object ownership or other applicable rights for each request, regardless of whether the caller is signed in."
+  },
+  {
+    "seedKey": "os-security-048",
+    "topic": "Protection & Security",
+    "subtopic": "Secret comparison",
+    "difficulty": "hard",
+    "questionText": "Why can early-exit comparison of a secret-derived value create a timing side channel?",
+    "options": [
+      "Response duration may correlate with how much of the prefix matched",
+      "A constant-length secret has no timing behavior",
+      "Network latency mathematically removes all statistical information",
+      "Any comparison necessarily reveals the full value immediately"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Repeated measurements can reveal data-dependent timing; appropriate constant-time verification avoids this particular source of leakage."
+  },
+  {
+    "seedKey": "os-security-049",
+    "topic": "Protection & Security",
+    "subtopic": "Secure boot scope",
+    "difficulty": "hard",
+    "questionText": "Why does a valid secure-boot signature not prove a running OS has no vulnerabilities?",
+    "options": [
+      "Signatures automatically prove all code invariants",
+      "Secure boot validates every future network input",
+      "A trusted signed image may still contain exploitable bugs",
+      "Signed code can never be updated"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Secure boot authenticates permitted boot components; software correctness and runtime defenses remain separate requirements."
+  },
+  {
+    "seedKey": "os-security-050",
+    "topic": "Protection & Security",
+    "subtopic": "Revoked access and caches",
+    "difficulty": "hard",
+    "questionText": "A service caches authorization results for ten minutes while policy can revoke access immediately. What security issue must its design address?",
+    "options": [
+      "The session cookie automatically rewrites cached policy",
+      "Stale positive decisions may outlive the intended revocation",
+      "Caching always proves current permission",
+      "Revocation has no meaning after the first successful login"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Cache invalidation, bounded acceptable staleness or revalidation must align with the promised revocation semantics."
+  }
+]

@@ -1,0 +1,677 @@
+[
+  {
+    "seedKey": "os-scheduling-006",
+    "topic": "CPU Scheduling",
+    "subtopic": "Dispatch",
+    "difficulty": "easy",
+    "questionText": "What does the CPU dispatcher do?",
+    "options": [
+      "Translate every virtual address",
+      "Choose the file allocation format",
+      "Allocate disk cylinders",
+      "Give the selected process control of a CPU"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "After scheduling selects a process, dispatching restores its execution context and transfers CPU control."
+  },
+  {
+    "seedKey": "os-scheduling-007",
+    "topic": "CPU Scheduling",
+    "subtopic": "Metrics",
+    "difficulty": "easy",
+    "questionText": "What does process turnaround time measure?",
+    "options": [
+      "Only time spent on the ready queue",
+      "Only the first CPU burst",
+      "Time from arrival to completion",
+      "The number of context switches"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Turnaround includes all elapsed waiting and execution until completion."
+  },
+  {
+    "seedKey": "os-scheduling-008",
+    "topic": "CPU Scheduling",
+    "subtopic": "Response",
+    "difficulty": "easy",
+    "questionText": "For an interactive process, what does initial response time measure?",
+    "options": [
+      "Total time blocked on every device",
+      "The size of its input buffer",
+      "Arrival to first CPU service",
+      "Arrival to final termination"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Initial response describes how quickly the process begins receiving service, not when all work completes."
+  },
+  {
+    "seedKey": "os-scheduling-009",
+    "topic": "CPU Scheduling",
+    "subtopic": "Preemption",
+    "difficulty": "easy",
+    "questionText": "Which action is an example of preemption?",
+    "options": [
+      "A process voluntarily blocking for I/O",
+      "A process terminating after completion",
+      "Taking a CPU from a running process before its burst finishes",
+      "A user deleting an executable"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Preemption lets the OS interrupt continued CPU use to serve other runnable work."
+  },
+  {
+    "seedKey": "os-scheduling-010",
+    "topic": "CPU Scheduling",
+    "subtopic": "Priority conventions",
+    "difficulty": "easy",
+    "questionText": "A scheduler states that lower numeric priority means higher importance. Which priority runs first among ready jobs?",
+    "options": [
+      "Priority 9",
+      "Priority 1",
+      "Priority 100",
+      "Priority 20"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Under the stated convention, the smallest number is the highest priority; conventions must be specified."
+  },
+  {
+    "seedKey": "os-scheduling-011",
+    "topic": "CPU Scheduling",
+    "subtopic": "Workloads",
+    "difficulty": "easy",
+    "questionText": "Which process is usually described as I/O-bound?",
+    "options": [
+      "One that never accesses a device",
+      "One using the CPU continuously for long bursts",
+      "One with frequent I/O waits and short CPU bursts",
+      "One defined solely by its executable size"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "I/O-bound work spends much of its elapsed time waiting for devices rather than executing long CPU bursts."
+  },
+  {
+    "seedKey": "os-scheduling-012",
+    "topic": "CPU Scheduling",
+    "subtopic": "Fairness",
+    "difficulty": "easy",
+    "questionText": "What does fairness in a general-purpose scheduler usually seek?",
+    "options": [
+      "Reasonable access to CPU service among runnable tasks",
+      "Zero overhead under every workload",
+      "Permanent priority for the first arrival",
+      "Identical completion times for all jobs"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Fairness concerns access and share, not a guarantee that different jobs finish together."
+  },
+  {
+    "seedKey": "os-scheduling-013",
+    "topic": "CPU Scheduling",
+    "subtopic": "Queues",
+    "difficulty": "easy",
+    "questionText": "In a nonpreemptive scheduler, when does a running process normally relinquish the CPU?",
+    "options": [
+      "Only after every other process terminates",
+      "When it blocks or finishes its burst/execution",
+      "Whenever any process arrives",
+      "At every timer tick by definition"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Nonpreemptive scheduling leaves the CPU with the running task until it yields through blocking or completion."
+  },
+  {
+    "seedKey": "os-scheduling-014",
+    "topic": "CPU Scheduling",
+    "subtopic": "CPU-bound work",
+    "difficulty": "easy",
+    "questionText": "Which workload is most likely CPU-bound?",
+    "options": [
+      "A process blocked on a network reply",
+      "A long numerical simulation with little I/O",
+      "A printer spooler sleeping for a device",
+      "A terminal waiting for keystrokes"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Sustained computation demands CPU service rather than frequent device waits."
+  },
+  {
+    "seedKey": "os-scheduling-015",
+    "topic": "CPU Scheduling",
+    "subtopic": "Idle CPU",
+    "difficulty": "easy",
+    "questionText": "If no process is runnable, what can the scheduler legitimately do?",
+    "options": [
+      "Assume every process has terminated",
+      "Execute a blocked process past its wait condition",
+      "Fabricate a completed quiz result",
+      "Run an idle task or enter an appropriate idle state"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "A lack of runnable work does not imply that waiting processes are complete."
+  },
+  {
+    "seedKey": "os-scheduling-016",
+    "topic": "CPU Scheduling",
+    "subtopic": "Quantum",
+    "difficulty": "easy",
+    "questionText": "What is a time quantum in a time-sliced scheduler?",
+    "options": [
+      "The disk sector transfer size",
+      "A maximum scheduled CPU interval before possible preemption",
+      "The number of files a process owns",
+      "The total physical memory size"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "A quantum bounds a time slice, allowing other ready tasks to receive service."
+  },
+  {
+    "seedKey": "os-scheduling-017",
+    "topic": "CPU Scheduling",
+    "subtopic": "Affinity",
+    "difficulty": "easy",
+    "questionText": "What does processor affinity describe?",
+    "options": [
+      "A file's ownership group",
+      "A disk's rotational speed",
+      "An application's password strength",
+      "A preference or restriction connecting a task to certain CPUs"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Affinity can preserve cache locality or restrict scheduling to a selected CPU set."
+  },
+  {
+    "seedKey": "os-scheduling-018",
+    "topic": "CPU Scheduling",
+    "subtopic": "Scheduling scope",
+    "difficulty": "easy",
+    "questionText": "Which tasks are candidates for immediate CPU scheduling?",
+    "options": [
+      "Runnable tasks",
+      "Only tasks blocked on unavailable input",
+      "Only already terminated tasks",
+      "Only executable files with no process"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "The scheduler selects work that can execute now; blocked tasks require their waiting condition to change."
+  },
+  {
+    "seedKey": "os-scheduling-019",
+    "topic": "CPU Scheduling",
+    "subtopic": "Overhead",
+    "difficulty": "easy",
+    "questionText": "What is dispatch latency?",
+    "options": [
+      "The number of priority levels",
+      "Total disk capacity divided by CPU count",
+      "The lifetime of an executable file",
+      "Time needed to stop one execution context and start another"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Dispatch latency contributes overhead and can affect responsiveness."
+  },
+  {
+    "seedKey": "os-scheduling-020",
+    "topic": "CPU Scheduling",
+    "subtopic": "FCFS calculation",
+    "difficulty": "medium",
+    "questionText": "Jobs A, B and C arrive at 0 with bursts 2, 5 and 1 ms. FCFS uses A, B, C with no overhead. What is average waiting time?",
+    "options": [
+      "3 ms",
+      "4 ms",
+      "2 ms",
+      "8 ms"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Their waits are 0, 2 and 7 ms; (0+2+7)/3=3 ms."
+  },
+  {
+    "seedKey": "os-scheduling-021",
+    "topic": "CPU Scheduling",
+    "subtopic": "SJF calculation",
+    "difficulty": "medium",
+    "questionText": "A nonpreemptive scheduler chooses the shortest burst first. Three jobs, all ready at zero, need 2, 4 and 7 ms. With no overhead, what is their mean ready-queue wait?",
+    "options": [
+      "6 ms",
+      "7/3 ms",
+      "8/3 ms",
+      "13/3 ms"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "SJF runs B, C, A. Waits are 0, 2 and 6 ms; their average is 8/3 ms."
+  },
+  {
+    "seedKey": "os-scheduling-022",
+    "topic": "CPU Scheduling",
+    "subtopic": "Turnaround calculation",
+    "difficulty": "medium",
+    "questionText": "A job arrives at 3 ms and completes at 18 ms. What is turnaround time?",
+    "options": [
+      "15 ms",
+      "18 ms",
+      "21 ms",
+      "3 ms"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Turnaround is completion minus arrival: 18-3=15 ms."
+  },
+  {
+    "seedKey": "os-scheduling-023",
+    "topic": "CPU Scheduling",
+    "subtopic": "Waiting calculation",
+    "difficulty": "medium",
+    "questionText": "A job arrives at 2 ms, finishes at 17 ms and uses 6 ms of CPU with no I/O. What is its waiting time?",
+    "options": [
+      "15 ms",
+      "11 ms",
+      "9 ms",
+      "6 ms"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Turnaround is 15 ms, and waiting is 15-6=9 ms when there is no blocked time."
+  },
+  {
+    "seedKey": "os-scheduling-024",
+    "topic": "CPU Scheduling",
+    "subtopic": "First response",
+    "difficulty": "medium",
+    "questionText": "A process arrives at 4 ms, first runs at 9 ms and finishes at 20 ms. What is initial response time?",
+    "options": [
+      "11 ms",
+      "5 ms",
+      "9 ms",
+      "16 ms"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Initial response is first execution minus arrival: 9-4=5 ms."
+  },
+  {
+    "seedKey": "os-scheduling-025",
+    "topic": "CPU Scheduling",
+    "subtopic": "Preemptive SJF",
+    "difficulty": "medium",
+    "questionText": "A has 8 ms remaining when B arrives with a 3 ms burst. Under shortest-remaining-time-first, what happens?",
+    "options": [
+      "Both execute on a single CPU simultaneously",
+      "B is discarded",
+      "A must always finish first",
+      "B preempts A"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "SRTF compares remaining CPU times and selects B's shorter remaining work, assuming no other ready jobs."
+  },
+  {
+    "seedKey": "os-scheduling-026",
+    "topic": "CPU Scheduling",
+    "subtopic": "Burst prediction",
+    "difficulty": "medium",
+    "questionText": "Using prediction new=0.5×actual+0.5×old, actual burst 10 ms and old estimate 6 ms, what is the new estimate?",
+    "options": [
+      "8 ms",
+      "16 ms",
+      "6 ms",
+      "5 ms"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "The weighted estimate is 0.5 times 10 plus 0.5 times 6 = 8 ms."
+  },
+  {
+    "seedKey": "os-scheduling-027",
+    "topic": "CPU Scheduling",
+    "subtopic": "RR tradeoff",
+    "difficulty": "medium",
+    "questionText": "With positive context-switch cost, why can an extremely short RR quantum hurt throughput?",
+    "options": [
+      "Every task permanently keeps the CPU",
+      "It makes all bursts shorter in actual CPU demand",
+      "All I/O is automatically eliminated",
+      "Too much time is spent switching rather than executing useful work"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Frequent preemptions increase switch overhead relative to useful time in each slice."
+  },
+  {
+    "seedKey": "os-scheduling-028",
+    "topic": "CPU Scheduling",
+    "subtopic": "MLFQ feedback",
+    "difficulty": "medium",
+    "questionText": "Why might an MLFQ scheduler demote a task that repeatedly uses its entire time allotment?",
+    "options": [
+      "It has definitely completed its workload",
+      "It must have the smallest PID",
+      "It appears CPU-intensive rather than interactive",
+      "It has no saved registers"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Feedback scheduling uses observed CPU consumption to favor tasks with short or interactive bursts."
+  },
+  {
+    "seedKey": "os-scheduling-029",
+    "topic": "CPU Scheduling",
+    "subtopic": "Priority inversion",
+    "difficulty": "medium",
+    "questionText": "A high-priority task waits for a lock held by a low-priority task. What can medium-priority CPU work cause?",
+    "options": [
+      "Remove all waiting by definition",
+      "Delay the low-priority lock holder and thus the high-priority waiter",
+      "Make the lock holder complete immediately",
+      "Change the lock into a semaphore automatically"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Medium work can preempt the low-priority owner, indirectly delaying the high-priority task."
+  },
+  {
+    "seedKey": "os-scheduling-030",
+    "topic": "CPU Scheduling",
+    "subtopic": "Priority inheritance",
+    "difficulty": "medium",
+    "questionText": "How does priority inheritance help a lock-related priority inversion?",
+    "options": [
+      "Makes critical sections execute without CPU time",
+      "Temporarily boosts the lock owner's effective priority",
+      "Permanently gives all tasks the same PID",
+      "Cancels the high-priority task's lock request"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "The owner can run sooner and release the needed lock; the boost is tied to the dependency."
+  },
+  {
+    "seedKey": "os-scheduling-031",
+    "topic": "CPU Scheduling",
+    "subtopic": "EDF",
+    "difficulty": "medium",
+    "questionText": "Two ready real-time jobs have absolute deadlines 30 ms and 18 ms. Which does EDF favor?",
+    "options": [
+      "Always the larger burst job regardless of deadline",
+      "Always the most recently created process",
+      "The 30 ms deadline job",
+      "The 18 ms deadline job"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Earliest-deadline-first prioritizes the nearest absolute deadline among ready jobs."
+  },
+  {
+    "seedKey": "os-scheduling-032",
+    "topic": "CPU Scheduling",
+    "subtopic": "Rate monotonic",
+    "difficulty": "medium",
+    "questionText": "Under rate-monotonic priorities, periodic tasks have periods 10 ms and 25 ms. Which has higher priority?",
+    "options": [
+      "The 10 ms period task",
+      "They must have equal priority",
+      "The 25 ms period task",
+      "Whichever has the larger PID"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Rate-monotonic assigns higher fixed priority to shorter periods, under its standard assumptions."
+  },
+  {
+    "seedKey": "os-scheduling-033",
+    "topic": "CPU Scheduling",
+    "subtopic": "Utilization",
+    "difficulty": "medium",
+    "questionText": "A CPU executes user jobs for 45 s and is idle for 15 s in a minute, with no overhead. What is utilization?",
+    "options": [
+      "75%",
+      "25%",
+      "60%",
+      "45%"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Busy time divided by observation time is 45/60=75%."
+  },
+  {
+    "seedKey": "os-scheduling-034",
+    "topic": "CPU Scheduling",
+    "subtopic": "Throughput",
+    "difficulty": "medium",
+    "questionText": "A batch completes 240 jobs in 120 seconds. What is its throughput?",
+    "options": [
+      "240 jobs/s",
+      "2 jobs/s",
+      "0.5 jobs/s",
+      "120 jobs/s"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Throughput is completed jobs divided by elapsed time: 240/120=2 jobs/s."
+  },
+  {
+    "seedKey": "os-scheduling-035",
+    "topic": "CPU Scheduling",
+    "subtopic": "Multilevel queues",
+    "difficulty": "medium",
+    "questionText": "What distinguishes fixed multilevel queues from multilevel feedback queues?",
+    "options": [
+      "Fixed queues do not normally move tasks between queues based on observed behavior",
+      "Feedback queues cannot preempt",
+      "Feedback queues require a disk for each task",
+      "Fixed queues always use only one priority"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Feedback scheduling adjusts queue placement using runtime behavior; fixed queue membership follows a classification rule."
+  },
+  {
+    "seedKey": "os-scheduling-036",
+    "topic": "CPU Scheduling",
+    "subtopic": "Load balancing",
+    "difficulty": "medium",
+    "questionText": "Why might moving a runnable task to another CPU reduce performance despite improving load balance?",
+    "options": [
+      "The new CPU cannot execute arithmetic",
+      "All migration necessarily changes program results",
+      "It can lose warm cache locality",
+      "The task's executable stops existing"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Migration can trade lower queue delay for cache and translation-cache warm-up costs."
+  },
+  {
+    "seedKey": "os-scheduling-037",
+    "topic": "CPU Scheduling",
+    "subtopic": "Tie breaking",
+    "difficulty": "medium",
+    "questionText": "Two SJF jobs have equal predicted bursts. What extra rule is needed for a deterministic schedule?",
+    "options": [
+      "A random new PID every tick",
+      "A larger filesystem block",
+      "A different page size",
+      "An explicit tie-breaker such as arrival order"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "The main policy does not resolve equal keys; a documented secondary order makes results reproducible."
+  },
+  {
+    "seedKey": "os-scheduling-038",
+    "topic": "CPU Scheduling",
+    "subtopic": "Blocking under RR",
+    "difficulty": "medium",
+    "questionText": "A task blocks for input before its quantum expires. What should a work-conserving RR scheduler normally do?",
+    "options": [
+      "Declare every blocked task finished",
+      "Reserve the rest of the quantum as forced idle time",
+      "Schedule another ready task immediately",
+      "Run the blocked task's next instruction anyway"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "The CPU need not remain idle while runnable work exists; blocking relinquishes the CPU."
+  },
+  {
+    "seedKey": "os-scheduling-039",
+    "topic": "CPU Scheduling",
+    "subtopic": "Lottery shares",
+    "difficulty": "medium",
+    "questionText": "A owns 30 of 100 lottery tickets and B owns the rest. What is A's expected fraction of draws?",
+    "options": [
+      "100%",
+      "3%",
+      "70%",
+      "30%"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Each ticket is equally likely to win, giving A probability 30/100 per draw; short runs can deviate."
+  },
+  {
+    "seedKey": "os-scheduling-040",
+    "topic": "CPU Scheduling",
+    "subtopic": "Fair share",
+    "difficulty": "medium",
+    "questionText": "Why can per-user fair-share scheduling differ from equal service per process?",
+    "options": [
+      "CPU shares determine disk size",
+      "Every user must have exactly one process",
+      "Fair-share scheduling prohibits priorities",
+      "One user can create many processes, so process equality need not imply user equality"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Grouping service by user or group prevents process count alone from determining the group's CPU entitlement."
+  },
+  {
+    "seedKey": "os-scheduling-041",
+    "topic": "CPU Scheduling",
+    "subtopic": "SRTF trace",
+    "difficulty": "medium",
+    "questionText": "A arrives at 0 with burst 8, B at 1 with burst 4, C at 2 with burst 2 ms. Under SRTF with no overhead, what is B's completion time?",
+    "options": [
+      "6 ms",
+      "5 ms",
+      "7 ms",
+      "14 ms"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "A runs 0–1, B 1–2, C 2–4, B 4–7, then A. B finishes at 7 ms."
+  },
+  {
+    "seedKey": "os-scheduling-042",
+    "topic": "CPU Scheduling",
+    "subtopic": "RR trace",
+    "difficulty": "hard",
+    "questionText": "A and B arrive at 0 with bursts 5 and 3 ms. RR quantum is 2 ms, initial order A then B, no overhead. What is A's completion time?",
+    "options": [
+      "8 ms",
+      "10 ms",
+      "7 ms",
+      "5 ms"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "The slices are A 0–2, B 2–4, A 4–6, B 6–7, A 7–8. A finishes at 8 ms."
+  },
+  {
+    "seedKey": "os-scheduling-043",
+    "topic": "CPU Scheduling",
+    "subtopic": "Slice overhead",
+    "difficulty": "hard",
+    "questionText": "Each completed scheduling cycle contains 4 ms useful execution and a 0.2 ms switch. What fraction of cycle time is switch overhead?",
+    "options": [
+      "20%",
+      "0.05%",
+      "5.26%",
+      "About 4.76%"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Total cycle time is 4.2 ms; 0.2/4.2 times 100 is approximately 4.76%."
+  },
+  {
+    "seedKey": "os-scheduling-044",
+    "topic": "CPU Scheduling",
+    "subtopic": "EDF feasibility",
+    "difficulty": "hard",
+    "questionText": "Independent preemptible periodic tasks on one CPU have C/T values 1/4, 1/5 and 2/10, with deadlines equal to periods. Under ideal EDF, what does utilization imply?",
+    "options": [
+      "Utilization 0.65 meets the EDF utilization test",
+      "Utilization 1.65 guarantees overload",
+      "Utilization alone proves feasibility even if these assumptions are removed",
+      "Utilization 0.65 guarantees all fixed-priority schedules fail"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "1/4+1/5+2/10=0.65. For the stated implicit-deadline, independent task model, ideal EDF is feasible when utilization is at most one."
+  },
+  {
+    "seedKey": "os-scheduling-045",
+    "topic": "CPU Scheduling",
+    "subtopic": "RM sufficient bound",
+    "difficulty": "hard",
+    "questionText": "Two independent periodic tasks have total utilization 0.80. The standard two-task RM sufficient bound is about 0.828. What follows under the bound's assumptions?",
+    "options": [
+      "The tasks necessarily miss deadlines",
+      "The sufficient RM schedulability test passes",
+      "The test proves feasibility above every utilization",
+      "Each task must use exactly 40% CPU"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Since 0.80 is below 2(2^(1/2)-1), the sufficient fixed-priority RM utilization test passes for that model."
+  },
+  {
+    "seedKey": "os-scheduling-046",
+    "topic": "CPU Scheduling",
+    "subtopic": "Nonpreemptive blocking",
+    "difficulty": "hard",
+    "questionText": "An EDF implementation is nonpreemptive. A long job starts just before a short urgent job arrives. Why can utilization below one still be insufficient?",
+    "options": [
+      "Utilization below one forces every arrival to be idle",
+      "Nonpreemptive jobs never consume CPU",
+      "EDF automatically interrupts nonpreemptive execution",
+      "The urgent job may be blocked past its deadline"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "The simple ideal preemptive EDF utilization condition does not remove nonpreemptive blocking delays."
+  },
+  {
+    "seedKey": "os-scheduling-047",
+    "topic": "CPU Scheduling",
+    "subtopic": "Priority trace",
+    "difficulty": "hard",
+    "questionText": "All jobs arrive at 0. Bursts are A=4, B=2, C=1 ms; priorities are A=3, B=1, C=2, lower is higher. Nonpreemptive priority scheduling has no overhead. What is average turnaround?",
+    "options": [
+      "3 ms",
+      "4 ms",
+      "14/3 ms",
+      "7/3 ms"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Execution is B 0–2, C 2–3, A 3–7. Turnarounds are 2, 3 and 7, whose sum is 12, so the average is 4 ms."
+  },
+  {
+    "seedKey": "os-scheduling-048",
+    "topic": "CPU Scheduling",
+    "subtopic": "MLFQ gaming",
+    "difficulty": "hard",
+    "questionText": "If a scheduler resets a task's allotment whenever it yields, how can a CPU-heavy task exploit this?",
+    "options": [
+      "Make its actual CPU consumption zero",
+      "Yield just before expiration to avoid demotion",
+      "Force another task to inherit its PID",
+      "Increase its physical CPU count by yielding"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Accounting cumulative CPU use at a level, rather than only the latest burst, prevents this form of priority gaming."
+  },
+  {
+    "seedKey": "os-scheduling-049",
+    "topic": "CPU Scheduling",
+    "subtopic": "Parallel speedup",
+    "difficulty": "hard",
+    "questionText": "A job is 20% serial and 80% perfectly parallel. Ignoring overhead, what is maximum speedup on 4 cores?",
+    "options": [
+      "2.5 times",
+      "3.2 times",
+      "4 times",
+      "1.25 times"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Normalized time is 0.2+0.8/4=0.4, so speedup is 1/0.4=2.5."
+  },
+  {
+    "seedKey": "os-scheduling-050",
+    "topic": "CPU Scheduling",
+    "subtopic": "Blocking budget",
+    "difficulty": "hard",
+    "questionText": "A high-priority job needs 3 ms of CPU, suffers at most 2 ms blocking and 1 ms higher-priority interference. Can it meet a 7 ms deadline in this bounded model?",
+    "options": [
+      "No; the bound is 8 ms",
+      "Yes; the bound is 6 ms",
+      "Only if blocking is ignored",
+      "Only if it uses two CPUs simultaneously"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "The response bound is execution plus blocking plus interference: 3+2+1=6 ms, leaving 1 ms before the deadline."
+  }
+]

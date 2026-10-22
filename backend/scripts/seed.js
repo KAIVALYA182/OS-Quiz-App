@@ -1,7 +1,9 @@
 require("dotenv").config();
 const { pool } = require("../config/db");
 const bank = require("../data/questions");
-async function seed(db = pool) {
+const mockKeys = require("../data/mock-question-keys.json");
+const legacyPositions = new Map(mockKeys.map((key, index) => [key, index]));
+async function seed(db = pool, sourceBank = bank) {
   const c = await db.connect();
   const counts = {
     questionsInserted: 0,
@@ -41,7 +43,17 @@ async function seed(db = pool) {
     counts[table + "Inserted"]++;
     return row.rows[0].id;
   }
-  async function quiz(key, title, topic, timed, minutes, ids) {
+  let existingQuizIds;
+  async function quiz(
+    key,
+    title,
+    topic,
+    timed,
+    minutes,
+    ids,
+    preserveExistingMemberships = false,
+    legacyIds = [],
+  ) {
     const id = await adopt(
       "quizzes",
       key,
@@ -53,8 +65,9 @@ async function seed(db = pool) {
         const candidates = await c.query(
           `select z.id,z.seed_key from quizzes z where z.seed_key is null and
            (select array_agg(question_id order by question_id) from quiz_questions where quiz_id=z.id) =
-           (select array_agg(v order by v) from unnest($1::uuid[]) v)`,
-          [ids],
+           (select array_agg(v order by v) from unnest($1::uuid[]) v)
+           or (z.seed_key is null and (select array_agg(question_id order by question_id) from quiz_questions where quiz_id=z.id) = (select array_agg(v order by v) from unnest($2::uuid[]) v))`,
+          [ids, legacyIds],
         );
         if (!candidates.rowCount) {
           const partial = await c.query(
@@ -70,6 +83,7 @@ async function seed(db = pool) {
         return candidates;
       },
     );
+    if (preserveExistingMemberships && existingQuizIds.has(id)) return;
     for (const q of ids) {
       const r = await c.query(
         `insert into quiz_questions(quiz_id,question_id,position)
@@ -83,7 +97,9 @@ async function seed(db = pool) {
   try {
     await c.query("begin");
     await c.query("select pg_advisory_xact_lock(187421,1)");
-    const keys = bank.flatMap((group) => group.questions.map((q) => q.seedKey));
+    const keys = sourceBank.flatMap((group) =>
+      group.questions.map((q) => q.seedKey),
+    );
     if (keys.some((key) => !key) || new Set(keys).size !== keys.length)
       throw new Error("Question seed keys must be present and unique.");
     const user = await c.query(
@@ -101,9 +117,11 @@ async function seed(db = pool) {
       );
       counts.usersInserted++;
     }
-    const all = [];
-    let globalPosition = 0;
-    for (const group of bank) {
+    existingQuizIds = new Set(
+      (await c.query("select id from quizzes")).rows.map((q) => q.id),
+    );
+    const bySeedKey = new Map();
+    for (const group of sourceBank) {
       const ids = [];
       for (const [position, q] of group.questions.entries()) {
         if (!q.seedKey) throw new Error("Question lacks a stable seedKey");
@@ -123,7 +141,9 @@ async function seed(db = pool) {
             q.explanation,
           ],
           async () => {
-            // Two agreeing independent memberships can identify an edited legacy question.
+            if (!legacyPositions.has(q.seedKey))
+              return { rows: [], rowCount: 0 };
+            // The original mock manifest preserves positions across bank expansion.
             const candidates = await c.query(
               `select distinct q.id,q.seed_key from questions q
        join quiz_questions t on t.question_id=q.id join quizzes tz on tz.id=t.quiz_id
@@ -131,9 +151,9 @@ async function seed(db = pool) {
        where tz.title=$1 and t.position=$2 and mz.title=$3 and m.position=$4`,
               [
                 group.topic + " — Practice Quiz",
-                position,
+                legacyPositions.get(q.seedKey) % 5,
                 "Full Mock Test — All Topics",
-                globalPosition,
+                legacyPositions.get(q.seedKey),
               ],
             );
             if (!candidates.rowCount) {
@@ -154,9 +174,8 @@ async function seed(db = pool) {
             return candidates;
           },
         );
-        globalPosition++;
+        bySeedKey.set(q.seedKey, id);
         ids.push(id);
-        all.push(id);
       }
       await quiz(
         "topic:" + group.topic,
@@ -165,7 +184,19 @@ async function seed(db = pool) {
         false,
         null,
         ids,
+        false,
+        group.questions
+          .filter((q) => legacyPositions.has(q.seedKey))
+          .map((q) => bySeedKey.get(q.seedKey)),
       );
+    }
+    const missingMockKeys = mockKeys.filter((key) => !bySeedKey.has(key));
+    if (missingMockKeys.length) {
+      const existing = await c.query(
+        "select id,seed_key from questions where seed_key=any($1::text[])",
+        [missingMockKeys],
+      );
+      for (const q of existing.rows) bySeedKey.set(q.seed_key, q.id);
     }
     await quiz(
       "full-mock",
@@ -173,7 +204,15 @@ async function seed(db = pool) {
       "Mixed",
       true,
       50,
-      all,
+      mockKeys.map((key) => {
+        const id = bySeedKey.get(key);
+        if (!id)
+          throw new Error(
+            "Mock manifest references a missing seed key: " + key,
+          );
+        return id;
+      }),
+      true,
     );
     await c.query("commit");
     return counts;

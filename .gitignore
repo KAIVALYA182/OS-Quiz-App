@@ -13,3 +13,20 @@ dist/
 !.env.example
 .DS_Store
 *.log
+
+# Local secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies and generated builds
+node_modules/
+dist/
+build/
+.gradle/
+local.properties
+*.apk
+*.aab
+*.jks
+*.keystore
+.DS_Store

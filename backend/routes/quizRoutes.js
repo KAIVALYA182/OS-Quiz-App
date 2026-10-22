@@ -4,7 +4,7 @@ const router = express.Router();
 const { list, getOne, start } = require("../controllers/quizController");
 
 // GET /api/quiz            -> all quizzes (id, title, topic, timing, questionCount)
-// GET /api/quiz/:quizId    -> one quiz with its questions (no correct answers)
+// GET /api/quiz/:quizId    -> quiz metadata only; POST start assigns questions
 router.get("/", list);
 router.get("/:quizId", getOne);
 router.post("/:quizId/start", start);

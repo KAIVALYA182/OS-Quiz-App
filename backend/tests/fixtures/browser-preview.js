@@ -32,7 +32,7 @@ const net = require("node:net");
   process.env.DATABASE_SSL = "false";
   process.env.SESSION_SECRET = crypto.randomBytes(48).toString("hex");
   process.env.NODE_ENV = "test";
-  process.env.CLIENT_ORIGIN = "http://localhost:5067";
+  process.env.CLIENT_ORIGIN = "http://127.0.0.1:5067";
   delete process.env.TRUST_PROXY_HOPS;
   const { pool } = require("../../config/db");
   await pool.query(
@@ -48,7 +48,7 @@ const net = require("node:net");
   );
   app.use(express.static(path.join(__dirname, "../../../frontend/dist")));
   const server = app.listen(5067, "127.0.0.1", () =>
-    console.log("Disposable browser preview ready: http://localhost:5067"),
+    console.log("Disposable browser preview ready: http://127.0.0.1:5067"),
   );
   const stop = () =>
     server.close(async () => {

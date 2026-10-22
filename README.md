@@ -1,5 +1,7 @@
 # OS Quiz App
 
+The question bank contains **500 questions across the existing ten topics: 15 easy, 25 medium and 10 hard per topic**. See [question-bank expansion and theme notes](docs/QUESTION_BANK.md) for the content inventory, non-destructive update commands, mock preservation, historical leaderboard versions and verification details.
+
 React/Vite and Express/PostgreSQL. Vite is updated to the compatible 6.4 maintenance line for security fixes and the test runner; React and the existing Tailwind 3 styling are retained. For installation and tests use Node 22.22.2+, 24.15+, or 26+ (matching the package engine ranges), and PostgreSQL 14+ (Supabase Session pooler supported). Existing question content, scoring, feedback, timer and answer-review components are retained.
 
 ## Install and configure
@@ -67,11 +69,21 @@ cd ..
 
 `db:init` refuses an existing users table. Migrations run transactionally under an advisory lock and record applied versions in `schema_migrations`. The fresh-install schema includes the same extensions. No migration, seed, or database reset runs during server startup.
 
-**Seeding supplies initial or missing seed data. It is not required to access the database or start the app.** The seed preserves existing IDs, timestamps, user fields, credentials, answers, settings, memberships and positions. A removed source-bank item stays in PostgreSQL. New memberships append after the highest existing position. Counters report inserted/reused records without credentials or answers.
+**Seeding supplies initial or missing seed data. It is not required to access the database or start the app.** The seed preserves existing IDs, timestamps, user fields, credentials, answers, settings, memberships and positions. A removed source-bank item stays in PostgreSQL. New topic memberships append after the highest existing position. Existing mock memberships are unchanged; fresh mocks use the fixed balanced 50-question manifest and a 50-minute limit. Counters report inserted/reused records without credentials or answers.
 
 Stable question `seedKey` values are explicit in the question bank. Keep them unchanged when editing or moving a question. Quiz seed keys are the fixed `topic:<existing topic>` identifiers and `full-mock`; do not rename those identifiers to edit a quiz. Seed adoption first uses these keys, then a unique exact topic/text or quiz title match. Edited legacy question text can be adopted only when original topic-quiz and full-mock membership positions agree on one record. A renamed quiz can be adopted by its exact membership set. Where identity cannot be established safely, the entire seed rolls back with a diagnostic; inspect the affected records and explicitly assign the intended `seed_key` before retrying. Do not resolve ambiguity by deleting or merging historical records. Database content wins once records have keys: source edits do not overwrite database edits.
 
 Migration stops on normalized email/username collisions or duplicate quiz positions. Resolve those conflicts through an explicit ownership/order decision before retrying. Existing users without usernames receive reserved `legacy_<UUID without hyphens>` identifiers. All pre-migration accounts remain disabled for authentication and competitive ranking; existing password hashes, IDs and histories are preserved. Placeholder passwords cannot authenticate. New registrations never inherit the shared test account's history. Recovery/activation of verified legacy accounts requires a separate deliberate operator process; this app adds no reset email workflow.
+
+## Topic attempt size
+
+Topic quizzes retain their full database pools (normally 50 questions) and assign a fresh random sample of up to **20 distinct questions** at each start. Smaller pools use all questions; empty pools return a clear error. Full Mock Test membership, ordering and timing remain unchanged: the standard seed supplies 50 questions and 50 minutes. Personalised practice still selects up to ten questions using the existing learning rules.
+
+The ordered selection and full question snapshots are persisted in the authenticated student's `attempts.snapshot` before questions are returned. Re-fetch it with authenticated `GET /api/attempts/:id`; this never reshuffles, exposes answers, or permits another student to read it. Catalogue detail `GET /api/quiz/:quizId` now returns metadata only; `questionCount` is the assignment size and `poolSize` is the stored membership count. Start with the existing POST endpoint to receive assigned questions. Scores, unanswered reviews and topic evidence use the assignment only. Existing attempts and results retain their saved counts and versions.
+
+Random topic selections retain **separate leaderboard cohorts for each exact ordered question set and pool/format version**. Consequently, different random selections usually have separate rankings rather than one shared topic score table. The default is your latest eligible completed selection from the current pool (otherwise the most recently completed eligible selection). Earlier sets, including pre-change 50-question attempts, remain selectable; mock rankings keep their existing behavior.
+
+**No migration or reseeding is needed for this feature.** The existing JSON snapshots support it. Restart the backend and frontend with the development commands below; do not run `db:init`, migration, or seed just to change the topic attempt size.
 
 ## Development
 
@@ -134,9 +146,9 @@ Practice selects at most ten unique existing questions: roughly 80% prioritizes 
 
 ### Ranking rules
 
-`GET /api/leaderboard/:quizId?page=1` returns 20 rows per page and the current student's rank independently of the visible page. Each student's highest server-calculated integer percentage for that standard quiz/version counts once. Ties share competition rank (1, 1, 3); usernames and IDs provide stable display ordering. Only public username, score, rank and an own-row marker are shown. Personalised practice, disabled/admin/shared accounts and unassigned legacy results are excluded.
+`GET /api/leaderboard/:quizId?page=1&version=<optional fingerprint>` returns 20 rows per page and the current student's rank independently of the visible page. Each student's highest server-calculated integer percentage for that standard quiz/version counts once. Ties share competition rank (1, 1, 3); usernames and IDs provide stable display ordering. Only public username, score, rank and an own-row marker are shown. Personalised practice, disabled/admin/shared accounts and unassigned legacy results are excluded.
 
-A SHA-256 fingerprint covers quiz settings and ordered question snapshots, including options and answers. Only attempts matching the current quiz version rank together. Content, settings or membership changes can therefore start a new leaderboard cohort; older results remain in personal history. There is no overall cross-quiz leaderboard.
+A SHA-256 fingerprint covers quiz settings and ordered question snapshots, including options and answers. Only attempts matching the selected quiz version rank together. The Question set selector exposes eligible earlier versions as well as the current one. Content, settings or membership changes start a separate cohort; older results remain in history and their eligible historical rankings stay available. There is no overall cross-quiz leaderboard.
 
 ## Verification
 
@@ -149,11 +161,11 @@ npm audit --prefix backend
 npm audit --prefix frontend
 ```
 
-Backend integration tests start their own disposable PostgreSQL cluster on a random local port, override DATABASE_URL before loading application modules, and never use project Supabase settings. Installation needs network access for the platform's embedded PostgreSQL package. Tests require permission to spawn processes and bind localhost ports. Production installation excludes this test dependency. The backend suite currently passes 17 tests (including its enclosing integration test); the frontend suite exercises components and the request client without network access. The suite covers migration preservation/collision rollback; empty/repeated/concurrent seeds; edited data and removed-source preservation; secure registration, login, CSRF, limits, logout and real process restarts; ownership isolation; topic calculations; small-bank practice; rankings, ties, pagination, versions and safe submission retries.
+Backend integration tests start their own disposable PostgreSQL cluster on a random local port, override DATABASE_URL before loading application modules, and never use project Supabase settings. Installation needs network access for the platform's embedded PostgreSQL package. Tests require permission to spawn processes and bind localhost ports. Production installation excludes this test dependency. The backend suite includes preservation, expansion, numerical-answer and integration checks; the frontend suite exercises components and the request client without network access. The suite covers migration preservation/collision rollback; empty/repeated/concurrent seeds; edited data and removed-source preservation; secure registration, login, CSRF, limits, logout and real process restarts; ownership isolation; topic calculations; small-bank practice; rankings, ties, pagination, versions and safe submission retries.
 
-Backend dependency audit reports zero vulnerabilities. All 17 backend tests, all 11 frontend tests, question-bank validation, syntax checks and the production build passed. The frontend development dependency audit reports seven findings (five high, two moderate) in the existing Tailwind 3 dependency chain; fixing them through the suggested Tailwind 4 upgrade requires a separate styling migration. Frontend production dependencies have no reported vulnerabilities.
+Backend dependency audit reports zero vulnerabilities. See docs/QUESTION_BANK.md for the expansion-specific test coverage; tests, question-bank validation and the production build are rerun for content/theme changes. The frontend development dependency audit reports seven findings (five high, two moderate) in the existing Tailwind 3 dependency chain; fixing them through the suggested Tailwind 4 upgrade requires a separate styling migration. Frontend production dependencies have no reported vulnerabilities.
 
-There was no pre-existing lint script in either package. Syntax checks, component tests, backend tests and the Vite production build are the automated checks. Browser visual/responsive verification could not be completed because the browser permission gate declined the local preview. Check those manually before deployment.
+There was no pre-existing lint script in either package. Syntax checks, component/contrast tests, backend/content tests and the Vite production build are the automated checks. Desktop and mobile browser checks use the disposable local preview. A full assistive-technology audit remains a manual deployment check.
 
 ## Manual checks
 

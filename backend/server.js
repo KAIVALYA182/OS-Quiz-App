@@ -26,6 +26,9 @@ function createApp() {
   app.use("/api", requireAuth);
   app.use("/api/quiz", require("./routes/quizRoutes"));
   app.use("/api/quiz", require("./routes/scoreRoutes"));
+  app.get("/api/attempts/:id", wrap(async (req, res) =>
+    res.json(await attempts.getAttempt(req.user.id, req.params.id)),
+  ));
   app.get(
     "/api/progress",
     wrap(async (req, res) => res.json(await attempts.progress(req.user.id))),
@@ -66,6 +69,7 @@ function createApp() {
           req.user.id,
           req.params.quizId,
           Number(req.query.page || 1),
+          req.query.version,
         ),
       ),
     ),

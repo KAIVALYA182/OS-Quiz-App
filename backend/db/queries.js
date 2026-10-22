@@ -22,7 +22,12 @@ async function listQuizzes() {
       group by z.id
       order by z.created_at, z.title`
   );
-  return rows;
+  return rows.map((q) => ({
+    ...q,
+    poolSize: q.questionCount,
+    questionCount: q.topic === "Mixed" ? q.questionCount : Math.min(20, q.questionCount),
+    selectionMode: q.topic === "Mixed" ? "fixed" : "random",
+  }));
 }
 
 module.exports={listQuizzes};

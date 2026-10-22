@@ -1,0 +1,677 @@
+[
+  {
+    "seedKey": "os-files-006",
+    "topic": "File Systems",
+    "subtopic": "Directories",
+    "difficulty": "easy",
+    "questionText": "What does a directory primarily map?",
+    "options": [
+      "Memory pages to scheduling priorities",
+      "Passwords to plaintext copies",
+      "Names to file-system objects or identifiers",
+      "CPU registers to instruction opcodes"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "A directory organizes name lookup; the object's metadata can be stored separately, such as in an inode."
+  },
+  {
+    "seedKey": "os-files-007",
+    "topic": "File Systems",
+    "subtopic": "Paths",
+    "difficulty": "easy",
+    "questionText": "What distinguishes an absolute path from a relative path?",
+    "options": [
+      "It starts from the filesystem root rather than the current directory",
+      "It always refers to a larger file",
+      "It must identify a device driver",
+      "It cannot contain directory names"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Absolute paths are interpreted from the root; relative paths use a current starting directory."
+  },
+  {
+    "seedKey": "os-files-008",
+    "topic": "File Systems",
+    "subtopic": "File descriptors",
+    "difficulty": "easy",
+    "questionText": "What is a file descriptor in a UNIX process?",
+    "options": [
+      "A process-local handle used for an open file or related I/O object",
+      "The complete contents of a file",
+      "A permanent file name valid in every process",
+      "The physical disk platter number"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Descriptors index process-managed open-object references used by operations such as read and write."
+  },
+  {
+    "seedKey": "os-files-009",
+    "topic": "File Systems",
+    "subtopic": "File offsets",
+    "difficulty": "easy",
+    "questionText": "What does an open file's current offset usually track?",
+    "options": [
+      "The user's password length",
+      "The count of all directories on disk",
+      "The position used for the next sequential read or write",
+      "The physical CPU core number"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Sequential I/O advances an offset in the open file description, subject to operation semantics."
+  },
+  {
+    "seedKey": "os-files-010",
+    "topic": "File Systems",
+    "subtopic": "Metadata",
+    "difficulty": "easy",
+    "questionText": "Which value is file metadata rather than file content?",
+    "options": [
+      "A pixel in a stored image",
+      "A sample in a stored audio stream",
+      "Last-modification timestamp",
+      "The first paragraph of a document"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Metadata describes attributes of the object rather than the application's stored payload."
+  },
+  {
+    "seedKey": "os-files-011",
+    "topic": "File Systems",
+    "subtopic": "Permissions",
+    "difficulty": "easy",
+    "questionText": "What does directory search/execute permission normally allow in UNIX?",
+    "options": [
+      "Rewrite all directory entries without write permission",
+      "Read every file's contents automatically",
+      "Traverse the directory to resolve known entry names",
+      "Execute every file inside regardless of file permissions"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Directory search permission enables path traversal; listing and modifying entries require other permissions."
+  },
+  {
+    "seedKey": "os-files-012",
+    "topic": "File Systems",
+    "subtopic": "Symbolic links",
+    "difficulty": "easy",
+    "questionText": "What does a symbolic link store conceptually?",
+    "options": [
+      "A path to another location",
+      "The target's complete CPU execution state",
+      "A mandatory second copy of all target data",
+      "A guarantee that the target cannot disappear"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "A symbolic link is resolved by interpreting its stored path and can become dangling if the target is removed."
+  },
+  {
+    "seedKey": "os-files-013",
+    "topic": "File Systems",
+    "subtopic": "Mounting",
+    "difficulty": "easy",
+    "questionText": "What does mounting a filesystem do?",
+    "options": [
+      "Change all file owners to the current user",
+      "Attach its directory tree at a mount point",
+      "Copy every file into CPU registers",
+      "Erase its free-space map"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Mounting makes another filesystem's hierarchy accessible through the namespace."
+  },
+  {
+    "seedKey": "os-files-014",
+    "topic": "File Systems",
+    "subtopic": "EOF",
+    "difficulty": "easy",
+    "questionText": "A regular-file read reaches the end with no more bytes available. What return value conventionally indicates EOF in UNIX read()?",
+    "options": [
+      "The file's inode number",
+      "A new positive file descriptor",
+      "Always minus 1",
+      "0 bytes"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "A zero-byte read result indicates EOF for a regular file; a negative result indicates an error."
+  },
+  {
+    "seedKey": "os-files-015",
+    "topic": "File Systems",
+    "subtopic": "Open modes",
+    "difficulty": "easy",
+    "questionText": "Why open a file with read-only access when no writes are needed?",
+    "options": [
+      "Force the file to occupy one block",
+      "Request only the needed access and prevent writes through that descriptor",
+      "Make the file impossible for any user to modify forever",
+      "Guarantee all reads bypass the page cache"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Open access mode limits operations through the handle and supports least-privilege use."
+  },
+  {
+    "seedKey": "os-files-016",
+    "topic": "File Systems",
+    "subtopic": "Free-space tracking",
+    "difficulty": "easy",
+    "questionText": "What does a block bitmap commonly indicate?",
+    "options": [
+      "Which filesystem blocks are free or allocated",
+      "Which CPU instruction runs next",
+      "Which process owns every register",
+      "Which user typed each key"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "One bit per allocation unit provides a compact free-space map."
+  },
+  {
+    "seedKey": "os-files-017",
+    "topic": "File Systems",
+    "subtopic": "Deletion semantics",
+    "difficulty": "easy",
+    "questionText": "What is the immediate namespace effect of unlinking a file name?",
+    "options": [
+      "That directory entry is removed",
+      "Every open descriptor to the file is instantly invalidated",
+      "All other hard links are automatically removed",
+      "The disk must be securely overwritten immediately"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Unlink removes one name; object lifetime also depends on other links and open references."
+  },
+  {
+    "seedKey": "os-files-018",
+    "topic": "File Systems",
+    "subtopic": "File size",
+    "difficulty": "easy",
+    "questionText": "What does a regular file's logical size describe?",
+    "options": [
+      "The count of users who can read it",
+      "Always exactly the physical allocated block count times block size",
+      "The byte range of its content as seen by applications",
+      "The number of CPU cores used to create it"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Logical size and physical storage allocation can differ because of holes, allocation rounding or metadata."
+  },
+  {
+    "seedKey": "os-files-019",
+    "topic": "File Systems",
+    "subtopic": "Caching",
+    "difficulty": "easy",
+    "questionText": "Why does an OS cache recently read file data in RAM?",
+    "options": [
+      "Guarantee the file can never be modified",
+      "Reduce repeated storage I/O and latency",
+      "Remove the need for all permission checks",
+      "Replace the directory tree permanently"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Cached data can satisfy later reads without another storage transfer, while consistency rules still apply."
+  },
+  {
+    "seedKey": "os-files-020",
+    "topic": "File Systems",
+    "subtopic": "Extensions",
+    "difficulty": "easy",
+    "questionText": "Does a file-name extension alone reliably enforce a file's actual format or safety?",
+    "options": [
+      "Yes; an extension encrypts the file",
+      "No; it is a naming convention, not proof of contents",
+      "Yes; the OS verifies all data whenever a name changes",
+      "No; files can never have extensions"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Applications and security checks must inspect or validate content rather than trusting a suffix alone."
+  },
+  {
+    "seedKey": "os-files-021",
+    "topic": "File Systems",
+    "subtopic": "Block rounding",
+    "difficulty": "medium",
+    "questionText": "A 9000-byte file uses 4096-byte blocks without holes. How many data blocks are needed?",
+    "options": [
+      "9",
+      "2",
+      "3",
+      "4"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Ceiling(9000/4096)=3; two blocks hold only 8192 bytes."
+  },
+  {
+    "seedKey": "os-files-022",
+    "topic": "File Systems",
+    "subtopic": "Tail waste",
+    "difficulty": "medium",
+    "questionText": "A 9000-byte file occupies three 4096-byte blocks. How many allocated data bytes are unused?",
+    "options": [
+      "1288 bytes",
+      "808 bytes",
+      "3288 bytes",
+      "4096 bytes"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Allocated capacity is 12288 bytes; subtract 9000 to obtain 3288 bytes of final-block slack."
+  },
+  {
+    "seedKey": "os-files-023",
+    "topic": "File Systems",
+    "subtopic": "Indexed allocation",
+    "difficulty": "medium",
+    "questionText": "What advantage does indexed allocation have over traversing a linked list of data blocks for random access?",
+    "options": [
+      "It needs no metadata storage",
+      "Every file must be physically contiguous",
+      "Block pointers can be looked up through an index",
+      "It makes all file offsets zero"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Indexed structures locate a target block through metadata rather than reading each preceding data block in a chain."
+  },
+  {
+    "seedKey": "os-files-024",
+    "topic": "File Systems",
+    "subtopic": "Extents",
+    "difficulty": "medium",
+    "questionText": "What is an extent?",
+    "options": [
+      "A password-validation routine",
+      "The number of CPUs in the machine",
+      "A mandatory one-byte file",
+      "A run of contiguous blocks described compactly"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Storing a starting block and length can represent many contiguous blocks with one record."
+  },
+  {
+    "seedKey": "os-files-025",
+    "topic": "File Systems",
+    "subtopic": "Hard-link limits",
+    "difficulty": "medium",
+    "questionText": "Why do conventional UNIX filesystems normally disallow user-created hard links to directories?",
+    "options": [
+      "Hard links always duplicate the entire directory contents",
+      "Directories cannot have identifiers",
+      "Only files with extensions have metadata",
+      "They can create cycles and complicate directory-tree invariants"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Restrictions maintain tractable parent relationships and namespace traversal, aside from special system-managed entries."
+  },
+  {
+    "seedKey": "os-files-026",
+    "topic": "File Systems",
+    "subtopic": "Dangling symlinks",
+    "difficulty": "medium",
+    "questionText": "A symbolic link points to a path that is removed. What commonly remains?",
+    "options": [
+      "A full copy of the target data appears automatically",
+      "Every parent directory is deleted",
+      "The symlink exists but resolution of its target fails",
+      "The symlink becomes a guaranteed hard link"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "A symbolic link stores a path, not a reference that necessarily keeps the target object alive."
+  },
+  {
+    "seedKey": "os-files-027",
+    "topic": "File Systems",
+    "subtopic": "Cross-filesystem rename",
+    "difficulty": "medium",
+    "questionText": "Why can a simple atomic rename generally not move a file directly between different filesystems?",
+    "options": [
+      "The operation crosses independent metadata and storage domains",
+      "Rename requires no metadata changes",
+      "Both filesystems must have identical file contents",
+      "A file name cannot contain letters"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Cross-filesystem moves are typically implemented using copy and removal rather than one ordinary within-filesystem rename."
+  },
+  {
+    "seedKey": "os-files-028",
+    "topic": "File Systems",
+    "subtopic": "Open-unlinked files",
+    "difficulty": "medium",
+    "questionText": "A process keeps a descriptor open after the file's last name is unlinked. What usually happens?",
+    "options": [
+      "It can keep accessing the object until the last open reference closes",
+      "The descriptor must immediately become a different user's file",
+      "Every read must return unrelated data",
+      "The OS instantly reuses the data blocks despite the open reference"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Namespace removal and object lifetime are separate; open references keep the object alive."
+  },
+  {
+    "seedKey": "os-files-029",
+    "topic": "File Systems",
+    "subtopic": "Sparse files",
+    "difficulty": "medium",
+    "questionText": "How can a file's logical size exceed the bytes allocated to its data blocks?",
+    "options": [
+      "Directories store all missing bytes as text",
+      "The file has negative-size blocks",
+      "Every extra logical byte must reside in a CPU register",
+      "Unwritten holes can represent zero ranges without allocated data blocks"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Sparse allocation records holes, so logical offsets can exist without storing a physical block for each range."
+  },
+  {
+    "seedKey": "os-files-030",
+    "topic": "File Systems",
+    "subtopic": "Append mode",
+    "difficulty": "medium",
+    "questionText": "What does a correctly implemented atomic append-position selection help prevent?",
+    "options": [
+      "Every crash-related data loss",
+      "Concurrent writers choosing the same old end offset before separate writes",
+      "Any need to check write return values",
+      "Every possible interleaving within arbitrary multi-write records"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Append mode associates each write with the current file end atomically for supported filesystem semantics; record framing still matters."
+  },
+  {
+    "seedKey": "os-files-031",
+    "topic": "File Systems",
+    "subtopic": "Partial writes",
+    "difficulty": "medium",
+    "questionText": "A write requests 1000 bytes but returns 600 without error. What should code needing all bytes do?",
+    "options": [
+      "Continue appropriately with the remaining 400 bytes",
+      "Assume all 1000 were written",
+      "Delete the file immediately",
+      "Resend all 1000 without tracking progress"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Short writes are possible; robust code advances the buffer and retries the unsent portion while handling later errors."
+  },
+  {
+    "seedKey": "os-files-032",
+    "topic": "File Systems",
+    "subtopic": "Durability",
+    "difficulty": "medium",
+    "questionText": "Why is close() alone not a universal guarantee that recent file data survives sudden power loss?",
+    "options": [
+      "Storage devices contain no volatile state",
+      "Buffered writes may still need an explicit persistence operation",
+      "Every close synchronizes every filesystem on the machine",
+      "Closing always erases user data"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Persistence requires the relevant fsync-style operations and storage guarantees, not merely releasing the descriptor."
+  },
+  {
+    "seedKey": "os-files-033",
+    "topic": "File Systems",
+    "subtopic": "Metadata journaling",
+    "difficulty": "medium",
+    "questionText": "What does metadata journaling primarily help recover after a crash?",
+    "options": [
+      "Every application's latest unsaved document by definition",
+      "The exact pre-crash CPU register values",
+      "Filesystem metadata consistency",
+      "Passwords forgotten by users"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "A journal supports coherent metadata updates; application data durability depends on the mode and explicit persistence protocol."
+  },
+  {
+    "seedKey": "os-files-034",
+    "topic": "File Systems",
+    "subtopic": "Write ordering",
+    "difficulty": "medium",
+    "questionText": "Why should data blocks generally be initialized before exposing a new file mapping that references them?",
+    "options": [
+      "To make every write use the same physical block",
+      "Because directories cannot be modified after data writes",
+      "Avoid exposing stale or uninitialized block contents",
+      "To remove the need for ownership checks"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Ordered update protocols prevent reachable metadata from pointing to inappropriate residual data."
+  },
+  {
+    "seedKey": "os-files-035",
+    "topic": "File Systems",
+    "subtopic": "Bitmap size",
+    "difficulty": "medium",
+    "questionText": "A filesystem has 32768 allocation blocks. How many bytes are required for a one-bit-per-block bitmap?",
+    "options": [
+      "4096 bytes",
+      "32768 bytes",
+      "262144 bytes",
+      "1024 bytes"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "32768 bits divided by 8 bits per byte equals 4096 bytes, excluding headers or replication."
+  },
+  {
+    "seedKey": "os-files-036",
+    "topic": "File Systems",
+    "subtopic": "Allocation overhead",
+    "difficulty": "medium",
+    "questionText": "With 4096-byte blocks and 4-byte block pointers, how many pointers fit in one indirect block?",
+    "options": [
+      "16384",
+      "256",
+      "4096",
+      "1024"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "An indirect block holds 4096/4=1024 pointers when all bytes are available for entries."
+  },
+  {
+    "seedKey": "os-files-037",
+    "topic": "File Systems",
+    "subtopic": "Access versus namespace rights",
+    "difficulty": "medium",
+    "questionText": "A user may write a file but lacks write permission on its parent directory. What does this distinction generally imply?",
+    "options": [
+      "The user can always rename every neighboring entry",
+      "Content modification may be allowed while deleting its name is not",
+      "The file's contents must be immutable",
+      "Writing the file automatically grants directory ownership"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "File write rights govern data; directory write/search rights govern namespace updates, with additional policy such as sticky bits possible."
+  },
+  {
+    "seedKey": "os-files-038",
+    "topic": "File Systems",
+    "subtopic": "umask",
+    "difficulty": "medium",
+    "questionText": "For requested permission mode 0666 and umask 0027, what mode results using requested AND NOT umask?",
+    "options": [
+      "0627",
+      "0640",
+      "0600",
+      "0666"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Clearing masked bits removes group write and all other-user rights: 0666 & ~0027 = 0640."
+  },
+  {
+    "seedKey": "os-files-039",
+    "topic": "File Systems",
+    "subtopic": "Directory lookup",
+    "difficulty": "medium",
+    "questionText": "Why can directory indexing help a directory containing many entries?",
+    "options": [
+      "Guarantee all names hash to different values",
+      "Make every file consume one disk sector",
+      "Eliminate all access checks",
+      "Reduce the work needed to locate a named entry"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Hashes or tree indexes avoid an exhaustive linear scan for typical lookups, while collision and consistency handling remain."
+  },
+  {
+    "seedKey": "os-files-040",
+    "topic": "File Systems",
+    "subtopic": "Symbolic-link security",
+    "difficulty": "medium",
+    "questionText": "Why should a privileged program avoid blindly following an attacker-controlled symbolic link while creating a sensitive file?",
+    "options": [
+      "Following a link cannot change path resolution",
+      "Symbolic links always contain encrypted data",
+      "A link's name proves its target owner",
+      "The path may resolve to an unintended protected target"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Secure path-resolution and handle-based operations are needed to avoid redirecting privileged file operations."
+  },
+  {
+    "seedKey": "os-files-041",
+    "topic": "File Systems",
+    "subtopic": "Disk-space accounting",
+    "difficulty": "medium",
+    "questionText": "Ten small files each use one 4 KiB data block. Ignoring metadata, how much block space do they allocate?",
+    "options": [
+      "10 KiB",
+      "4 KiB",
+      "400 KiB",
+      "40 KiB"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Each independent file consumes one block under these assumptions: 10×4=40 KiB."
+  },
+  {
+    "seedKey": "os-files-042",
+    "topic": "File Systems",
+    "subtopic": "Indirect capacity",
+    "difficulty": "hard",
+    "questionText": "An inode has 12 direct pointers and one single-indirect pointer. Blocks are 4 KiB and pointers 4 bytes. Ignoring other limits, how many data blocks can these address?",
+    "options": [
+      "13",
+      "1036",
+      "1040",
+      "1024"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "The single-indirect block holds 4096/4=1024 pointers; adding 12 direct pointers yields 1036 data blocks."
+  },
+  {
+    "seedKey": "os-files-043",
+    "topic": "File Systems",
+    "subtopic": "Double-indirect reach",
+    "difficulty": "hard",
+    "questionText": "A double-indirect pointer uses 4 KiB pointer blocks and 4-byte pointers. How many data blocks can that pointer address?",
+    "options": [
+      "2097152",
+      "1048576",
+      "4096",
+      "1024"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Each of two pointer levels fans out to 1024 entries; 1024²=1048576 data blocks, excluding pointer-block overhead."
+  },
+  {
+    "seedKey": "os-files-044",
+    "topic": "File Systems",
+    "subtopic": "Crash-safe replacement",
+    "difficulty": "hard",
+    "questionText": "For a local filesystem with suitable guarantees, why might a durable replace protocol write and fsync a temporary file, rename it, then fsync the parent directory?",
+    "options": [
+      "Because fsync on a file always persists every directory change",
+      "To prevent all future edits to the file",
+      "Because rename always copies the complete file contents",
+      "Persist both the new contents and the namespace update"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "File sync covers content; directory sync makes the changed name association durable, subject to filesystem and device guarantees."
+  },
+  {
+    "seedKey": "os-files-045",
+    "topic": "File Systems",
+    "subtopic": "Journaling commit",
+    "difficulty": "hard",
+    "questionText": "Why should recovery not replay an incomplete journal transaction as if it were committed?",
+    "options": [
+      "Incomplete transactions necessarily contain no metadata",
+      "Replay automatically invents missing writes",
+      "It could expose only part of a logically related metadata update",
+      "Every journal entry is independently an entire filesystem"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Commit records and ordering distinguish completed atomic update groups from interrupted partial records."
+  },
+  {
+    "seedKey": "os-files-046",
+    "topic": "File Systems",
+    "subtopic": "Copy-on-write filesystems",
+    "difficulty": "hard",
+    "questionText": "Why must a copy-on-write tree update preserve a path of new metadata before publishing its new root?",
+    "options": [
+      "New blocks contain no references",
+      "Root publication automatically fixes all partially initialized descendants",
+      "The old tree must be modified in place before every read",
+      "Readers of the old root must still see a coherent old tree"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Constructing a coherent new path before root switch provides a consistent transition while preserving referenced old versions."
+  },
+  {
+    "seedKey": "os-files-047",
+    "topic": "File Systems",
+    "subtopic": "Hard links and offsets",
+    "difficulty": "hard",
+    "questionText": "Two separate open() calls access the same inode. Must their sequential offsets be shared?",
+    "options": [
+      "No; regular files never use offsets",
+      "Yes; an inode has exactly one global offset",
+      "Yes; all descriptors in the machine share one offset",
+      "No; separate open file descriptions normally have independent offsets"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Object identity and open-description identity differ; separate opens normally track separate positions, unlike dup or inherited shared descriptions."
+  },
+  {
+    "seedKey": "os-files-048",
+    "topic": "File Systems",
+    "subtopic": "Metadata I/O count",
+    "difficulty": "hard",
+    "questionText": "For a single-indirect data access with no relevant caches, assume the inode is already in RAM. How many disk-block reads locate and read the target data?",
+    "options": [
+      "1024",
+      "2",
+      "1",
+      "3"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "One read obtains the indirect pointer block and another reads the selected data block; inode and directory reads are excluded by assumption."
+  },
+  {
+    "seedKey": "os-files-049",
+    "topic": "File Systems",
+    "subtopic": "Deletion and snapshots",
+    "difficulty": "hard",
+    "questionText": "Why might deleting a file fail to immediately free all its physical blocks in a snapshotting filesystem?",
+    "options": [
+      "A snapshot may still reference those blocks",
+      "All deleted data is automatically overwritten before unlink returns",
+      "Snapshots contain only file names and no references",
+      "Deletion necessarily allocates a new full copy"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Reference-aware reclamation retains blocks needed by surviving snapshots or clones."
+  },
+  {
+    "seedKey": "os-files-050",
+    "topic": "File Systems",
+    "subtopic": "End-to-end integrity",
+    "difficulty": "hard",
+    "questionText": "Why is a filesystem checksum insufficient by itself to guarantee recovery of corrupted data?",
+    "options": [
+      "Detection does not provide a correct replacement copy",
+      "All checksum algorithms encode every original bit redundantly",
+      "A checksum is always larger than its file",
+      "Checksums prevent every hardware fault"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Recovery needs redundancy, backups or another source of valid data; integrity detection alone cannot reconstruct arbitrary damage."
+  }
+]

@@ -1,0 +1,677 @@
+[
+  {
+    "seedKey": "os-io-006",
+    "topic": "I/O Management",
+    "subtopic": "Device drivers",
+    "difficulty": "easy",
+    "questionText": "What is a device driver's main role?",
+    "options": [
+      "Compile all user programs",
+      "Store the complete directory tree in CPU registers",
+      "Choose every application's password",
+      "Translate OS I/O requests into device-specific operations"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Drivers bridge generic operating-system interfaces and particular device hardware or protocols."
+  },
+  {
+    "seedKey": "os-io-007",
+    "topic": "I/O Management",
+    "subtopic": "Controllers",
+    "difficulty": "easy",
+    "questionText": "What does a device controller typically provide?",
+    "options": [
+      "Hardware registers or interfaces for commands, status and transfers",
+      "Only high-level application menus",
+      "A separate user account for each byte",
+      "The filesystem's entire naming policy"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "The CPU and driver communicate with the controller through a defined device interface."
+  },
+  {
+    "seedKey": "os-io-008",
+    "topic": "I/O Management",
+    "subtopic": "Interrupt-driven I/O",
+    "difficulty": "easy",
+    "questionText": "What can the CPU do while waiting for an interrupt-driven I/O request to finish?",
+    "options": [
+      "Necessarily poll the device continuously",
+      "Stop every process for the whole transfer",
+      "Assume completion before receiving any status",
+      "Execute other runnable work"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Completion interrupts avoid requiring the CPU to spend the entire wait actively checking the device."
+  },
+  {
+    "seedKey": "os-io-009",
+    "topic": "I/O Management",
+    "subtopic": "Buffering",
+    "difficulty": "easy",
+    "questionText": "Why use a memory buffer during I/O?",
+    "options": [
+      "Accommodate differences in transfer rate, size or timing",
+      "Eliminate all data copies in every design",
+      "Remove the need for error checking",
+      "Make every device infinitely fast"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Buffers decouple producers and consumers that operate at different rates or in different units."
+  },
+  {
+    "seedKey": "os-io-010",
+    "topic": "I/O Management",
+    "subtopic": "Block devices",
+    "difficulty": "easy",
+    "questionText": "Which operation is characteristic of a block device interface?",
+    "options": [
+      "Always execute a shell command per byte",
+      "Read or write addressed fixed-size storage blocks",
+      "Assign process priorities",
+      "Only consume an unaddressed stream of keypresses"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Block interfaces support addressable transfer units such as logical blocks on storage devices."
+  },
+  {
+    "seedKey": "os-io-011",
+    "topic": "I/O Management",
+    "subtopic": "Character devices",
+    "difficulty": "easy",
+    "questionText": "Which device is commonly exposed using a stream-oriented character interface?",
+    "options": [
+      "A terminal",
+      "A CPU page table",
+      "A virtual-memory frame allocator",
+      "A filesystem block bitmap itself"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Character interfaces commonly present streams rather than randomly addressed storage blocks."
+  },
+  {
+    "seedKey": "os-io-012",
+    "topic": "I/O Management",
+    "subtopic": "Device independence",
+    "difficulty": "easy",
+    "questionText": "Why provide a uniform OS read/write interface across many devices?",
+    "options": [
+      "All devices must use the same speed",
+      "No device driver is needed anymore",
+      "Applications need less device-specific control code",
+      "Every device then has identical physical behavior"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "A common interface abstracts differences while drivers handle hardware-specific details and limitations."
+  },
+  {
+    "seedKey": "os-io-013",
+    "topic": "I/O Management",
+    "subtopic": "Completion status",
+    "difficulty": "easy",
+    "questionText": "Why should a program check the result of an I/O operation?",
+    "options": [
+      "The operation may fail or transfer fewer bytes than requested",
+      "The return value is always the user's PID",
+      "Errors necessarily erase every disk",
+      "All I/O calls always succeed fully"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Resource limits, device faults and interruption can lead to errors or partial transfers."
+  },
+  {
+    "seedKey": "os-io-014",
+    "topic": "I/O Management",
+    "subtopic": "Asynchronous I/O",
+    "difficulty": "easy",
+    "questionText": "What distinguishes asynchronous I/O submission from a blocking read?",
+    "options": [
+      "The operation never reports completion",
+      "The data is always ready before submission begins",
+      "The device no longer needs a controller",
+      "Submission can return before the I/O completes"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Completion is reported later through the relevant event, callback or result mechanism."
+  },
+  {
+    "seedKey": "os-io-015",
+    "topic": "I/O Management",
+    "subtopic": "Memory-mapped I/O",
+    "difficulty": "easy",
+    "questionText": "What does memory-mapped I/O make accessible through address-space operations?",
+    "options": [
+      "Only ordinary executable files",
+      "Device control or data registers",
+      "A guarantee of cacheable device accesses",
+      "Every remote user's private memory"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Specific physical address ranges are decoded as device interfaces; access rules may differ from normal RAM."
+  },
+  {
+    "seedKey": "os-io-016",
+    "topic": "I/O Management",
+    "subtopic": "Disk components",
+    "difficulty": "easy",
+    "questionText": "What is rotational latency on a rotating disk?",
+    "options": [
+      "Waiting for a process to authenticate",
+      "Waiting for the target sector to rotate under the head",
+      "Translating a virtual address",
+      "Moving a file into a directory"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "It is distinct from seek time, which moves the head to the appropriate track."
+  },
+  {
+    "seedKey": "os-io-017",
+    "topic": "I/O Management",
+    "subtopic": "SSD behavior",
+    "difficulty": "easy",
+    "questionText": "Which HDD cost is absent from an SSD's normal data access mechanism?",
+    "options": [
+      "Mechanical head seek time",
+      "All transfer time",
+      "All possible queue delay",
+      "All controller processing"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "SSDs have no rotating platter or moving read/write head, although electronic and software latency remain."
+  },
+  {
+    "seedKey": "os-io-018",
+    "topic": "I/O Management",
+    "subtopic": "Transfer time",
+    "difficulty": "medium",
+    "questionText": "At a sustained 100 MB/s, how long does transferring 20 MB take, ignoring all overhead and using decimal units?",
+    "options": [
+      "5 s",
+      "0.2 s",
+      "2 s",
+      "0.02 s"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Time equals data divided by rate: 20/100=0.2 seconds."
+  },
+  {
+    "seedKey": "os-io-019",
+    "topic": "I/O Management",
+    "subtopic": "Rotational latency",
+    "difficulty": "medium",
+    "questionText": "A disk rotates at 7200 RPM. Assuming a uniformly random sector angle, what is average rotational latency?",
+    "options": [
+      "About 8.33 ms",
+      "About 60 ms",
+      "About 4.17 ms",
+      "About 0.417 ms"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "One turn takes 60/7200 seconds=8.33 ms; average waiting is half a rotation, about 4.17 ms."
+  },
+  {
+    "seedKey": "os-io-020",
+    "topic": "I/O Management",
+    "subtopic": "I/O time components",
+    "difficulty": "medium",
+    "questionText": "A request needs 5 ms seek, 3 ms rotational wait and 2 ms transfer, with no queueing. What is total service time?",
+    "options": [
+      "7 ms",
+      "8 ms",
+      "10 ms",
+      "30 ms"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "The specified serial components add: 5+3+2=10 ms."
+  },
+  {
+    "seedKey": "os-io-021",
+    "topic": "I/O Management",
+    "subtopic": "Double buffering",
+    "difficulty": "medium",
+    "questionText": "How can double buffering improve an I/O pipeline?",
+    "options": [
+      "One buffer can be processed while the other is filled",
+      "It guarantees twice the speed in every workload",
+      "It makes both buffers the same physical bytes",
+      "It eliminates synchronization requirements"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Overlap can reduce idle periods if device and CPU work can proceed independently."
+  },
+  {
+    "seedKey": "os-io-022",
+    "topic": "I/O Management",
+    "subtopic": "DMA ownership",
+    "difficulty": "medium",
+    "questionText": "Why must the CPU and a DMA-capable device coordinate buffer lifetime?",
+    "options": [
+      "Freeing memory automatically cancels every hardware transaction",
+      "DMA always completes synchronously at function entry",
+      "A device cannot write memory",
+      "The device may still access the buffer after CPU submission returns"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Reusing or freeing a buffer too early can corrupt memory or expose unrelated data."
+  },
+  {
+    "seedKey": "os-io-023",
+    "topic": "I/O Management",
+    "subtopic": "DMA coherence",
+    "difficulty": "medium",
+    "questionText": "On a non-coherent DMA system, why are cache-maintenance operations sometimes needed?",
+    "options": [
+      "Device memory can never hold application data",
+      "DMA automatically invalidates all caches on every architecture",
+      "CPU caches and device-visible memory may contain different versions",
+      "Caches exist only on disks"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "The driver must follow platform rules so each participant sees the intended data before and after ownership transfer."
+  },
+  {
+    "seedKey": "os-io-024",
+    "topic": "I/O Management",
+    "subtopic": "IOMMU",
+    "difficulty": "medium",
+    "questionText": "What is a major purpose of an IOMMU for device DMA?",
+    "options": [
+      "Translate and restrict device-visible memory addresses",
+      "Increase a disk's mechanical rotation rate",
+      "Store every file's name",
+      "Choose the next user process by priority"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Device address translation and access isolation limit what a DMA-capable device can reach."
+  },
+  {
+    "seedKey": "os-io-025",
+    "topic": "I/O Management",
+    "subtopic": "Interrupt coalescing",
+    "difficulty": "medium",
+    "questionText": "Why might a device combine several completion notifications into fewer interrupts?",
+    "options": [
+      "Remove the need to process completion records",
+      "Make transfer errors impossible",
+      "Reduce per-event CPU overhead at a possible latency cost",
+      "Guarantee zero queueing delay"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Coalescing amortizes interrupt handling but can delay notification of individual completions."
+  },
+  {
+    "seedKey": "os-io-026",
+    "topic": "I/O Management",
+    "subtopic": "Queue depth",
+    "difficulty": "medium",
+    "questionText": "Why can additional outstanding requests improve SSD throughput up to a point?",
+    "options": [
+      "More requests always reduce each request's latency",
+      "Queueing removes all controller overhead",
+      "An SSD has infinitely many independent channels",
+      "They expose device parallelism and hide per-request latency"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Concurrency can utilize internal resources, though excessive depth can increase queueing delay."
+  },
+  {
+    "seedKey": "os-io-027",
+    "topic": "I/O Management",
+    "subtopic": "SSTF fairness",
+    "difficulty": "medium",
+    "questionText": "Why can shortest-seek-time-first starve some HDD requests?",
+    "options": [
+      "The farthest request is always chosen first",
+      "Every request must be served within one seek",
+      "A continuing stream of nearby requests can postpone a far request",
+      "All pending cylinders are identical"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Optimizing immediate seek distance does not itself guarantee bounded waiting."
+  },
+  {
+    "seedKey": "os-io-028",
+    "topic": "I/O Management",
+    "subtopic": "SCAN endpoints",
+    "difficulty": "medium",
+    "questionText": "What distinguishes SCAN from LOOK in classic disk scheduling?",
+    "options": [
+      "SCAN travels to an endpoint; LOOK reverses at the last pending request in that direction",
+      "LOOK always visits both physical endpoints",
+      "SCAN chooses the nearest request regardless of direction",
+      "LOOK serves requests only in arrival order"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Both sweep, but LOOK avoids travel beyond the furthest currently pending request."
+  },
+  {
+    "seedKey": "os-io-029",
+    "topic": "I/O Management",
+    "subtopic": "C-SCAN purpose",
+    "difficulty": "medium",
+    "questionText": "Why can circular SCAN offer more uniform waiting than servicing both directions?",
+    "options": [
+      "It ignores cylinder positions entirely",
+      "Every request is served immediately on arrival",
+      "Requests are served in one sweep direction before wrapping",
+      "The head never moves between requests"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "A single service direction reduces the directional asymmetry of requests waiting near opposite ends."
+  },
+  {
+    "seedKey": "os-io-030",
+    "topic": "I/O Management",
+    "subtopic": "Nonblocking reads",
+    "difficulty": "medium",
+    "questionText": "A nonblocking read has no available data but the stream has not ended. What is an appropriate outcome on UNIX?",
+    "options": [
+      "Permanent deletion of the device",
+      "A false claim that a full buffer was read",
+      "An EAGAIN/EWOULDBLOCK-style error",
+      "Mandatory process termination"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Nonblocking mode avoids sleeping for data; lack of data is distinct from EOF."
+  },
+  {
+    "seedKey": "os-io-031",
+    "topic": "I/O Management",
+    "subtopic": "Readiness notification",
+    "difficulty": "medium",
+    "questionText": "Why must code still handle a would-block result after a readiness notification?",
+    "options": [
+      "The descriptor becomes a regular file automatically",
+      "Another consumer or state change may remove readiness before the operation",
+      "Readiness notifications always contain the full data payload",
+      "Ready means no operation can ever fail"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Readiness is an observation of state, not an irrevocable reservation of data for that caller."
+  },
+  {
+    "seedKey": "os-io-032",
+    "topic": "I/O Management",
+    "subtopic": "Backpressure",
+    "difficulty": "medium",
+    "questionText": "What should a bounded I/O pipeline do when its consumer cannot keep up?",
+    "options": [
+      "Allocate unlimited memory forever",
+      "Apply backpressure or an explicit bounded overflow policy",
+      "Increase the producer's privilege level",
+      "Silently claim all data was consumed"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Bounded queues require controlling production or defining intentional dropping/error behavior under overload."
+  },
+  {
+    "seedKey": "os-io-033",
+    "topic": "I/O Management",
+    "subtopic": "RAID mirroring",
+    "difficulty": "medium",
+    "questionText": "What is the main redundancy property of two-disk RAID 1 with complete mirrored copies?",
+    "options": [
+      "Both disks can fail without data loss guaranteed",
+      "It provides twice the raw usable capacity",
+      "It replaces the need for backups against deletion",
+      "One disk can fail while a surviving copy remains"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Mirroring duplicates data for device-failure tolerance; it does not protect against all logical corruption or mistakes."
+  },
+  {
+    "seedKey": "os-io-034",
+    "topic": "I/O Management",
+    "subtopic": "RAID parity",
+    "difficulty": "medium",
+    "questionText": "Four equal 1 TB disks form RAID 5. Ignoring metadata and using decimal capacity, what usable capacity is typical?",
+    "options": [
+      "1 TB",
+      "3 TB",
+      "2 TB",
+      "4 TB"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Distributed single-parity protection uses capacity equivalent to one disk, leaving (4-1)×1=3 TB."
+  },
+  {
+    "seedKey": "os-io-035",
+    "topic": "I/O Management",
+    "subtopic": "Queueing relation",
+    "difficulty": "medium",
+    "questionText": "A stable I/O system averages 200 requests/s and 0.01 s total time per request. By Little's law, what is average requests in the system?",
+    "options": [
+      "20000",
+      "0.02",
+      "20",
+      "2"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "L=λW=200×0.01=2 requests, including both waiting and service under the stated system boundary."
+  },
+  {
+    "seedKey": "os-io-036",
+    "topic": "I/O Management",
+    "subtopic": "Throughput versus latency",
+    "difficulty": "medium",
+    "questionText": "Why can batching improve throughput yet worsen individual request latency?",
+    "options": [
+      "A batch makes each device physically faster by definition",
+      "Throughput and latency are mathematically identical",
+      "Batches eliminate every per-request delay",
+      "Batch formation and shared processing amortize overhead but add waiting"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Per-batch work can be cheaper per request while early arrivals wait for the batch or its scheduled processing."
+  },
+  {
+    "seedKey": "os-io-037",
+    "topic": "I/O Management",
+    "subtopic": "Block merging",
+    "difficulty": "medium",
+    "questionText": "Why might an I/O scheduler merge adjacent storage requests?",
+    "options": [
+      "Guarantee no storage request ever fails",
+      "Make nonadjacent blocks physically identical",
+      "Reduce command overhead and exploit sequential transfer efficiency",
+      "Remove the need to complete each caller's request"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Merging can reduce setup cost, but completion and error accounting must still preserve each request's semantics."
+  },
+  {
+    "seedKey": "os-io-038",
+    "topic": "I/O Management",
+    "subtopic": "Cancellation races",
+    "difficulty": "medium",
+    "questionText": "Why can canceling asynchronous I/O require waiting for a cancellation/completion result before reusing its buffer?",
+    "options": [
+      "The operation may already be executing or completing",
+      "Buffer ownership is unrelated to I/O lifetime",
+      "The device must be idle whenever the API returns",
+      "Cancellation always rolls back device writes instantly"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Cancellation is often a request, not immediate proof that all device accesses have stopped."
+  },
+  {
+    "seedKey": "os-io-039",
+    "topic": "I/O Management",
+    "subtopic": "Device errors",
+    "difficulty": "medium",
+    "questionText": "A read fails a checksum check. Why should the driver not simply return the corrupted bytes as a successful read?",
+    "options": [
+      "Every checksum mismatch is harmless",
+      "Applications cannot observe read results",
+      "Checksums only affect file names",
+      "Callers need a reliable error/recovery signal rather than silently invalid data"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Integrity failures should follow the device and OS error-handling protocol, which may include retries or recovery."
+  },
+  {
+    "seedKey": "os-io-040",
+    "topic": "I/O Management",
+    "subtopic": "Bandwidth bottlenecks",
+    "difficulty": "medium",
+    "questionText": "A pipeline has a 400 MB/s device and a 100 MB/s bus carrying all its data. Ignoring overhead, what bounds end-to-end throughput?",
+    "options": [
+      "100 MB/s",
+      "400 MB/s",
+      "500 MB/s",
+      "300 MB/s"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "A serial pipeline cannot exceed its slowest required stage; here the bus limits the rate to 100 MB/s."
+  },
+  {
+    "seedKey": "os-io-041",
+    "topic": "I/O Management",
+    "subtopic": "Scatter-gather DMA",
+    "difficulty": "medium",
+    "questionText": "What does scatter-gather support allow a device to transfer?",
+    "options": [
+      "The CPU's entire register file without permission",
+      "Every file on every mounted filesystem",
+      "Data described by multiple memory-region descriptors",
+      "Only one physically contiguous application buffer in every case"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "A descriptor list identifies multiple regions, reducing the need to coalesce them into one contiguous buffer."
+  },
+  {
+    "seedKey": "os-io-042",
+    "topic": "I/O Management",
+    "subtopic": "LOOK trace",
+    "difficulty": "hard",
+    "questionText": "The head starts at cylinder 50 moving upward. Pending requests are 10,40,60,90. Under LOOK, with no new arrivals, what total movement serves all requests?",
+    "options": [
+      "80 cylinders",
+      "120 cylinders",
+      "140 cylinders",
+      "180 cylinders"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "The path is 50→60→90→40→10: movement 10+30+50+30=120. LOOK reverses at 90, not the physical endpoint."
+  },
+  {
+    "seedKey": "os-io-043",
+    "topic": "I/O Management",
+    "subtopic": "C-LOOK trace",
+    "difficulty": "hard",
+    "questionText": "The head starts at 50 moving upward; requests are 10,40,60,90. Under C-LOOK, counting wrap movement, what total movement serves all requests?",
+    "options": [
+      "150 cylinders",
+      "200 cylinders",
+      "120 cylinders",
+      "80 cylinders"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Service path is 50→60→90→10→40. Including wrap gives 10+30+80+30=150 cylinders."
+  },
+  {
+    "seedKey": "os-io-044",
+    "topic": "I/O Management",
+    "subtopic": "SCAN trace",
+    "difficulty": "hard",
+    "questionText": "Cylinders are 0–199. Head starts at 50 moving upward; requests are 10,40,60,90. SCAN reaches 199 before reversing and stops once all requests finish. What movement occurs?",
+    "options": [
+      "388 cylinders",
+      "338 cylinders",
+      "120 cylinders",
+      "298 cylinders"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "The head travels 199-50=149 cylinders upward, then 199-10=189 to the last request, totaling 338."
+  },
+  {
+    "seedKey": "os-io-045",
+    "topic": "I/O Management",
+    "subtopic": "Buffer overlap",
+    "difficulty": "hard",
+    "questionText": "A pipeline transfers each chunk in 5 ms and processes it in 8 ms. With perfect two-stage overlap after startup, what steady-state chunk interval is possible?",
+    "options": [
+      "3 ms",
+      "5 ms",
+      "8 ms",
+      "13 ms"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "The slower stage limits steady-state throughput, so the interval is max(5,8)=8 ms; initial fill/drain costs still apply."
+  },
+  {
+    "seedKey": "os-io-046",
+    "topic": "I/O Management",
+    "subtopic": "Interrupt budget",
+    "difficulty": "hard",
+    "questionText": "An adapter completes 12000 requests/s. One interrupt per request costs 5 microseconds. If groups of 6 use one interrupt of the same cost, what CPU time per second is saved?",
+    "options": [
+      "5 ms",
+      "50 ms",
+      "60 ms",
+      "10 ms"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Without batching: 12000×5=60000 microseconds. With groups: 2000×5=10000. Savings are 50000 microseconds=50 ms per second."
+  },
+  {
+    "seedKey": "os-io-047",
+    "topic": "I/O Management",
+    "subtopic": "Parity write overhead",
+    "difficulty": "hard",
+    "questionText": "In a classic small RAID-5 read-modify-write update of one data block, which four block operations are commonly needed?",
+    "options": [
+      "Write four complete mirrored copies of all data",
+      "Read old data and parity, then write new data and parity",
+      "Read only the new data four times",
+      "Read four directory names"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Updating parity from the data difference typically requires two old-block reads and two new-block writes, absent cache or full-stripe optimizations."
+  },
+  {
+    "seedKey": "os-io-048",
+    "topic": "I/O Management",
+    "subtopic": "Flush semantics",
+    "difficulty": "hard",
+    "questionText": "Why may a storage flush or force-unit-access command matter after the OS submits a write?",
+    "options": [
+      "All write caches are permanently powered by definition",
+      "A device may acknowledge data held only in volatile write-back cache",
+      "Flushing changes the file's owner",
+      "Device acknowledgment always proves physical durability"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Durability requires commands and hardware that honor persistence semantics through relevant caches."
+  },
+  {
+    "seedKey": "os-io-049",
+    "topic": "I/O Management",
+    "subtopic": "Driver teardown",
+    "difficulty": "hard",
+    "questionText": "Why must a driver quiesce DMA and synchronize pending completions before freeing its queues?",
+    "options": [
+      "Freeing a queue automatically resets every bus master",
+      "Queues contain no addresses",
+      "Interrupt handlers cannot overlap device removal",
+      "Otherwise hardware or callbacks can access freed memory"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Teardown must end asynchronous access before releasing memory and objects used by those accesses."
+  },
+  {
+    "seedKey": "os-io-050",
+    "topic": "I/O Management",
+    "subtopic": "Rate-limited service",
+    "difficulty": "hard",
+    "questionText": "A device can finish one request every 2 ms. Requests arrive steadily at 600/s. Ignoring drops, can its queue remain stable indefinitely?",
+    "options": [
+      "No; capacity is only 2/s",
+      "Yes; any finite arrival rate is stable",
+      "Yes; CPU priority removes device service time",
+      "No; capacity is 500/s, below arrival rate"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "The maximum service rate is 1000/2=500 requests/s. Arrivals exceed capacity by 100/s, so backlog grows without additional control or capacity."
+  }
+]

@@ -28,10 +28,10 @@ export default function Auth({ onAuthenticated }) {
     }
   }
   const field = (name, label, type = "text", extra = {}) => (
-    <label className="block text-sm" key={name}>
+    <label className="block text-base" key={name}>
       {label}
       <input
-        className="mt-1 block w-full rounded border border-slate-300 p-2"
+        className="field mt-2"
         required
         name={name}
         type={type}
@@ -40,7 +40,7 @@ export default function Auth({ onAuthenticated }) {
     </label>
   );
   return (
-    <section className="mx-auto max-w-md rounded-lg border bg-white p-6">
+    <section className="panel mx-auto max-w-md">
       <h1 className="text-2xl font-semibold">
         {register ? "Create your account" : "Welcome back"}
       </h1>
@@ -71,25 +71,22 @@ export default function Auth({ onAuthenticated }) {
           )}
         <button
           type="button"
-          className="text-sm underline"
+          className="text-base underline"
           onClick={() => setShow(!show)}
         >
           {show ? "Hide" : "Show"} passwords
         </button>
         {register && (
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-muted">
             Use 12–128 characters. Password spaces are preserved.
           </p>
         )}
         {error && (
-          <p role="alert" className="text-sm text-rose-700">
+          <p role="alert" className="text-base text-danger">
             {error}
           </p>
         )}
-        <button
-          disabled={busy}
-          className="block w-full rounded bg-slate-900 p-3 text-white disabled:opacity-50"
-        >
+        <button disabled={busy} className="btn-primary block w-full">
           {busy ? "Please wait…" : register ? "Register" : "Log in"}
         </button>
       </form>
@@ -99,7 +96,7 @@ export default function Auth({ onAuthenticated }) {
           setRegister(!register);
           setError("");
         }}
-        className="mt-4 text-sm underline"
+        className="mt-4 text-base underline"
       >
         {register ? "Already registered? Log in" : "Create an account"}
       </button>

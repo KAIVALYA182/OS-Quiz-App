@@ -1,6 +1,6 @@
 // backend/data/questions.js
-// The question bank: 10 topics x 5 questions. This is the file to edit when
-// you want to add or change questions; `npm run seed` loads it into Supabase.
+// The question bank: 10 topics x 50 questions. This is the file to edit when
+// you want to add questions; seeding inserts missing records without overwriting database edits.
 //
 // Each question:
 //   questionText         the question
@@ -665,3 +665,21 @@ module.exports = [
     ],
   },
 ];
+
+// Static, authored expansion. Original records above and their keys remain unchanged.
+const additions = [
+  ...require('./expanded/01-basics.json'),
+  ...require('./expanded/02-processes.json'),
+  ...require('./expanded/03-scheduling.json'),
+  ...require('./expanded/04-concurrency.json'),
+  ...require('./expanded/05-deadlocks.json'),
+  ...require('./expanded/06-memory.json'),
+  ...require('./expanded/07-virtual-memory.json'),
+  ...require('./expanded/08-files.json'),
+  ...require('./expanded/09-io.json'),
+  ...require('./expanded/10-security.json'),
+];
+module.exports = module.exports.map(group => ({
+  ...group,
+  questions: [...group.questions, ...additions.filter(q => q.topic === group.topic)],
+}));

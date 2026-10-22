@@ -41,8 +41,9 @@ test("isolated PostgreSQL integration", { timeout: 180000 }, async (t) => {
     delete process.env.TRUST_PROXY_HOPS;
     pool = require("../config/db").pool;
     const { migrate } = require("../scripts/migrate");
-    const { seed } = require("../scripts/seed");
-    const bank = require("../data/questions");
+    const { seed: seedBank } = require("../scripts/seed");
+    const bank = structuredClone(require("./fixtures/original-bank.json"));
+    const seed = (db = pool) => seedBank(db, bank);
     const schema = fs.readFileSync(
       path.join(__dirname, "../db/schema.sql"),
       "utf8",
@@ -377,6 +378,7 @@ test("isolated PostgreSQL integration", { timeout: 180000 }, async (t) => {
           "/api/learning",
           "/api/leaderboard/invalid",
           "/api/results/invalid",
+          "/api/attempts/invalid",
         ])
           assert.equal((await anonymous.get(url)).status, 401, url);
         assert.equal(
@@ -757,6 +759,14 @@ test("isolated PostgreSQL integration", { timeout: 180000 }, async (t) => {
           try {
             const p = await require("../attempts").start(u, null, true);
             assert.equal(p.questions.length, 1);
+            const quizId = (await tiny.query('select id from quizzes')).rows[0].id;
+            await tiny.query('insert into quiz_questions(quiz_id,question_id,position) select $1,id,0 from questions',[quizId]);
+            const small = await require('../attempts').start(u,quizId);
+            assert.equal(small.questions.length,1);
+            assert.equal((await require('../db/queries').listQuizzes())[0].questionCount,1);
+            await tiny.query("insert into quizzes(title,topic) values('Empty','CPU Scheduling')");
+            const emptyId=(await tiny.query("select id from quizzes where title='Empty'")).rows[0].id;
+            await assert.rejects(require('../attempts').start(u,emptyId),e=>e.status===409 && /No questions/.test(e.message));
           } finally {
             pool.connect = original;
             pool.query = query;
@@ -766,6 +776,330 @@ test("isolated PostgreSQL integration", { timeout: 180000 }, async (t) => {
           await c.query("rollback");
           throw e;
         } finally {
+          c.release();
+        }
+      },
+    );
+
+    await t.test(
+      "expansion preserves old IDs, edits, memberships, results, reviews, mock and historical rankings",
+      async () => {
+        const service = require("../attempts");
+        const before = await snapshot();
+        const oldRanks = await service.leaderboard(userA.id, quiz.id, 1);
+        const oldVersion = oldRanks.version;
+        const oldReview = await service.result(userA.id, result.resultId);
+        const mock = (
+          await pool.query("select * from quizzes where seed_key='full-mock'")
+        ).rows[0];
+        await pool.query(
+          "update quizzes set time_limit_minutes=47 where id=$1",
+          [mock.id],
+        );
+        const mockBefore = (
+          await pool.query(
+            "select * from quiz_questions where quiz_id=$1 order by position",
+            [mock.id],
+          )
+        ).rows;
+        const counts = await seedBank(pool, require("../data/questions"));
+        assert.equal(counts.questionsInserted, 450);
+        assert.equal(counts.quizzesInserted, 0);
+        assert.equal(counts.linksInserted, 450);
+        const after = await snapshot();
+        for (const table of ["users", "results", "answers"])
+          assert.deepEqual(after[table], before[table]);
+        for (const q of before.questions)
+          assert.deepEqual(
+            after.questions.find((n) => n.id === q.id),
+            q,
+          );
+        for (const link of before.links)
+          assert.deepEqual(
+            after.links.find(
+              (n) =>
+                n.quiz_id === link.quiz_id &&
+                n.question_id === link.question_id,
+            ),
+            link,
+          );
+        for (const q of before.quizzes) {
+          const found = after.quizzes.find((n) => n.id === q.id);
+          assert.deepEqual(
+            found,
+            q.id === mock.id ? { ...q, time_limit_minutes: 47 } : q,
+          );
+        }
+        assert.deepEqual(
+          (
+            await pool.query(
+              "select * from quiz_questions where quiz_id=$1 order by position",
+              [mock.id],
+            )
+          ).rows,
+          mockBefore,
+        );
+        assert.equal(
+          (
+            await pool.query(
+              "select time_limit_minutes from quizzes where id=$1",
+              [mock.id],
+            )
+          ).rows[0].time_limit_minutes,
+          47,
+        );
+        assert.equal(
+          (await service.loadQuiz(pool, quiz.id)).questions.length,
+          50,
+        );
+        assert.deepEqual(
+          await service.result(userA.id, result.resultId),
+          oldReview,
+        );
+        const current = await service.leaderboard(userA.id, quiz.id, 1);
+        assert.notEqual(current.version, oldVersion);
+        assert.equal(current.total, 0);
+        assert.ok(
+          current.versions.some(
+            (v) =>
+              v.version === oldVersion && v.questionCount === 5 && !v.current,
+          ),
+        );
+        const historical = await service.leaderboard(
+          userA.id,
+          quiz.id,
+          1,
+          oldVersion,
+        );
+        assert.deepEqual(historical.rows, oldRanks.rows);
+        assert.deepEqual(historical.currentUser, oldRanks.currentUser);
+        const viaHttp = await a.get(
+          `/api/leaderboard/${quiz.id}?version=${oldVersion}`,
+        );
+        assert.equal(viaHttp.status, 200);
+        assert.equal(viaHttp.body.total, oldRanks.total);
+        assert.equal(
+          (await a.get(`/api/leaderboard/${quiz.id}?version=bad`)).status,
+          400,
+        );
+        const practice = await service.start(userA.id, null, true);
+        assert.equal(
+          new Set(practice.questions.map((q) => q.id)).size,
+          practice.questions.length,
+        );
+        assert.ok(
+          practice.questions.some(
+            (q) => !before.questions.some((old) => old.id === q.id),
+          ),
+          "Expanded questions are available to personalised practice",
+        );
+        const expandedSnapshot = await snapshot();
+        await Promise.all([seedBank(pool), seedBank(pool)]);
+        assert.deepEqual(await snapshot(), expandedSnapshot);
+      },
+    );
+    await t.test("random topic assignments preserve snapshots, security and ranking cohorts", async (t) => {
+      const service = require("../attempts");
+      const full = await service.loadQuiz(pool, quiz.id);
+      const poolIds = new Set(full.questions.map((q) => q.id));
+      const originalBank = await snapshot();
+      // Simulate an existing pre-change full-pool assignment, including its original version.
+      const oldVersion = service.versionOf(full);
+      const oldId = (await pool.query(
+        "insert into attempts(user_id,quiz_id,attempt_type,version,snapshot) values($1,$2,'standard',$3,$4) returning id",
+        [userA.id, quiz.id, oldVersion, JSON.stringify(full)],
+      )).rows[0].id;
+      const pendingOldId = (await pool.query(
+        "insert into attempts(user_id,quiz_id,attempt_type,version,snapshot) values($1,$2,'standard',$3,$4) returning id",
+        [userA.id, quiz.id, oldVersion, JSON.stringify(full)],
+      )).rows[0].id;
+      const oldResult = await service.submit(userA.id, oldId, [], quiz.id);
+      const historicalRows = (await pool.query(
+        "select to_jsonb(a) as attempt,to_jsonb(r) as result from attempts a join results r on r.attempt_id=a.id where a.id=$1", [oldId],
+      )).rows;
+      let sampled, second, saved, version;
+      await t.test("each start freshly samples 20 distinct pool members; detail hides the pool", async () => {
+        // Deterministic random draws test both branches without probabilistic assertions.
+        const crypto = require("node:crypto"), original = crypto.randomInt;
+        let draws = 0;
+        try {
+          crypto.randomInt = (min, max) => { draws++; return min; };
+          sampled = await service.start(userA.id, quiz.id);
+          crypto.randomInt = (min, max) => { draws++; return max - 1; };
+          second = await service.start(userA.id, quiz.id);
+        } finally { crypto.randomInt = original; }
+        assert.equal(draws, 40);
+        for (const assigned of [sampled, second]) {
+          assert.equal(assigned.questions.length, 20);
+          assert.equal(new Set(assigned.questions.map((q) => q.id)).size, 20);
+          assert.ok(assigned.questions.every((q) => poolIds.has(q.id)));
+          assert.ok(assigned.questions.every((q) => !('correctOptionIndex' in q) && !('explanation' in q)));
+          assert.equal(assigned.selection.poolSize, 50);
+        }
+        assert.notDeepEqual(sampled.questions.map(q=>q.id).sort(), second.questions.map(q=>q.id).sort());
+        const detail = await a.get(`/api/quiz/${quiz.id}`);
+        assert.equal(detail.status, 200);
+        assert.equal(detail.body.questions, undefined);
+        assert.equal(detail.body.questionCount, 20);
+        const cards = (await a.get('/api/quiz')).body;
+        assert.equal(cards.find(q=>q.id===quiz.id).questionCount, 20);
+        assert.equal(cards.find(q=>q.id===quiz.id).poolSize, 50);
+      });
+      await t.test("re-fetching keeps the persisted assignment and order private", async () => {
+        const stored = (await pool.query('select * from attempts where id=$1',[sampled.attemptId])).rows[0];
+        version = stored.version;
+        assert.deepEqual(stored.snapshot.questions.map(q=>q.id),sampled.questions.map(q=>q.id));
+        for (let i=0;i<3;i++) {
+          const r = await a.get(`/api/attempts/${sampled.attemptId}`);
+          assert.equal(r.status,200);
+          assert.deepEqual(r.body,sampled);
+        }
+        assert.deepEqual(await service.getAttempt(userA.id,sampled.attemptId),sampled);
+        assert.equal((await b.get(`/api/attempts/${sampled.attemptId}`)).status,404);
+        assert.equal((await a.get('/api/attempts/not-a-uuid')).status,404);
+        assert.equal((await anonymous.get(`/api/attempts/${sampled.attemptId}`)).status,401);
+        // Repeated service reads use the persisted JSON, not fresh random draws.
+        assert.deepEqual((await service.getAttempt(userA.id,sampled.attemptId)).questions,sampled.questions);
+      });
+      await t.test("foreign attempts, unselected pool questions and duplicate IDs are rejected",async()=>{
+        const send = (agent,token,payload)=>agent.post(`/api/quiz/${quiz.id}/submit`).set('X-CSRF-Token',token).send(payload);
+        assert.equal((await send(b,tokenB,{attemptId:sampled.attemptId,answers:[]})).status,404);
+        const outside = full.questions.find(q=>!sampled.questions.some(s=>s.id===q.id));
+        assert.equal((await send(a,tokenA,{attemptId:sampled.attemptId,answers:[{questionId:outside.id,selectedOptionIndex:0}]})).status,400);
+        const duplicate={questionId:sampled.questions[0].id,selectedOptionIndex:0};
+        assert.equal((await send(a,tokenA,{attemptId:sampled.attemptId,answers:[duplicate,duplicate]})).status,400);
+        assert.equal((await send(a,tokenA,{attemptId:'00000000-0000-4000-8000-000000000000',answers:[]})).status,404);
+        assert.equal((await pool.query('select count(*)::int as n from results where attempt_id=$1',[sampled.attemptId])).rows[0].n,0);
+      });
+      await t.test("scores, unanswered reviews and learning use only the selected 20; retries are safe",async()=>{
+        const beforeProgress=await service.progress(userA.id);
+        const beforeLearning=await service.learning(userA.id);
+        const one=full.questions.find(q=>q.id===sampled.questions[0].id);
+        const payload={attemptId:sampled.attemptId,answers:[{questionId:one.id,selectedOptionIndex:one.correctOptionIndex}],userId:userB.id,scorePercentage:100,attemptType:'practice',timeTakenSeconds:0};
+        const send=()=>a.post(`/api/quiz/${quiz.id}/submit`).set('X-CSRF-Token',tokenA).send(payload);
+        const replies=await Promise.all([send(),send()]);
+        assert.ok(replies.every(r=>r.status===200));
+        assert.deepEqual(replies[0].body,replies[1].body);
+        saved=replies[0].body;
+        assert.equal(saved.totalQuestions,20);
+        assert.equal(saved.correctCount,1);
+        assert.equal(saved.scorePercentage,5);
+        assert.equal(saved.attemptType,'standard');
+        assert.equal(saved.review.length,20);
+        assert.equal(saved.review.filter(q=>q.selectedOptionIndex===-1).length,19);
+        assert.deepEqual(saved.review.map(q=>q.questionId),sampled.questions.map(q=>q.id));
+        assert.deepEqual(await service.result(userA.id,saved.resultId),saved);
+        assert.equal((await b.get('/api/results/'+saved.resultId)).status,404);
+        const afterProgress=await service.progress(userA.id);
+        assert.equal(afterProgress.summary.total,beforeProgress.summary.total+1);
+        assert.equal(afterProgress.history.find(r=>r.id===saved.resultId).total,20);
+        const afterLearning=await service.learning(userA.id);
+        assert.equal(afterLearning.reduce((s,t)=>s+t.answered,0)-beforeLearning.reduce((s,t)=>s+t.answered,0),20);
+        for(const t of afterLearning) {
+          const old=beforeLearning.find(b=>b.topic===t.topic);
+          const questions=sampled.questions.filter(q=>q.topic===t.topic);
+          assert.equal(t.answered-old.answered,questions.length);
+        }
+        assert.equal((await pool.query('select count(*)::int as n from results where attempt_id=$1',[sampled.attemptId])).rows[0].n,1);
+        assert.equal((await pool.query('select count(*)::int as n from result_answers where result_id=$1',[saved.resultId])).rows[0].n,20);
+      });
+      await t.test("different random selections and legacy full-pool rankings never mix",async()=>{
+        await service.submit(userA.id,second.attemptId,[],quiz.id);
+        const board=await service.leaderboard(userA.id,quiz.id,1,version);
+        assert.equal(board.total,1);
+        assert.equal(board.currentUser.score,5);
+        const secondVersion=(await pool.query('select version from attempts where id=$1',[second.attemptId])).rows[0].version;
+        assert.notEqual(version,secondVersion);
+        const other=await service.leaderboard(userA.id,quiz.id,1,secondVersion);
+        assert.equal(other.currentUser.score,0);
+        assert.equal((await service.leaderboard(userA.id,quiz.id,1)).version,secondVersion);
+        const old=await service.leaderboard(userA.id,quiz.id,1,oldVersion);
+        assert.equal(old.versions.find(v=>v.version===oldVersion).questionCount,50);
+        assert.equal(old.currentUser.score,0);
+        assert.equal(board.versions.find(v=>v.version===version).questionCount,20);
+      });
+      await t.test("full mock memberships, order and timing and personalised practice are unchanged",async()=>{
+        const mockId=(await pool.query("select id from quizzes where seed_key='full-mock'")).rows[0].id;
+        const mockPool=await service.loadQuiz(pool,mockId);
+        const mock=await service.start(userA.id,mockId);
+        assert.equal(mock.questions.length,50);
+        assert.deepEqual(mock.questions.map(q=>q.id),mockPool.questions.map(q=>q.id));
+        assert.equal(mock.timeLimitMinutes,mockPool.timeLimitMinutes);
+        assert.equal(mock.isTimed,true);
+        assert.equal(mock.selection,undefined);
+        assert.equal((await service.submit(userA.id,mock.attemptId,[],mockId)).totalQuestions,50);
+        const practice=await service.start(userA.id,null,true);
+        assert.equal(practice.questions.length,10);
+        assert.equal(practice.attemptType,'practice');
+        assert.equal(practice.selection,undefined);
+      });
+      await t.test("historical assignments, results and reviews and the database pool are untouched",async()=>{
+        assert.deepEqual(await service.result(userA.id,oldResult.resultId),oldResult);
+        assert.deepEqual((await pool.query(
+          "select to_jsonb(a) as attempt,to_jsonb(r) as result from attempts a join results r on r.attempt_id=a.id where a.id=$1",[oldId],
+        )).rows,historicalRows);
+        const pendingResult = await service.submit(userA.id,pendingOldId,[],quiz.id);
+        assert.equal(pendingResult.totalQuestions,50);
+        assert.equal(pendingResult.review.length,50);
+        const after=await snapshot();
+        for(const table of ['questions','quizzes','links']) assert.deepEqual(after[table],originalBank[table]);
+      });
+    });
+    await t.test(
+      "fresh expanded installs have 50 per topic and a balanced 50-question, 50-minute mock",
+      async () => {
+        const c = await pool.connect();
+        let fresh;
+        try {
+          await c.query("begin");
+          await c.query("create schema expanded_fresh");
+          await c.query("set local search_path=expanded_fresh,public");
+          await c.query(schema);
+          await c.query("commit");
+          fresh = new Pool({
+            connectionString: process.env.DATABASE_URL,
+            options: "-c search_path=expanded_fresh,public",
+          });
+          const inserted = await seedBank(fresh);
+          assert.equal(inserted.questionsInserted, 500);
+          assert.equal(inserted.linksInserted, 550);
+          const topics = (
+            await fresh.query(
+              "select topic,count(*)::int as count from questions group by topic",
+            )
+          ).rows;
+          assert.equal(topics.length, 10);
+          assert.ok(topics.every((t) => t.count === 50));
+          const mock = (
+            await fresh.query(
+              "select z.*,count(l.question_id)::int as count from quizzes z join quiz_questions l on l.quiz_id=z.id where seed_key='full-mock' group by z.id",
+            )
+          ).rows[0];
+          assert.equal(mock.count, 50);
+          assert.equal(mock.is_timed, true);
+          assert.equal(mock.time_limit_minutes, 50);
+          const mix = (
+            await fresh.query(
+              "select q.topic,count(*)::int as count from quiz_questions l join questions q on q.id=l.question_id where l.quiz_id=$1 group by q.topic",
+              [mock.id],
+            )
+          ).rows;
+          assert.equal(mix.length, 10);
+          assert.ok(mix.every((t) => t.count === 5));
+          await seedBank(fresh);
+          assert.equal(
+            (
+              await fresh.query(
+                "select count(*)::int as count from quiz_questions",
+              )
+            ).rows[0].count,
+            550,
+          );
+        } catch (e) {
+          await c.query("rollback");
+          throw e;
+        } finally {
+          if (fresh) await fresh.end();
           c.release();
         }
       },

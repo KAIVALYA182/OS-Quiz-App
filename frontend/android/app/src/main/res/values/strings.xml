@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">OS Quiz</string>
+    <string name="title_activity_main">OS Quiz</string>
+    <string name="package_name">com.kaivalya.osquiz</string>
+    <string name="custom_url_scheme">com.kaivalya.osquiz</string>
+</resources>

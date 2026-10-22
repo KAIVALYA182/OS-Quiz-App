@@ -1,9 +1,12 @@
+import { StrictMode } from "react";
 import { beforeEach, describe, it, expect, vi } from "vitest";
 import { render, screen, waitFor, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "../App";
 import Auth from "../components/Auth";
 import QuizAttempt from "../components/QuizAttempt";
+import QuizList from "../components/QuizList";
+import ScoreFeedback from "../components/ScoreFeedback";
 import { Learning, Leaderboard } from "../components/PersonalPages";
 import { request, clearSessionState } from "../api/client";
 vi.mock("../api/client", () => ({
@@ -213,4 +216,87 @@ it("leaderboard displays the current rank, public rows and empty pagination corr
   expect(await screen.findByText("alice (you)")).toBeTruthy();
   expect(screen.getByText("Your rank: 1 · 80%")).toBeTruthy();
   expect(screen.getByRole("button", { name: "Next →" }).disabled).toBe(true);
+});
+it("preserves access to historical question-set rankings without mixing versions", async () => {
+  const user = userEvent.setup();
+  const current = "a".repeat(64),
+    earlier = "b".repeat(64);
+  request.mockImplementation((path) =>
+    Promise.resolve(
+      path === "/quiz"
+        ? [{ id: "quiz-1", title: "CPU Scheduling" }]
+        : {
+            rows: [
+              {
+                username: path.includes("version=")
+                  ? "earlier_student"
+                  : "current_student",
+                score: 80,
+                rank: 1,
+                isCurrentUser: false,
+              },
+            ],
+            currentUser: null,
+            total: 1,
+            pageSize: 20,
+            version: path.includes("version=") ? earlier : current,
+            versions: [
+              {
+                version: current,
+                title: "CPU Scheduling",
+                questionCount: 50,
+                current: true,
+              },
+              {
+                version: earlier,
+                title: "CPU Scheduling",
+                questionCount: 5,
+                current: false,
+              },
+            ],
+          },
+    ),
+  );
+  render(<Leaderboard />);
+  await screen.findByText("current_student");
+  await user.selectOptions(screen.getByLabelText("Question set"), earlier);
+  expect(await screen.findByText("earlier_student")).toBeTruthy();
+  expect(screen.queryByText("current_student")).toBeNull();
+  expect(
+    request.mock.calls.some(
+      ([path]) => path === `/leaderboard/quiz-1?page=1&version=${earlier}`,
+    ),
+  ).toBe(true);
+});
+
+it("topic cards distinguish the random assignment from its pool and keep mock counts", async () => {
+  request.mockResolvedValue([
+    {id:"topic",topic:"CPU Scheduling",title:"CPU Scheduling",questionCount:20,poolSize:50,selectionMode:"random"},
+    {id:"small",topic:"Deadlocks",title:"Deadlocks",questionCount:3,poolSize:3,selectionMode:"random"},
+    {id:"mock",topic:"Mixed",title:"Full Mock Test",questionCount:50,poolSize:50,isTimed:true,timeLimitMinutes:50},
+  ]);
+  render(<QuizList onStart={vi.fn()} />);
+  expect(await screen.findByText("20 random questions · 50-question pool")).toBeTruthy();
+  expect(screen.getByText("3 random questions · 3-question pool")).toBeTruthy();
+  expect(screen.getByText(/50 questions · 50 minute timer/)).toBeTruthy();
+});
+it("StrictMode and re-renders keep one assignment; navigation and confirmation use 20", async () => {
+  const user=userEvent.setup();
+  const questions=Array.from({length:20},(_,i)=>({id:`q${i}`,topic:"CPU Scheduling",difficulty:"medium",questionText:`Assigned question ${i+1}`,options:["One","Two","Three","Four"]}));
+  request.mockResolvedValue({id:"topic",attemptId:"saved-assignment",title:"Topic quiz",topic:"CPU Scheduling",questions});
+  const finished=vi.fn(), exit=vi.fn();
+  const {rerender}=render(<StrictMode><QuizAttempt quizId="topic" onFinished={finished} onExit={exit}/></StrictMode>);
+  expect(await screen.findByText("Question 1 of 20")).toBeTruthy();
+  expect(screen.getByText("0/20 answered")).toBeTruthy();
+  expect(screen.getAllByRole("button",{name:/Question \d+, not answered/})).toHaveLength(20);
+  rerender(<StrictMode><QuizAttempt quizId="topic" onFinished={finished} onExit={exit}/></StrictMode>);
+  await user.click(screen.getByRole("button",{name:"Question 20, not answered"}));
+  expect(screen.getByText("Question 20 of 20")).toBeTruthy();
+  await user.click(screen.getByRole("button",{name:"Submit quiz"}));
+  expect(screen.getByRole("alertdialog").textContent).toContain("20 unanswered questions");
+  expect(request.mock.calls.filter(([path])=>path.endsWith('/start'))).toHaveLength(1);
+});
+it("results display the saved assignment size rather than the pool size", () => {
+  render(<ScoreFeedback result={{correctCount:7,totalQuestions:20,scorePercentage:35,feedbackMessage:"Keep practising",topicBreakdown:[]}}/>);
+  expect(screen.getByText("7 of 20 correct")).toBeTruthy();
 });

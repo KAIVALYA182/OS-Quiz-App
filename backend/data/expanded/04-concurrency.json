@@ -1,0 +1,677 @@
+[
+  {
+    "seedKey": "os-concurrency-006",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Critical sections",
+    "difficulty": "easy",
+    "questionText": "What is a critical section?",
+    "options": [
+      "Every instruction in a private local calculation",
+      "Any function longer than one page",
+      "Only a program's final return statement",
+      "Code accessing shared state that needs coordinated access"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Critical sections protect shared operations whose overlapping execution could violate an invariant."
+  },
+  {
+    "seedKey": "os-concurrency-007",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Mutex ownership",
+    "difficulty": "easy",
+    "questionText": "What is the typical purpose of a mutex?",
+    "options": [
+      "Translate virtual addresses",
+      "Allow one owner at a time into a protected section",
+      "Create a new process every time it locks",
+      "Store file data permanently"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "A mutex provides mutual exclusion around shared resources or state."
+  },
+  {
+    "seedKey": "os-concurrency-008",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Atomicity",
+    "difficulty": "easy",
+    "questionText": "What does it mean for an operation to be atomic relative to other participating operations?",
+    "options": [
+      "It appears indivisible to them",
+      "It needs no CPU instructions",
+      "It always takes one nanosecond",
+      "It automatically writes to disk"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Atomicity is an indivisibility guarantee, not a claim about duration or persistence."
+  },
+  {
+    "seedKey": "os-concurrency-009",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Spinlocks",
+    "difficulty": "easy",
+    "questionText": "What does a thread do while waiting on a simple spinlock?",
+    "options": [
+      "Repeatedly checks or attempts the lock",
+      "Deletes the protected object",
+      "Reboots the processor",
+      "Necessarily sleeps in the kernel"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "A spinlock uses active waiting; this can be appropriate for very short waits in suitable contexts."
+  },
+  {
+    "seedKey": "os-concurrency-010",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Condition variables",
+    "difficulty": "easy",
+    "questionText": "What is a condition variable mainly used for?",
+    "options": [
+      "Replacing a thread's stack",
+      "Waiting until shared state may satisfy a predicate",
+      "Automatically remembering an unlimited signal count",
+      "Storing the protected data itself"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Condition variables coordinate waiting for state changes; the predicate is stored in shared state and checked under a lock."
+  },
+  {
+    "seedKey": "os-concurrency-011",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Barrier",
+    "difficulty": "easy",
+    "questionText": "What does a barrier synchronization point require?",
+    "options": [
+      "Participating threads reach a common phase boundary before proceeding",
+      "All processes have the same PID",
+      "Every thread terminate immediately",
+      "Only the first thread may ever continue"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "A barrier coordinates phases of a parallel computation so required participants finish one phase before the next."
+  },
+  {
+    "seedKey": "os-concurrency-012",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Semaphore initialization",
+    "difficulty": "easy",
+    "questionText": "A resource pool has 6 identical available units. What initial counting-semaphore value represents this?",
+    "options": [
+      "6",
+      "12",
+      "0",
+      "1"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "A counting semaphore can represent available units, so an entirely free six-unit pool starts at six."
+  },
+  {
+    "seedKey": "os-concurrency-013",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Producer-consumer roles",
+    "difficulty": "easy",
+    "questionText": "In a queue, what is the producer's role?",
+    "options": [
+      "Collect process exit status",
+      "Translate virtual addresses",
+      "Choose the next disk cylinder",
+      "Add items for a consumer to remove"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Producers generate queued work or data; consumers take it for processing."
+  },
+  {
+    "seedKey": "os-concurrency-014",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Read sharing",
+    "difficulty": "easy",
+    "questionText": "Why can a reader-writer lock permit several readers together?",
+    "options": [
+      "Multiple readers always need exclusive mutation rights",
+      "Readers have no CPU registers",
+      "Read-only participants do not modify the protected state",
+      "Readers automatically receive private copies of every file"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Concurrent reads can coexist, while a writer requires exclusion from conflicting accesses."
+  },
+  {
+    "seedKey": "os-concurrency-015",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Local state",
+    "difficulty": "easy",
+    "questionText": "Which variable is least likely to need inter-thread locking by itself?",
+    "options": [
+      "A mutable global linked list",
+      "A shared bank balance",
+      "A stack-local counter whose address never escapes its thread",
+      "A shared global queue head"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "State accessed by only one thread does not create an inter-thread conflict."
+  },
+  {
+    "seedKey": "os-concurrency-016",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Unlocking",
+    "difficulty": "easy",
+    "questionText": "Why should code release a mutex after finishing the protected work?",
+    "options": [
+      "Unlocking makes all prior calculations disappear",
+      "Other waiting threads need access to the resource",
+      "It changes the process's PID",
+      "A mutex can be used only once"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Retaining ownership blocks other participants and can prevent progress."
+  },
+  {
+    "seedKey": "os-concurrency-017",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Busy waiting cost",
+    "difficulty": "easy",
+    "questionText": "What resource does busy waiting primarily consume while no useful work completes?",
+    "options": [
+      "CPU time",
+      "Printer paper",
+      "Extra disk cylinders",
+      "Additional user accounts"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "A spinning waiter executes instructions instead of doing useful application work or sleeping."
+  },
+  {
+    "seedKey": "os-concurrency-018",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Concurrent execution",
+    "difficulty": "easy",
+    "questionText": "Can threads on a single CPU still have concurrency bugs?",
+    "options": [
+      "Yes; interleaving at preemption points can expose shared-state races",
+      "No; races require two physical CPUs",
+      "Only if the filesystem is full",
+      "No; every source statement is atomic"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Concurrency includes interleaved execution, so shared compound operations can race even without simultaneous CPU execution."
+  },
+  {
+    "seedKey": "os-concurrency-019",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Synchronization goals",
+    "difficulty": "easy",
+    "questionText": "What does a bounded-waiting guarantee limit?",
+    "options": [
+      "The number of arithmetic operations in the OS",
+      "The maximum disk file name length",
+      "The total size of all program files",
+      "How long or how many entries others can make before a requester gets access"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Bounded waiting addresses starvation by limiting indefinite postponement under the stated algorithm's assumptions."
+  },
+  {
+    "seedKey": "os-concurrency-020",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Lost updates",
+    "difficulty": "medium",
+    "questionText": "Two threads each read a shared counter as 0, then each writes its read value plus 1. What final value can result?",
+    "options": [
+      "2 only",
+      "3",
+      "Minus 1",
+      "1"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Both compute 1 from the same old value; the second store overwrites the first increment."
+  },
+  {
+    "seedKey": "os-concurrency-021",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Atomic increment",
+    "difficulty": "medium",
+    "questionText": "Why does a normal x++ on shared memory generally need more reasoning than an atomic increment?",
+    "options": [
+      "It is necessarily a system call",
+      "It cannot modify memory",
+      "It may consist of separate load, compute and store operations",
+      "It always holds a mutex automatically"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Interleaving separate steps can lose updates; an appropriate atomic operation gives a single indivisible modification."
+  },
+  {
+    "seedKey": "os-concurrency-022",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Condition wait",
+    "difficulty": "medium",
+    "questionText": "Why should a condition wait normally appear in a while loop checking its predicate?",
+    "options": [
+      "Every wakeup permanently grants resource ownership",
+      "The mutex must never be reacquired",
+      "Condition variables store the predicate automatically",
+      "Wakeup does not guarantee the predicate is true when the thread resumes"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Spurious wakeups and other threads consuming the condition require rechecking protected state."
+  },
+  {
+    "seedKey": "os-concurrency-023",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Atomic release-and-wait",
+    "difficulty": "medium",
+    "questionText": "Why must a condition wait atomically release its mutex and begin waiting?",
+    "options": [
+      "To copy the whole heap to disk",
+      "To guarantee the process will never be scheduled again",
+      "To avoid a notification being lost between checking and sleeping",
+      "To remove the need for shared predicates"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Atomic release-and-wait closes the race where a signal occurs after the predicate check but before the waiter is registered."
+  },
+  {
+    "seedKey": "os-concurrency-024",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Signal versus permit",
+    "difficulty": "medium",
+    "questionText": "A semaphore is posted before a thread waits, with no intervening wait. How does this differ from a bare condition signal with no waiters?",
+    "options": [
+      "Both necessarily retain one message payload",
+      "The condition signal permanently locks a mutex",
+      "The semaphore loses all counts automatically",
+      "The semaphore retains a permit; the condition signal need not be retained"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Semaphores maintain counts, whereas condition variables notify existing waiters about state stored elsewhere."
+  },
+  {
+    "seedKey": "os-concurrency-025",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Lock granularity",
+    "difficulty": "medium",
+    "questionText": "What is a common tradeoff of fine-grained locking?",
+    "options": [
+      "Elimination of all shared mutable state",
+      "Guaranteed absence of deadlock",
+      "More parallelism but greater lock-management complexity",
+      "No need to define lock order"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "More independent locks reduce unnecessary exclusion but complicate reasoning about interactions and ordering."
+  },
+  {
+    "seedKey": "os-concurrency-026",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Sleeping locks",
+    "difficulty": "medium",
+    "questionText": "Why is a blocking mutex often preferable to spinning during a long wait on a single CPU?",
+    "options": [
+      "Blocking erases the protected data",
+      "Spinning creates more CPU cores",
+      "The owner cannot run unless the waiter spins",
+      "The waiter can yield CPU time to useful work"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Active waiting can waste the CPU the owner or other work needs to make progress."
+  },
+  {
+    "seedKey": "os-concurrency-027",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Readers-writers policy",
+    "difficulty": "medium",
+    "questionText": "What problem can a reader-preference policy cause if readers continually arrive?",
+    "options": [
+      "Writer starvation",
+      "Writers gain infinite priority",
+      "Files become physically fragmented",
+      "Every reader is guaranteed to deadlock"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "New readers can repeatedly delay a waiting writer unless the policy bounds that bypass."
+  },
+  {
+    "seedKey": "os-concurrency-028",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Monitor semantics",
+    "difficulty": "medium",
+    "questionText": "Under Mesa-style condition signaling, what does a signaled thread generally do?",
+    "options": [
+      "Take permanent ownership of every monitor",
+      "Skip rechecking the shared condition",
+      "Become eligible to run and later reacquire the monitor lock",
+      "Run immediately while bypassing the lock"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "The signaler can continue; the waiter competes to reacquire the lock and must recheck its predicate."
+  },
+  {
+    "seedKey": "os-concurrency-029",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Memory visibility",
+    "difficulty": "medium",
+    "questionText": "Why can releasing and acquiring the same correctly used mutex matter beyond exclusion?",
+    "options": [
+      "It establishes ordering and visibility guarantees for protected writes",
+      "It makes all data persistent on disk",
+      "It invalidates every private stack",
+      "It automatically repairs unprotected data races elsewhere"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Synchronization primitives provide specified memory-order relationships, not merely scheduling decisions."
+  },
+  {
+    "seedKey": "os-concurrency-030",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Lock scope",
+    "difficulty": "medium",
+    "questionText": "Why is blocking on slow network I/O while holding a broad mutex often undesirable?",
+    "options": [
+      "Network I/O cannot block",
+      "A mutex guarantees the remote peer responds instantly",
+      "Holding the lock increases network bandwidth by definition",
+      "It unnecessarily delays unrelated threads needing that lock"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Long waits enlarge the critical section and can serialize otherwise independent operations."
+  },
+  {
+    "seedKey": "os-concurrency-031",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Bounded buffer counts",
+    "difficulty": "medium",
+    "questionText": "A buffer has capacity 8 and currently holds 3 items. With conventional empty/full semaphores, what are their counts when no operations are in flight?",
+    "options": [
+      "empty=3, full=5",
+      "empty=8, full=3",
+      "empty=5, full=3",
+      "empty=0, full=8"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Free slots equal capacity minus occupied slots: 8-3=5; three items are available to consume."
+  },
+  {
+    "seedKey": "os-concurrency-032",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Barrier phases",
+    "difficulty": "medium",
+    "questionText": "Four workers must all finish phase 1 before any starts phase 2. Which primitive directly expresses this requirement?",
+    "options": [
+      "An unlocked integer alone",
+      "A four-participant barrier",
+      "A file-name lookup",
+      "A private thread-local flag in each thread"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "A barrier coordinates completion across participants rather than protecting one shared object at a time."
+  },
+  {
+    "seedKey": "os-concurrency-033",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Compare-and-swap",
+    "difficulty": "medium",
+    "questionText": "A compare-and-swap expects 7 but sees 9. Under standard semantics, what happens to the target value?",
+    "options": [
+      "The process necessarily exits",
+      "It becomes zero",
+      "It remains 9 and the comparison fails",
+      "It becomes 7 unconditionally"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "CAS changes the target only when its current value equals the expected value."
+  },
+  {
+    "seedKey": "os-concurrency-034",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "False sharing",
+    "difficulty": "medium",
+    "questionText": "Two cores repeatedly modify different counters on the same cache line. What can hurt performance?",
+    "options": [
+      "The absence of any cache-line transfers",
+      "Cache-coherence traffic despite logically independent data",
+      "Automatic filesystem corruption",
+      "A guaranteed lost update between different addresses"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Coherence operates at cache-line granularity, so unrelated mutable variables can interfere through placement."
+  },
+  {
+    "seedKey": "os-concurrency-035",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Semaphore accounting",
+    "difficulty": "medium",
+    "questionText": "A counting semaphore starts at 4. Three successful waits occur, then two posts, with no other operations. What count remains?",
+    "options": [
+      "9",
+      "3",
+      "5",
+      "1"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "The available-permit count becomes 4-3+2=3; no wait needed to block in this sequence."
+  },
+  {
+    "seedKey": "os-concurrency-036",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Thread-safe APIs",
+    "difficulty": "medium",
+    "questionText": "Why can two individually thread-safe calls still need a surrounding lock when combined?",
+    "options": [
+      "An invariant may depend on the pair being indivisible",
+      "Each call automatically reserves future calls",
+      "Thread-safe means every possible sequence is atomic",
+      "Locks cannot span two function calls"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Thread safety of individual operations does not make a multi-step check-then-act sequence atomic."
+  },
+  {
+    "seedKey": "os-concurrency-037",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Livelock",
+    "difficulty": "medium",
+    "questionText": "Two threads repeatedly back off and retry to accommodate each other but never complete. What is this called?",
+    "options": [
+      "Successful mutual exclusion",
+      "Livelock",
+      "Static linking",
+      "Page replacement"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Livelock involves continuing activity without useful progress, unlike threads simply blocked without activity."
+  },
+  {
+    "seedKey": "os-concurrency-038",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Ordering shared access",
+    "difficulty": "medium",
+    "questionText": "When is it valid to protect one shared object with two unrelated mutexes?",
+    "options": [
+      "Always on a multicore processor",
+      "Only when the mutex names have equal length",
+      "Only if another design guarantee prevents conflicting access; unrelated locks alone do not protect it",
+      "Always, because any mutex protects all memory"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Participants must follow a common synchronization protocol; different independent locks do not exclude one another."
+  },
+  {
+    "seedKey": "os-concurrency-039",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Condition notification",
+    "difficulty": "medium",
+    "questionText": "Why is the predicate usually changed while holding the same mutex used by condition waiters?",
+    "options": [
+      "To prevent any future wakeups",
+      "To turn the condition variable into a file",
+      "To keep predicate checks and updates in one coherent synchronization protocol",
+      "To remove the need for loops"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Shared locking coordinates the state transition with the waiter's check and atomic wait operation."
+  },
+  {
+    "seedKey": "os-concurrency-040",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Contention",
+    "difficulty": "medium",
+    "questionText": "What does lock contention mean?",
+    "options": [
+      "A process has no executable image",
+      "Several threads want the same lock at overlapping times",
+      "A thread uses only private variables",
+      "A disk has unused free blocks"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Contention causes waiting or retries because a resource has competing requesters."
+  },
+  {
+    "seedKey": "os-concurrency-041",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Interleaving trace",
+    "difficulty": "hard",
+    "questionText": "x starts at 0. T1 loads x, T2 loads x, T1 stores its value+1, T2 stores its value+2. What is final x?",
+    "options": [
+      "3",
+      "2",
+      "1",
+      "0"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Both loads see 0; T1 stores 1, then T2 stores 2 from its stale value, so the final value is 2."
+  },
+  {
+    "seedKey": "os-concurrency-042",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "ABA problem",
+    "difficulty": "hard",
+    "questionText": "Why can pointer CAS succeed even after an object was removed and another object reused its address?",
+    "options": [
+      "The address can change from A to B and back to A while identity changes",
+      "Memory addresses can never be reused",
+      "CAS always fails after the first allocation",
+      "CAS compares full object histories automatically"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Comparing only the current bit pattern misses intervening changes; tagged versions or safe reclamation can address this ABA hazard."
+  },
+  {
+    "seedKey": "os-concurrency-043",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Publication ordering",
+    "difficulty": "hard",
+    "questionText": "A producer initializes data then sets ready using a release store. A consumer observes that store using an acquire load. What guarantee is intended?",
+    "options": [
+      "Earlier producer writes become visible to the acquiring consumer",
+      "Data becomes durable against power loss",
+      "Acquire makes uninitialized data valid before release",
+      "Every unrelated future write becomes ordered automatically"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "A matching release/acquire synchronization publishes prior writes; the consumer must actually observe the relevant release sequence."
+  },
+  {
+    "seedKey": "os-concurrency-044",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Lock-free progress",
+    "difficulty": "hard",
+    "questionText": "What does lock-free progress generally guarantee?",
+    "options": [
+      "No thread can ever retry",
+      "Some operation completes despite contention, not that every thread finishes promptly",
+      "The algorithm never uses atomic instructions",
+      "Every individual thread has bounded completion time"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Lock-free is a system-wide progress guarantee; wait-free is the stronger per-operation bounded-step guarantee under its model."
+  },
+  {
+    "seedKey": "os-concurrency-045",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Serial bottleneck",
+    "difficulty": "hard",
+    "questionText": "A protected section takes 2 ms per operation and cannot overlap. Ignoring other costs, what is its maximum service rate?",
+    "options": [
+      "2000 operations/s",
+      "500 operations/s",
+      "2 operations/s",
+      "50 operations/s"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "One second contains 1000 ms; 1000/2=500 serialized operations per second."
+  },
+  {
+    "seedKey": "os-concurrency-046",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Double-checked initialization",
+    "difficulty": "hard",
+    "questionText": "Why is double-checked initialization with an ordinary unsynchronized shared pointer unsafe in languages such as C++?",
+    "options": [
+      "Constructors cannot allocate memory",
+      "A second check automatically creates acquire semantics",
+      "It can race and expose incompletely published state",
+      "Pointer assignment necessarily flushes persistent storage"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Correct publication needs the language's synchronization guarantees; a lock on only one path does not make all accesses safe."
+  },
+  {
+    "seedKey": "os-concurrency-047",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Hand-over-hand locks",
+    "difficulty": "hard",
+    "questionText": "In a linked-list traversal using lock coupling, why acquire the next node's lock before releasing the current one?",
+    "options": [
+      "To eliminate every possible ordering issue regardless of implementation",
+      "To ensure all nodes remain locked forever",
+      "To make deletion of any unlocked node impossible globally",
+      "To keep the traversed link/node relationship protected during movement"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Overlapping lock ownership can stabilize traversal locally, provided insertion/deletion use a compatible protocol and ordering."
+  },
+  {
+    "seedKey": "os-concurrency-048",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Wakeup cardinality",
+    "difficulty": "hard",
+    "questionText": "A queue becomes nonempty with one item while ten consumers wait. Why can broadcast cause unnecessary work?",
+    "options": [
+      "Every consumer is guaranteed to remove a different item",
+      "The mutex disappears on broadcast",
+      "Broadcast gives each consumer a separate copy automatically",
+      "Many consumers may wake and contend although only one can consume the item"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "All awakened consumers recheck the predicate; all but one may need to wait again, causing a thundering herd."
+  },
+  {
+    "seedKey": "os-concurrency-049",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Dead waiter recovery",
+    "difficulty": "hard",
+    "questionText": "A thread dies while holding a robust mutex. What must a recovering owner typically consider?",
+    "options": [
+      "All writes by the dead thread are automatically rolled back",
+      "The mutex's memory contains a full transaction log by definition",
+      "Protected state may be inconsistent and require repair",
+      "The state is guaranteed correct merely because ownership changed"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Owner-death notification enables recovery, but application-level invariants still need validation or reconstruction."
+  },
+  {
+    "seedKey": "os-concurrency-050",
+    "topic": "Concurrency & Synchronization",
+    "subtopic": "Semaphore ordering",
+    "difficulty": "hard",
+    "questionText": "Why must a bounded-buffer producer wait for an empty slot before locking the buffer mutex, if consumers need that mutex to remove items?",
+    "options": [
+      "Otherwise a full-buffer producer can hold the mutex while waiting for a consumer that needs it",
+      "A consumer never touches the buffer mutex",
+      "Semaphore waits cannot block inside locks",
+      "Mutex acquisition automatically increments the empty count"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "The wrong order can block the producer while excluding the very consumer that would create space."
+  }
+]

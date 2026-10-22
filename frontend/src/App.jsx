@@ -81,7 +81,7 @@ export default function App() {
   else if (screen.name === "result")
     content = (
       <>
-        <p className="mb-3 text-sm text-slate-500">
+        <p className="mb-3 text-base text-muted">
           {screen.quizTitle} · {screen.result.attemptType}
         </p>
         <ScoreFeedback result={screen.result} onRetry={home} />
@@ -128,20 +128,22 @@ export default function App() {
   else content = <QuizList onStart={start} />;
   return (
     <div className="min-h-screen">
-      <header className="border-b border-slate-200 bg-white">
+      <header className="border-b border-line bg-surface">
         <div className="mx-auto max-w-3xl px-4 py-3 sm:px-6">
           <div className="flex items-center justify-between gap-3">
-            <button className="font-mono text-sm font-medium" onClick={home}>
+            <button className="font-mono text-base font-medium" onClick={home}>
               ■ os-quiz
             </button>
             {user && (
-              <span className="text-sm text-slate-500">{user.name}</span>
+              <span className="min-w-0 break-words text-right text-base text-muted">
+                {user.name}
+              </span>
             )}
           </div>
           {user && (
             <nav
               aria-label="Main navigation"
-              className="mt-3 flex flex-wrap gap-4 text-sm"
+              className="mt-4 flex flex-wrap gap-x-3 gap-y-1 text-base"
             >
               {[
                 ["home", "Quizzes"],
@@ -153,7 +155,9 @@ export default function App() {
                   disabled={busy}
                   aria-current={screen.name === name ? "page" : undefined}
                   className={
-                    screen.name === name ? "font-semibold underline" : ""
+                    screen.name === name
+                      ? "px-3 font-semibold underline"
+                      : "px-3 text-primary hover:bg-surface-muted"
                   }
                   key={name}
                   onClick={() => {
@@ -184,18 +188,18 @@ export default function App() {
       </header>
       <main
         key={user?.id || "anonymous"}
-        className="mx-auto max-w-3xl px-4 pb-20 pt-8 sm:px-6"
+        className="mx-auto max-w-3xl px-4 pb-20 pt-8 sm:px-6 sm:pt-10"
       >
         {error && (
           <p
             role="alert"
-            className="mb-4 rounded border border-rose-200 bg-rose-50 p-3 text-sm text-rose-700"
+            className="mb-4 rounded border border-danger-line bg-danger-soft p-3 text-base text-danger"
           >
             {error}
           </p>
         )}
         {busy && (
-          <p role="status" className="mb-3 text-sm">
+          <p role="status" className="mb-3 text-base">
             Loading…
           </p>
         )}

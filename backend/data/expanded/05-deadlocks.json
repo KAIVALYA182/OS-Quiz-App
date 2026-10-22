@@ -1,0 +1,677 @@
+[
+  {
+    "seedKey": "os-deadlocks-006",
+    "topic": "Deadlocks",
+    "subtopic": "Definitions",
+    "difficulty": "easy",
+    "questionText": "What is a resource deadlock?",
+    "options": [
+      "A CPU executes a long but finite calculation",
+      "A set of processes waits indefinitely for resources held within that set",
+      "A process voluntarily sleeps for a fixed interval",
+      "A file contains an invalid character"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "In deadlock, the waiting dependencies prevent the involved processes from making the releases needed for progress."
+  },
+  {
+    "seedKey": "os-deadlocks-007",
+    "topic": "Deadlocks",
+    "subtopic": "Hold and wait",
+    "difficulty": "easy",
+    "questionText": "Which situation demonstrates hold-and-wait?",
+    "options": [
+      "A process holds a scanner while requesting a printer",
+      "A process releases all resources before requesting new ones",
+      "A process finishes without further requests",
+      "A process has no resources and sleeps"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Hold-and-wait combines retaining one resource with waiting to acquire another."
+  },
+  {
+    "seedKey": "os-deadlocks-008",
+    "topic": "Deadlocks",
+    "subtopic": "Mutual exclusion",
+    "difficulty": "easy",
+    "questionText": "Which resource is naturally non-shareable during a conflicting operation?",
+    "options": [
+      "A mutex owned exclusively by one thread",
+      "Read-only text used by many readers",
+      "A publicly readable immutable table",
+      "An independently copied constant"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Exclusive ownership creates mutual exclusion; immutable read sharing does not inherently require it."
+  },
+  {
+    "seedKey": "os-deadlocks-009",
+    "topic": "Deadlocks",
+    "subtopic": "Circular wait",
+    "difficulty": "easy",
+    "questionText": "Which dependency pattern is circular wait?",
+    "options": [
+      "One process computes without resource requests",
+      "A waits for B, then B completes independently",
+      "Three processes use disjoint resources",
+      "A waits for B, B waits for C, and C waits for A"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "A closed chain of waiting dependencies gives each participant a dependency on another in the cycle."
+  },
+  {
+    "seedKey": "os-deadlocks-010",
+    "topic": "Deadlocks",
+    "subtopic": "Preemption",
+    "difficulty": "easy",
+    "questionText": "What does resource preemption mean in deadlock discussions?",
+    "options": [
+      "Giving a process a larger file name",
+      "Taking a resource away from its current holder",
+      "Compiling a resource's driver",
+      "Waiting for the holder to release voluntarily only"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Preemption withdraws a held resource rather than relying solely on the owner's voluntary release."
+  },
+  {
+    "seedKey": "os-deadlocks-011",
+    "topic": "Deadlocks",
+    "subtopic": "Recovery",
+    "difficulty": "easy",
+    "questionText": "Which action can recover from an established deadlock?",
+    "options": [
+      "Add more edges to every wait cycle",
+      "Ignore every release request",
+      "Give all waiting processes zero CPU time forever",
+      "Terminate a selected victim to release its resources"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Victim termination can break the cycle, but recovery must account for lost work and state consistency."
+  },
+  {
+    "seedKey": "os-deadlocks-012",
+    "topic": "Deadlocks",
+    "subtopic": "Avoidance information",
+    "difficulty": "easy",
+    "questionText": "What information does classic Banker's avoidance require in advance?",
+    "options": [
+      "The physical color of each device",
+      "Every future CPU instruction's execution time",
+      "Each process's maximum resource demand",
+      "Every user's password"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Banker's algorithm compares available resources against declared maximum future claims."
+  },
+  {
+    "seedKey": "os-deadlocks-013",
+    "topic": "Deadlocks",
+    "subtopic": "Safe sequence",
+    "difficulty": "easy",
+    "questionText": "What is a safe sequence?",
+    "options": [
+      "A list containing only deadlocked processes",
+      "A fixed order of file names",
+      "A guaranteed prediction of actual scheduling order",
+      "An order in which every process can obtain remaining needs and finish"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "A safe sequence is evidence that completion is possible under the model, not a promise of the actual runtime order."
+  },
+  {
+    "seedKey": "os-deadlocks-014",
+    "topic": "Deadlocks",
+    "subtopic": "Starvation versus deadlock",
+    "difficulty": "easy",
+    "questionText": "A low-priority job never runs because higher-priority jobs keep arriving, but others finish. What is this most directly?",
+    "options": [
+      "Memory compaction",
+      "Necessarily a resource deadlock",
+      "Successful completion",
+      "Starvation"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Starvation can indefinitely postpone one job while the system continues useful work; deadlock involves blocked dependencies."
+  },
+  {
+    "seedKey": "os-deadlocks-015",
+    "topic": "Deadlocks",
+    "subtopic": "Prevention approach",
+    "difficulty": "easy",
+    "questionText": "A policy requires requesting all needed resources before starting. Which condition does it try to prevent?",
+    "options": [
+      "The existence of CPU registers",
+      "Hold-and-wait",
+      "The existence of files",
+      "Every possible mutual exclusion need"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "All-at-once acquisition avoids retaining one resource while later requesting another."
+  },
+  {
+    "seedKey": "os-deadlocks-016",
+    "topic": "Deadlocks",
+    "subtopic": "Resource graph",
+    "difficulty": "easy",
+    "questionText": "In a resource-allocation graph, a process-to-resource edge ordinarily denotes what?",
+    "options": [
+      "A request for that resource",
+      "A disk sector's physical position",
+      "A CPU register assignment",
+      "A completed process's exit status"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Request edges point from the process to the requested resource; assignment edges point from a resource instance to its holder."
+  },
+  {
+    "seedKey": "os-deadlocks-017",
+    "topic": "Deadlocks",
+    "subtopic": "Detection",
+    "difficulty": "easy",
+    "questionText": "How does deadlock detection differ from prevention?",
+    "options": [
+      "Detection makes resource sharing impossible",
+      "Detection guarantees no recovery is needed",
+      "Detection allows potential deadlock and later checks whether it occurred",
+      "Prevention runs only after every process terminates"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Detection is paired with a recovery strategy rather than forbidding all dangerous allocation patterns up front."
+  },
+  {
+    "seedKey": "os-deadlocks-018",
+    "topic": "Deadlocks",
+    "subtopic": "No-preemption examples",
+    "difficulty": "easy",
+    "questionText": "Why is forcibly preempting a printer halfway through a page problematic?",
+    "options": [
+      "Preemption automatically erases printed ink",
+      "Printers never have exclusive access",
+      "Pages are ordinary CPU registers",
+      "Its partial physical output may not be cleanly restorable"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Some resources have externally visible effects that cannot be safely checkpointed and resumed like CPU state."
+  },
+  {
+    "seedKey": "os-deadlocks-019",
+    "topic": "Deadlocks",
+    "subtopic": "Resource ordering",
+    "difficulty": "easy",
+    "questionText": "A lock hierarchy assigns each lock a fixed number. What rule helps avoid lock cycles?",
+    "options": [
+      "Acquire locks only in increasing order",
+      "Acquire locks in arbitrary order on every call",
+      "Ignore the hierarchy during nested calls",
+      "Always acquire the largest and then the smallest"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Strictly increasing acquisition cannot form a circular chain back to a lower-ranked held lock."
+  },
+  {
+    "seedKey": "os-deadlocks-020",
+    "topic": "Deadlocks",
+    "subtopic": "Need calculation",
+    "difficulty": "medium",
+    "questionText": "A process's maximum claim is 9 units and it already holds 4. What is its remaining need in Banker's model?",
+    "options": [
+      "4 units",
+      "13 units",
+      "5 units",
+      "9 units"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Remaining need equals maximum minus allocation: 9-4=5 units."
+  },
+  {
+    "seedKey": "os-deadlocks-021",
+    "topic": "Deadlocks",
+    "subtopic": "Available calculation",
+    "difficulty": "medium",
+    "questionText": "A system has 12 identical units and current allocations are 3, 2 and 4. How many are available?",
+    "options": [
+      "3",
+      "5",
+      "9",
+      "12"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Allocated units total 3+2+4=9; available units equal 12-9=3."
+  },
+  {
+    "seedKey": "os-deadlocks-022",
+    "topic": "Deadlocks",
+    "subtopic": "Safety check",
+    "difficulty": "medium",
+    "questionText": "Available units are 2. P1 needs 1 and holds 2; P2 needs 4 and holds 3. Is P1 then P2 a safe completion order?",
+    "options": [
+      "Yes; after P1 finishes, available work becomes 4",
+      "Yes only if P1's allocation is discarded permanently",
+      "No; P2 must always run first",
+      "No; available work can never increase"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "P1 can finish with the initial 2 available; returning its 2 held units makes work 4, enough for P2's remaining need."
+  },
+  {
+    "seedKey": "os-deadlocks-023",
+    "topic": "Deadlocks",
+    "subtopic": "Unsafe state",
+    "difficulty": "medium",
+    "questionText": "What does an unsafe state mean in avoidance analysis?",
+    "options": [
+      "Every process is already blocked in a deadlock",
+      "The OS has necessarily crashed",
+      "Every resource is physically damaged",
+      "No safe completion sequence is guaranteed under maximum claims"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Unsafe does not imply current deadlock; it means maximum future demands cannot be guaranteed a completion order."
+  },
+  {
+    "seedKey": "os-deadlocks-024",
+    "topic": "Deadlocks",
+    "subtopic": "Request validation",
+    "difficulty": "medium",
+    "questionText": "In Banker's algorithm, a process requests more than its declared remaining need. What should happen?",
+    "options": [
+      "Reduce its maximum claim below its allocation",
+      "Grant it solely because it arrived first",
+      "Reject the request as exceeding its claim",
+      "Erase every other process's allocation"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Avoidance relies on respecting declared maximum needs; an excess request violates that model."
+  },
+  {
+    "seedKey": "os-deadlocks-025",
+    "topic": "Deadlocks",
+    "subtopic": "Tentative allocation",
+    "difficulty": "medium",
+    "questionText": "A request fits available resources but leaves an unsafe tentative state. What does Banker's avoidance normally do?",
+    "options": [
+      "Set all needs to zero",
+      "Terminate every process automatically",
+      "Defer the request and restore the prior allocation state",
+      "Grant it because availability is the only test"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "The safety check is essential; mere immediate availability does not guarantee safe future completion."
+  },
+  {
+    "seedKey": "os-deadlocks-026",
+    "topic": "Deadlocks",
+    "subtopic": "Multiple instances",
+    "difficulty": "medium",
+    "questionText": "Why does a cycle not always prove deadlock when resource types have multiple instances?",
+    "options": [
+      "Multiple instances eliminate exclusive use",
+      "Cycles cannot be represented with multiple instances",
+      "Every instance must have the same owner",
+      "Another instance may permit a process to finish and release resources"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Additional available or releasable instances can satisfy requests despite a cycle in the type-level graph."
+  },
+  {
+    "seedKey": "os-deadlocks-027",
+    "topic": "Deadlocks",
+    "subtopic": "Wait-for graphs",
+    "difficulty": "medium",
+    "questionText": "When resources are single-instance exclusive locks, what does an edge P→Q in a wait-for graph mean?",
+    "options": [
+      "Q must be P's parent",
+      "P waits for a resource held by Q",
+      "P can never release any resource",
+      "P has completed before Q exists"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Collapsing resource nodes gives direct process dependencies for deadlock detection."
+  },
+  {
+    "seedKey": "os-deadlocks-028",
+    "topic": "Deadlocks",
+    "subtopic": "Victim selection",
+    "difficulty": "medium",
+    "questionText": "Which factor can reasonably influence choosing a deadlock victim?",
+    "options": [
+      "Whether the executable icon is blue",
+      "The alphabetical order of all file extensions alone",
+      "The monitor's brightness",
+      "Work already done and cost of rollback/restart"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Recovery policy can weigh lost work, resources released, priority and restart cost."
+  },
+  {
+    "seedKey": "os-deadlocks-029",
+    "topic": "Deadlocks",
+    "subtopic": "Timeout limitations",
+    "difficulty": "medium",
+    "questionText": "Why does a timeout alone not prove a deadlock?",
+    "options": [
+      "Every timeout uniquely identifies a wait cycle",
+      "Timeouts guarantee no false positives",
+      "A slow but progressing operation may also exceed the timeout",
+      "Timers can observe all future releases"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Timeouts detect excessive delay, which can have causes other than circular resource dependencies."
+  },
+  {
+    "seedKey": "os-deadlocks-030",
+    "topic": "Deadlocks",
+    "subtopic": "All-at-once costs",
+    "difficulty": "medium",
+    "questionText": "What is a drawback of requiring every resource at process start?",
+    "options": [
+      "Resources may sit idle while held, reducing utilization",
+      "It removes all resource waiting permanently",
+      "It makes memory demand disappear",
+      "It guarantees maximum parallelism"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "A process may reserve resources long before using them, delaying other work unnecessarily."
+  },
+  {
+    "seedKey": "os-deadlocks-031",
+    "topic": "Deadlocks",
+    "subtopic": "Read-only sharing",
+    "difficulty": "medium",
+    "questionText": "Why can immutable read-only data often avoid the mutual-exclusion condition?",
+    "options": [
+      "All immutable data must be copied on every read",
+      "Reading always requires exclusive device ownership",
+      "Multiple processes can read it without conflicting modifications",
+      "The data cannot be addressed by processes"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Sharing is safe when there are no conflicting writes, though other resources may still require exclusion."
+  },
+  {
+    "seedKey": "os-deadlocks-032",
+    "topic": "Deadlocks",
+    "subtopic": "Lock cycle trace",
+    "difficulty": "medium",
+    "questionText": "T1 holds A and waits for B; T2 holds B and waits for A. Locks are nonpreemptible and both waits block. What follows?",
+    "options": [
+      "Both threads must finish immediately",
+      "The two threads are deadlocked",
+      "The scheduler can resolve it merely by running either blocked thread",
+      "Only starvation is possible, never deadlock"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Neither thread can acquire its needed lock or reach the release of the lock it holds."
+  },
+  {
+    "seedKey": "os-deadlocks-033",
+    "topic": "Deadlocks",
+    "subtopic": "Try-lock strategy",
+    "difficulty": "medium",
+    "questionText": "Why can releasing held locks after a failed try-lock help avoid hold-and-wait?",
+    "options": [
+      "try-lock always takes ownership of every lock",
+      "The thread does not remain blocked while retaining those locks",
+      "It guarantees fairness without any retry policy",
+      "It makes all operations atomic globally"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Releasing and retrying removes a blocking hold-and-wait dependency, though livelock or starvation can still need attention."
+  },
+  {
+    "seedKey": "os-deadlocks-034",
+    "topic": "Deadlocks",
+    "subtopic": "Recovery consistency",
+    "difficulty": "medium",
+    "questionText": "Why might simply killing a lock owner leave an application unusable?",
+    "options": [
+      "A killed process's writes always disappear",
+      "The owner may have partially updated protected state",
+      "Locks store complete previous object versions",
+      "All protected updates are automatically transactional"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Resource release alone does not restore invariants; recovery may require transaction rollback or repair."
+  },
+  {
+    "seedKey": "os-deadlocks-035",
+    "topic": "Deadlocks",
+    "subtopic": "Claim edges",
+    "difficulty": "medium",
+    "questionText": "In a resource-allocation avoidance scheme, what does a claim edge represent before it becomes a request?",
+    "options": [
+      "A possible future resource request",
+      "A resource already physically destroyed",
+      "A process already terminated",
+      "An immutable file-content hash"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Claim information describes potential future allocations so the system can avoid dangerous grants."
+  },
+  {
+    "seedKey": "os-deadlocks-036",
+    "topic": "Deadlocks",
+    "subtopic": "Need vector",
+    "difficulty": "medium",
+    "questionText": "A process has Max=(4,3) and Allocation=(1,2). What is Need?",
+    "options": [
+      "(4,3)",
+      "(1,3)",
+      "(3,1)",
+      "(5,5)"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Need is computed componentwise: (4-1,3-2)=(3,1)."
+  },
+  {
+    "seedKey": "os-deadlocks-037",
+    "topic": "Deadlocks",
+    "subtopic": "Vector comparison",
+    "difficulty": "medium",
+    "questionText": "Work=(2,3). Which remaining Need vector can be satisfied immediately?",
+    "options": [
+      "(1,4)",
+      "(3,1)",
+      "(3,3)",
+      "(2,2)"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Every component of Need must be at most the corresponding Work component; only (2,2) satisfies both bounds."
+  },
+  {
+    "seedKey": "os-deadlocks-038",
+    "topic": "Deadlocks",
+    "subtopic": "Detection frequency",
+    "difficulty": "medium",
+    "questionText": "Why not necessarily run an expensive full deadlock detector after every resource event?",
+    "options": [
+      "A detector makes resource claims irrelevant",
+      "Deadlocks can only happen at reboot",
+      "Checking more often always costs no CPU time",
+      "Detection overhead must be balanced against recovery delay"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Frequent checks can be expensive; less frequent checks may allow more work to become entangled before recovery."
+  },
+  {
+    "seedKey": "os-deadlocks-039",
+    "topic": "Deadlocks",
+    "subtopic": "CPU scheduling limitation",
+    "difficulty": "medium",
+    "questionText": "Why can higher CPU priority alone fail to cure a resource deadlock?",
+    "options": [
+      "Deadlocks occur only when all processes are ready",
+      "A blocked process cannot execute past its unmet resource wait",
+      "Priority automatically releases every lock",
+      "The CPU scheduler owns every application resource"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Changing run order does not supply a resource that only another blocked participant can release."
+  },
+  {
+    "seedKey": "os-deadlocks-040",
+    "topic": "Deadlocks",
+    "subtopic": "Cancellation safety",
+    "difficulty": "medium",
+    "questionText": "Why should cancellation during a lock-holding operation use cleanup handlers or structured release?",
+    "options": [
+      "Cancellation always unlocks every user mutex",
+      "Releasing a lock deletes all associated data",
+      "Cleanup gives the process a new PID",
+      "Otherwise the canceled operation may retain resources and obstruct progress"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "Correct release must occur along exceptional as well as successful control paths."
+  },
+  {
+    "seedKey": "os-deadlocks-041",
+    "topic": "Deadlocks",
+    "subtopic": "Resource sufficiency",
+    "difficulty": "medium",
+    "questionText": "Three processes each may need at most 2 identical units and release them only on completion. What minimum total guarantees progress under arbitrary partial allocation?",
+    "options": [
+      "3 units",
+      "4 units",
+      "2 units",
+      "6 units"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "In the worst stalled distribution each holds one unit. A fourth unit lets one reach two, finish and release; three units could deadlock."
+  },
+  {
+    "seedKey": "os-deadlocks-042",
+    "topic": "Deadlocks",
+    "subtopic": "Two-resource safety",
+    "difficulty": "hard",
+    "questionText": "Work=(1,0). P1 holds (1,1), needs (0,1); P2 holds (0,1), needs (1,0). Which completion sequence is safe?",
+    "options": [
+      "P1 then P2",
+      "P2 then P1",
+      "Neither can start",
+      "Only P1 can ever finish"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "P2's need fits Work. Its release changes Work to (1,1), which satisfies P1's need."
+  },
+  {
+    "seedKey": "os-deadlocks-043",
+    "topic": "Deadlocks",
+    "subtopic": "Unsafe grant trace",
+    "difficulty": "hard",
+    "questionText": "There are 6 units. P1 holds 2 and may need 4 total; P2 holds 2 and may need 5 total. Would granting P2 one more unit leave a safe state?",
+    "options": [
+      "Yes; P1's remaining need becomes zero",
+      "No; available becomes 1, while both remaining needs are 2",
+      "Yes; every currently available request is safe",
+      "No; total allocation would exceed 6"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "After the grant allocations are 2 and 3, leaving 1. Each process still needs 2, so neither can finish under its maximum claim."
+  },
+  {
+    "seedKey": "os-deadlocks-044",
+    "topic": "Deadlocks",
+    "subtopic": "Multiple-resource ordering",
+    "difficulty": "hard",
+    "questionText": "If locks have a strict total order and threads never acquire a lower-ranked lock while holding a higher-ranked one, why is circular wait impossible?",
+    "options": [
+      "A cycle would require strictly increasing ranks to return to its starting rank",
+      "The policy removes the need for lock release",
+      "All threads must share the same program counter",
+      "Lock ranks decrease on every acquisition"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "Following acquisition dependencies yields increasing ranks; a finite strict order cannot increase around a closed cycle."
+  },
+  {
+    "seedKey": "os-deadlocks-045",
+    "topic": "Deadlocks",
+    "subtopic": "Mixed dependencies",
+    "difficulty": "hard",
+    "questionText": "Why can a lock-only detector miss a deadlock involving a worker that waits for a message while holding a lock?",
+    "options": [
+      "Messages cannot participate in waiting cycles",
+      "Every message automatically releases all locks",
+      "The message dependency may not appear as a lock edge",
+      "Lock-only graphs include every application dependency by definition"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Deadlocks can span communication, I/O and locks; detection requires the relevant dependency model."
+  },
+  {
+    "seedKey": "os-deadlocks-046",
+    "topic": "Deadlocks",
+    "subtopic": "Rollback starvation",
+    "difficulty": "hard",
+    "questionText": "Why can repeatedly choosing the same cheap victim be unfair?",
+    "options": [
+      "Cheap victims always have zero remaining work",
+      "That process may repeatedly lose work and never complete",
+      "Rollback increases every process's maximum claim",
+      "Victim choice cannot affect progress"
+    ],
+    "correctOptionIndex": 1,
+    "explanation": "Recovery should consider how often a process has been selected, not only its immediate rollback cost."
+  },
+  {
+    "seedKey": "os-deadlocks-047",
+    "topic": "Deadlocks",
+    "subtopic": "Detection with zero requests",
+    "difficulty": "hard",
+    "questionText": "In a multi-instance detector, a process has no outstanding request and is not blocked. Why can it help establish progress?",
+    "options": [
+      "It must be considered deadlocked because it holds resources",
+      "Its allocated resources must be removed from the system",
+      "It can finish and release its allocated resources into Work",
+      "Its Need must necessarily equal its maximum claim"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "Detection checks current outstanding requests; a completable process can release resources and unlock other completions."
+  },
+  {
+    "seedKey": "os-deadlocks-048",
+    "topic": "Deadlocks",
+    "subtopic": "Nested ordering exception",
+    "difficulty": "hard",
+    "questionText": "An application usually follows a lock hierarchy but one callback acquires an earlier-ranked lock. What can that exception do?",
+    "options": [
+      "Eliminate the hold-and-wait condition globally",
+      "Preserve the proof because most calls obey it",
+      "Make all locks recursively owned by every thread",
+      "Reintroduce a cycle despite correct ordering elsewhere"
+    ],
+    "correctOptionIndex": 3,
+    "explanation": "The acyclic-order argument requires all relevant acquisition paths, including callbacks, to respect the ordering."
+  },
+  {
+    "seedKey": "os-deadlocks-049",
+    "topic": "Deadlocks",
+    "subtopic": "General resource bound",
+    "difficulty": "hard",
+    "questionText": "Four processes each require at most 3 identical units and keep units until completion. What minimum total guarantees at least one can finish for any partial allocation?",
+    "options": [
+      "9 units",
+      "12 units",
+      "8 units",
+      "4 units"
+    ],
+    "correctOptionIndex": 0,
+    "explanation": "At most 4×(3-1)=8 units can be held while everyone remains one short. One extra unit, giving 9, ensures a process can reach its maximum and release."
+  },
+  {
+    "seedKey": "os-deadlocks-050",
+    "topic": "Deadlocks",
+    "subtopic": "Capacity and cycles",
+    "difficulty": "hard",
+    "questionText": "A and B each hold one unit of a two-unit pool and each blocks waiting for a second unit before releasing. Why does adding CPU cores not solve this?",
+    "options": [
+      "Each new core automatically releases held pool units",
+      "The extra cores necessarily reduce resource demand",
+      "No runnable execution can create the missing available pool unit",
+      "Resource units are identical to CPU time slices"
+    ],
+    "correctOptionIndex": 2,
+    "explanation": "The bottleneck is an unsatisfied resource dependency, not a lack of processors to schedule runnable work."
+  }
+]
